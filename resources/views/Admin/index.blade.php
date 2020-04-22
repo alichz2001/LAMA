@@ -72,6 +72,14 @@
 
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-database fa-fw"></i> roles <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" id="ul-role_list">
+
+                        </ul>
+                    </li>
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('/Admin/templates/_1/assets/img/user-13.jpg') }}" alt="" />

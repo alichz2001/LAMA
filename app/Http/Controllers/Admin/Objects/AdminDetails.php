@@ -29,12 +29,12 @@ class AdminDetails
     /**
      * @var int|mixed company_id
      */
-    private $currentCompanyId;
+    private $currentCompanyId = 0;
 
     /**
      * @var int|mixed role_id
      */
-    private $currentRoleId;
+    private $currentRoleId = 0;
 
     /**
      * @var array [id => 'company_id', title => 'company_title', created_at => 'timestamp, updated_at => 'timestamp]
@@ -45,6 +45,11 @@ class AdminDetails
      * @var array [role => 'role_title', company => 'company_title']
      */
     public $currentRoleWithCompany = [];
+
+    /**
+     * @var array
+     */
+    public $rolesOfCurrentCompany = [];
 
     /**
      * @var array
@@ -64,6 +69,7 @@ class AdminDetails
         $this->currentRoleId = !session()->has('currentRoleId') ? 0 : session()->get('currentRoleId');
         $this->currentCompanyId = !session()->has('currentCompanyId') ? 0 : session()->get('currentCompanyId');
         $this->setCurrentCompanyDetails();
+        $this->setRolesOfCurrentCompany();
         $this->setCurrentRoleDetails();
         $this->setModules();
     }
@@ -121,6 +127,15 @@ class AdminDetails
             $this->currentRoleWithCompany = ['role' => $role[0]['title'], 'company' => $this->currentCompanyDetails['title']];
         else
             $this->errors[] = 40020;
+    }
+
+    private function setRolesOfCurrentCompany() {
+        $userRoleCompany = User_Role_Company::where(['company_id' => $this->currentCompanyId, 'user_id' => Auth::id(), 'status' => 1])->with(['role'])->get()->makeVisible(['id', 'status'])->toArray();
+        $roles = [];
+        foreach ($userRoleCompany as $item) {
+            $roles[] = $item['role'];
+        }
+        $this->rolesOfCurrentCompany = $roles;
     }
 
 

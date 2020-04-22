@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Admin;
 
+use App\Http\Controllers\Admin\Handler\Response;
 use App\Http\Controllers\Admin\Objects\AdminDetails;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,8 @@ class isSetCompany
      */
     public function handle($request, Closure $next)
     {
-        $adminDetails = new AdminDetails(Auth::id());
+        if (!session()->has('currentCompanyId') || session()->get('currentCompanyId') == 0)
+            return Response::Handle(false, '', 1, 40030);
         return $next($request);
     }
 }

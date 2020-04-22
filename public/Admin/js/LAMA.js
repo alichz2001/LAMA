@@ -18,9 +18,24 @@ function AJAXRequest(url, method, data) {
 }
 
 function setCompanySelect() {
+    $('#ul-company_list').html('');
     var companiesList = AJAXRequest(baseURL + '/getMyCompanies', globalSysRequestMethod, '');
+    var currentCompany = {};
+    currentCompany['id'] = 0;
+    currentCompany = AJAXRequest(baseURL + '/getMyCurrentCompany', globalSysRequestMethod, '');
     for (var i = 0; i < companiesList.length; i++)
-        $('#ul-company_list').append('<li><a href="javascript:;" onclick="changeCompany(' + companiesList[i]['id'] + ')">' + companiesList[i]['title'] + '</a></li>');
+        $('#ul-company_list').append('<li ' + (companiesList[i]['id'] == currentCompany['id'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeCompany(' + companiesList[i]['id'] + ')">' + companiesList[i]['title'] + '</a></li>');
+}
+
+function setRoleSelect() {
+    $('#ul-role_list').html('');
+    var rolesList = AJAXRequest(baseURL + '/getMyRolesOfCurrentCompany', globalSysRequestMethod, '');
+    var currentRole = {};
+    currentRole['role'] = '';
+    currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '');
+    console.log(currentRole);
+    for (var i = 0; i < rolesList.length; i++)
+        $('#ul-role_list').append('<li ' + (currentRole['role'] == rolesList[i]['title'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeRole(' + rolesList[i]['id'] + ')">' + rolesList[i]['title'] + '</a></li>');
 }
 
 function setModulesMenu() {
@@ -31,6 +46,8 @@ function setModulesMenu() {
     $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
 
 }
+
+
 
 function createMenu(modules, step) {
     var x = '';
@@ -77,8 +94,14 @@ function createMenu(modules, step) {
 
 
 
+function changeCompany(id) {
+    var res = AJAXRequest(baseURL + '/changeCompany', 'post', {'id' : id});
+    setCompanySelect();
+    setRoleSelect();
+}
+
 
 
 function setModule(id) {
-    var module = AJAXRequest('', globalSysRequestMethod, '');
+    var module = AJAXRequest('/getModule', globalSysRequestMethod, '');
 }

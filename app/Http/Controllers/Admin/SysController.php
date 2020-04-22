@@ -14,41 +14,14 @@ use Illuminate\Support\Facades\Auth;
 class SysController extends Controller
 {
 
-    public function __construct()
+    private $req;
+    public function __construct(Request $req)
     {
-        session()->put(['currentRoleId' => 1, 'currentCompanyId' => 1]);
-
+        $this->req = $req->toArray();
     }
 
-    public function getMyCompanies() {
+    public function changeCompany() {
         $adminDetails = new AdminDetails(Auth::id());
-        return Response::Handle(true, $adminDetails->accessibleCompanies, 1,20000);
-    }
-
-    public function getMyCurrentCompany() {
-        //session(['currentCompanyId' => 1]);
-        $adminDetails = new AdminDetails(Auth::id());
-        //return dump($adminDetails->getCurrentCompanyDetails());
-        if ($adminDetails->errors == [])
-            return Response::Handle(true, $adminDetails->currentCompanyDetails, 1,20001);
-        return Response::Handle(false, '', 2,$adminDetails->errors);
-
-    }
-
-    public function getMyRoles() {
-        $adminDetails = new AdminDetails(Auth::id());
-        return Response::Handle(true, $adminDetails->accessibleRoles, 1,20002);
-    }
-
-    public function getMyCurrentRole() {
-        $adminDetails = new AdminDetails(Auth::id());
-        if ($adminDetails->errors == [])
-            return Response::Handle(true, $adminDetails->currentRoleWithCompany, 1,20003);
-        return Response::Handle(false, '', 2, $adminDetails->errors);
-    }
-
-    public function getMyModules() {
-        $adminDetails = new AdminDetails(Auth::id());
-        return Response::Handle(true, $adminDetails->modules, 1, 20004);
+        return dump($this->req);
     }
 }

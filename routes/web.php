@@ -35,8 +35,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'Admin\DashboardController@dashboard');
 
 
-Route::get('/admin/sys/getMyCompanies', 'Admin\SysController@getMyCompanies')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyCurrentCompany', 'Admin\SysController@getMyCurrentCompany')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyRoles', 'Admin\SysController@getMyRoles')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyCurrentRole', 'Admin\SysController@getMyCurrentRole')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyModules', 'Admin\SysController@getMyModules')->middleware(['isLogin', 'isSetCompany']);
+Route::get('/admin/sys/getMyCompanies', 'Admin\AdminDetailsController@getMyCompanies')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyCurrentCompany', 'Admin\AdminDetailsController@getMyCurrentCompany')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyRoles', 'Admin\AdminDetailsController@getMyRoles')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyRolesOfCurrentCompany', 'Admin\AdminDetailsController@getMyRolesOfCurrentCompany')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyCurrentRole', 'Admin\AdminDetailsController@getMyCurrentRole')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyModules', 'Admin\AdminDetailsController@getMyModules')->middleware(['isLogin', 'isSetCompany']);
+
+Route::post('/admin/sys/changeCompany', 'Admin\SysController@changeCompany')->middleware(['isLogin']);
