@@ -42,11 +42,13 @@ function createMenu(modules, step) {
             has_child = modules[key]['has_child'];
 
             x += has_child ? '<li class="has-sub">' : '<li>';
+
             x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" onclick="setModules(' + modules[key]['id'] + ')">';
 
-            x += has_child ? '<b class="caret pull-left"></b>' : '';
-            x += '<i class="fa ' + modules[key]['icon'] + '"></i>';
+            x += has_child ? '<b class="caret pull-right"></b>' : '';
             x += '<span>' + modules[key]['title'] + '</span>';
+            x += '<i class="fa ' + modules[key]['icon'] + '"></i>';
+
             x += '</a>';
 
             x += has_child ? createMenu(modules[key]['sub_module'], 2) : '';
@@ -59,7 +61,7 @@ function createMenu(modules, step) {
             has_child = modules[key]['has_child'];
             x += has_child ? '<li class="has-sub">' : '<li>' ;
             x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" onclick="setModule(' + modules[key]['id'] + ')">';
-            x += has_child ? '<b class="caret pull-left"></b>' : '';
+            x += has_child ? '<b class="caret pull-right"></b>' : '';
             x += modules[key]['title'];
             x += '</a>';
 

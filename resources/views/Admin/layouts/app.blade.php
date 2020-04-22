@@ -58,6 +58,7 @@
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <script src="{{ asset('/Admin/js/LAMA.js') }}"></script>
+<script src="{{ asset('/Admin/js/app.js') }}"></script>
 
 <script>
     $(document).ready(function() {
