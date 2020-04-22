@@ -26,26 +26,51 @@ function setModulesMenu() {
     var modules = AJAXRequest('/admin/sys/getMyModules', 'get', '');
     var x = '';
     console.log(modules);
-    for (var key in modules) {
-        var has_child = modules[key]['has_child'];
-
-        x += has_child ? '<li class="has-sub">' : '<li>';
-        x += '<a href="javascript:;">';
-
-        x += has_child ? '<b class="caret pull-right"></b>' : '';
-        x += '<i class="fa ' + modules[key]['icon'] + '"></i>';
-        x += '<span>' + modules[key]['title'] + '</span>';
-        x += '</a>';
+    x = createMenu(modules, 1);
 
 
-
-
-
-
-
-        x += '</li>';
-    }
     console.log(x);
     $('#menu').append(x);
 
+}
+
+function createMenu(modules, step) {
+    var x = '';
+    if (step == 1) {
+        var has_child = 0;
+        for (var key in modules) {
+            has_child = modules[key]['has_child'];
+
+            x += has_child ? '<li class="has-sub">' : '<li>';
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" onclick="setModules(' + modules[key]['id'] + ')">';
+
+            x += has_child ? '<b class="caret pull-left"></b>' : '';
+            x += '<i class="fa ' + modules[key]['icon'] + '"></i>';
+            x += '<span>' + modules[key]['title'] + '</span>';
+            x += '</a>';
+
+            x += has_child ? createMenu(modules[key]['sub_module'], 2) : '';
+            x += '</li>';
+        }
+    } else {
+        var has_child = 0;
+        x += '<ul class="sub-menu">';
+        for (var key in modules) {
+            has_child = modules[key]['has_child'];
+            x += has_child ? '<li class="has-sub">' : '<li>' ;
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" onclick="setModule(' + modules[key]['id'] + ')">';
+            x += has_child ? '<b class="caret pull-left"></b>' : '';
+            x += modules[key]['title'];
+            x += '</a>';
+
+            x += has_child ? createMenu(modules[key]['sub_module'], 2) : '';
+
+            x += '</li>';
+
+        }
+        x += '</ul>';
+
+    }
+
+    return x;
 }
