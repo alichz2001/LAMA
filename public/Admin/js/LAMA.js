@@ -16,21 +16,19 @@ function AJAXRequest(url, method, data) {
     //TODO
     return response['data'];
 }
+
 function setCompanySelect() {
-    var companiesList = AJAXRequest('/admin/sys/getMyCompanies', 'get', '');
+    var companiesList = AJAXRequest(baseURL + '/getMyCompanies', globalSysRequestMethod, '');
     for (var i = 0; i < companiesList.length; i++)
         $('#ul-company_list').append('<li><a href="javascript:;" onclick="changeCompany(' + companiesList[i]['id'] + ')">' + companiesList[i]['title'] + '</a></li>');
 }
 
 function setModulesMenu() {
-    var modules = AJAXRequest('/admin/sys/getMyModules', 'get', '');
-    var x = '';
-    console.log(modules);
-    x = createMenu(modules, 1);
-
-
-    console.log(x);
-    $('#menu').append(x);
+    $('#menu').html('');
+    var modules = AJAXRequest(baseURL + '/getMyModules', globalSysRequestMethod, '');
+    $('#menu').append('<li class="nav-header">Navigation</li>');
+    $('#menu').append(createMenu(modules, 1));
+    $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
 
 }
 
@@ -43,7 +41,7 @@ function createMenu(modules, step) {
 
             x += has_child ? '<li class="has-sub">' : '<li>';
 
-            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" onclick="setModules(' + modules[key]['id'] + ')">';
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" onclick="setModule(' + modules[key]['id'] + ')">';
 
             x += has_child ? '<b class="caret pull-right"></b>' : '';
             x += '<span>' + modules[key]['title'] + '</span>';
@@ -75,4 +73,12 @@ function createMenu(modules, step) {
     }
 
     return x;
+}
+
+
+
+
+
+function setModule(id) {
+    var module = AJAXRequest('', globalSysRequestMethod, '');
 }

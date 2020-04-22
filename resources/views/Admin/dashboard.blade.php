@@ -40,26 +40,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><img src="{{ asset('/templates/_1/assets/img/user-1.jpg') }}" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">John Smith</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted f-s-11">25 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><img src="{{ asset('/templates/_1/assets/img/user-2.jpg') }}" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Olivia</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted f-s-11">35 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
+
                             <li class="media">
                                 <a href="javascript:;">
                                     <div class="media-left"><i class="fa fa-plus media-object bg-green"></i></div>
@@ -93,7 +74,7 @@
                     </li>
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('/templates/_1/assets/img/user-13.jpg') }}" alt="" />
+                            <img src="{{ asset('/Admin/templates/_1/assets/img/user-13.jpg') }}" alt="" />
                             <span class="hidden-xs">Adam Schwartz</span> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu animated fadeInLeft">
@@ -121,7 +102,7 @@
                 <ul class="nav">
                     <li class="nav-profile">
                         <div class="image">
-                            <a href="javascript:;"><img src="{{ asset('/templates/_1/assets/img/user-13.jpg') }}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{ asset('/Admin/templates/_1/assets/img/user-13.jpg') }}" alt="" /></a>
                         </div>
                         <div class="info">
                             Sean Ngu
@@ -154,14 +135,14 @@
         <!-- begin #content -->
         <div id="content" class="content">
             <!-- begin breadcrumb -->
-            <ol class="breadcrumb pull-right">
+            <ol class="breadcrumb pull-left">
                 <li><a href="javascript:;">Home</a></li>
                 <li><a href="javascript:;">Page Options</a></li>
                 <li class="active">Page with Right Sidebar</li>
             </ol>
             <!-- end breadcrumb -->
             <!-- begin page-header -->
-            <h1 class="page-header">Page with Right Sidebar <small>header small text goes here...</small></h1>
+            <h1 class="page-header" style="text-align: right; direction: rtl">Page with Right Sidebar <small dir="rtl">header small text goes here...</small></h1>
             <!-- end page-header -->
 
             <div class="panel panel-inverse">

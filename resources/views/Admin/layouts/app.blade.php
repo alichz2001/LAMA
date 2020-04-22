@@ -38,7 +38,10 @@
 @yield('content')
 
 
-
+<script>
+    const baseURL = '{{ url('/') }}' + '/admin/sys';
+    const globalSysRequestMethod = 'get';
+</script>
 <!-- ================== BEGIN BASE JS ================== -->
 <script src="{{ asset('/Admin/templates/_1/assets/plugins/jquery/jquery-1.9.1.min.js') }}"></script>
 <script src="{{ asset('/Admin/templates/_1/assets/plugins/jquery/jquery-migrate-1.1.0.min.js') }}"></script>
