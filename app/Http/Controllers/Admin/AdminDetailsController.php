@@ -13,7 +13,7 @@ class AdminDetailsController extends Controller
     public function __construct()
     {
 
-        session()->put(['currentCompanyId' => 1, 'currentRoleId' => 2]);
+        //session()->put(['currentCompanyId' => 1, 'currentRoleId' => 2]);
     }
 
     public function getMyCompanies() {
@@ -25,9 +25,7 @@ class AdminDetailsController extends Controller
         //session(['currentCompanyId' => 1]);
         $adminDetails = new AdminDetails(Auth::id());
         //return dump($adminDetails->getCurrentCompanyDetails());
-        if ($adminDetails->errors == [])
-            return Response::Handle(true, $adminDetails->currentCompanyDetails, 1,20001);
-        return Response::Handle(false, '', 2,$adminDetails->errors);
+        return Response::Handle(true, $adminDetails->currentCompanyDetails, 1,20001);
 
     }
 

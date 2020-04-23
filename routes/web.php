@@ -42,4 +42,5 @@ Route::get('/admin/sys/getMyRolesOfCurrentCompany', 'Admin\AdminDetailsControlle
 Route::get('/admin/sys/getMyCurrentRole', 'Admin\AdminDetailsController@getMyCurrentRole')->middleware(['isLogin']);
 Route::get('/admin/sys/getMyModules', 'Admin\AdminDetailsController@getMyModules')->middleware(['isLogin', 'isSetCompany']);
 
-Route::post('/admin/sys/changeCompany', 'Admin\SysController@changeCompany')->middleware(['isLogin']);
+Route::get('/admin/sys/changeCompany', 'Admin\SysController@changeCompany')->middleware(['isLogin']);
+Route::get('/admin/sys/changeRole', 'Admin\SysController@changeRole')->middleware(['isLogin', 'isSetCompany']);

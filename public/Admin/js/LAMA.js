@@ -14,38 +14,63 @@ function AJAXRequest(url, method, data) {
         }
     });
     //TODO
-    return response['data'];
+    return { data: response['data'], status: response['status']};
 }
 
 function setCompanySelect() {
     $('#ul-company_list').html('');
-    var companiesList = AJAXRequest(baseURL + '/getMyCompanies', globalSysRequestMethod, '');
+    var companiesList = AJAXRequest(baseURL + '/getMyCompanies', globalSysRequestMethod, '')['data'];
     var currentCompany = {};
     currentCompany['id'] = 0;
-    currentCompany = AJAXRequest(baseURL + '/getMyCurrentCompany', globalSysRequestMethod, '');
+    currentCompany = AJAXRequest(baseURL + '/getMyCurrentCompany', globalSysRequestMethod, '')['data'];
     for (var i = 0; i < companiesList.length; i++)
         $('#ul-company_list').append('<li ' + (companiesList[i]['id'] == currentCompany['id'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeCompany(' + companiesList[i]['id'] + ')">' + companiesList[i]['title'] + '</a></li>');
 }
 
 function setRoleSelect() {
     $('#ul-role_list').html('');
-    var rolesList = AJAXRequest(baseURL + '/getMyRolesOfCurrentCompany', globalSysRequestMethod, '');
+    var rolesList = AJAXRequest(baseURL + '/getMyRolesOfCurrentCompany', globalSysRequestMethod, '')['data'];
     var currentRole = {};
     currentRole['role'] = '';
-    currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '');
-    console.log(currentRole);
+    currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
     for (var i = 0; i < rolesList.length; i++)
         $('#ul-role_list').append('<li ' + (currentRole['role'] == rolesList[i]['title'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeRole(' + rolesList[i]['id'] + ')">' + rolesList[i]['title'] + '</a></li>');
 }
 
 function setModulesMenu() {
     $('#menu').html('');
-    var modules = AJAXRequest(baseURL + '/getMyModules', globalSysRequestMethod, '');
+    var modules = AJAXRequest(baseURL + '/getMyModules', globalSysRequestMethod, '')['data'];
     $('#menu').append('<li class="nav-header">Navigation</li>');
     $('#menu').append(createMenu(modules, 1));
     $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
-
+    Menu.init();
 }
+
+
+
+function changeCompany(id) {
+    var res = AJAXRequest(baseURL + '/changeCompany', globalSysRequestMethod, {'id' : id});
+    if (res['status'] == true) {
+        setCompanySelect();
+        setRoleSelect();
+        setModulesMenu();
+    }
+}
+
+function changeRole(id) {
+    var res = AJAXRequest(baseURL + '/changeRole', globalSysRequestMethod, {'id' : id});
+    if (res['status'] == true) {
+        setRoleSelect();
+        setModulesMenu();
+    }
+}
+
+
+
+function setModule(id) {
+    var module = AJAXRequest('/getModule', globalSysRequestMethod, '');
+}
+
 
 
 
@@ -90,18 +115,4 @@ function createMenu(modules, step) {
     }
 
     return x;
-}
-
-
-
-function changeCompany(id) {
-    var res = AJAXRequest(baseURL + '/changeCompany', 'post', {'id' : id});
-    setCompanySelect();
-    setRoleSelect();
-}
-
-
-
-function setModule(id) {
-    var module = AJAXRequest('/getModule', globalSysRequestMethod, '');
 }
