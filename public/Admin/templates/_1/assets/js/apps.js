@@ -883,47 +883,90 @@ var handleMobileSidebar = function() {
 var App = function () {
     "use strict";
 
-	return {
-		//main function
-		init: function () {
+    return {
+        //main function
+        init: function () {
 
-		    // draggable panel & local storage
-			handleDraggablePanel();
-		    handleLocalStorage();
-		    handleResetLocalStorage();
+            // draggable panel & local storage
+            handleDraggablePanel();
+            handleLocalStorage();
+            handleResetLocalStorage();
 
-			// slimscroll+
-			handleSlimScroll();
+            // slimscroll+
+            handleSlimScroll();
 
-			// sidebar
-			handleSidebarMenu();
-			handleMobileSidebarToggle();
-			handleSidebarMinify();
-			handleMobileSidebar();
+            // sidebar
+            handleSidebarMenu();
+            handleMobileSidebarToggle();
+            handleSidebarMinify();
+            handleMobileSidebar();
 
-			// theme configuration
-			handleThemePageStructureControl();
-			handleThemePanelExpand();
+            // theme configuration
+            handleThemePageStructureControl();
+            handleThemePanelExpand();
 
-			handleAfterPageLoadAddClass();
+            handleAfterPageLoadAddClass();
 
-			handlePanelAction();
-			handelTooltipPopoverActivation();
-			handleScrollToTopButton();
-			handlePageContentView();
+            handlePanelAction();
+            handelTooltipPopoverActivation();
+            handleScrollToTopButton();
+            handlePageContentView();
 
-			// IE Compatibility
-			handleIEFullHeightContent();
+            // IE Compatibility
+            handleIEFullHeightContent();
 
-			// unlimited nav tabs
-			handleUnlimitedTabsRender();
-		}
+            // unlimited nav tabs
+            handleUnlimitedTabsRender();
+        }
 
-  };
+    };
 }();
 
 var Menu = function () {
     "use strict";
+
+    return {
+        //main function
+        init: function () {
+
+            // draggable panel & local storage
+            handleDraggablePanel();
+            handleLocalStorage();
+            handleResetLocalStorage();
+
+            // slimscroll+
+            handleSlimScroll();
+
+            // sidebar
+            handleSidebarMenu();
+            handleMobileSidebarToggle();
+            handleSidebarMinify();
+            handleMobileSidebar();
+
+            // theme configuration
+            handleThemePageStructureControl();
+            handleThemePanelExpand();
+
+            handleAfterPageLoadAddClass();
+
+            handlePanelAction();
+            handelTooltipPopoverActivation();
+            handleScrollToTopButton();
+            handlePageContentView();
+
+            // IE Compatibility
+            handleIEFullHeightContent();
+
+            // unlimited nav tabs
+            handleUnlimitedTabsRender();
+        }
+
+    };
+}();
+/*
+var Menu = function () {
+    "use strict";
+
     return {
         init: function() {
             handleMobileSidebarToggle();
@@ -933,3 +976,5 @@ var Menu = function () {
     };
 
 }();
+
+*/

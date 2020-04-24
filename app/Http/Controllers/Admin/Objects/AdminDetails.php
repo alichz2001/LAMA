@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Auth;
 class AdminDetails
 {
 
+
+    //TODO there is some way to make better performance for this object
+
+
     private $id;
 
     /**

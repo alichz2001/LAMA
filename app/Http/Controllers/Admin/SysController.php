@@ -6,6 +6,7 @@ use App\Company;
 use App\Http\Controllers\Admin\Handler\Response;
 use App\Http\Controllers\Admin\Objects\AdminDetails;
 use App\Http\Controllers\Controller;
+use App\Module;
 use App\User;
 use App\User_Role_Company;
 use Illuminate\Http\Request;
@@ -58,6 +59,23 @@ class SysController extends Controller
             return Response::Handle(false, '', 2, 40041);
         }
 
+
+    }
+
+    public function getModule() {
+        $module = Module::where(['id' => $this->req['id'], 'status' => 1])->get()->makevisible(['sys_title'])->toArray();
+
+        return 1;
+        if (!isset($module[0]))
+            return Response::Handle(false, '', 3, 50000);
+        elseif ($module[0]['has_child'] != 0)
+            return Response::Handle(false, '', 3, 50001);
+        elseif (!view()->exists('Admin.Modules.dashboard'))
+            return Response::Handle(false, '', 2, 40050);
+        else
+            return view('Admin.Modules.dashboard');
+        //TODO not send view like this
+        // Response::Handle(true, view('Admin.Modules.dashboard'), 1, 20050);
 
     }
 }

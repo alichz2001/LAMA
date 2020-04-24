@@ -43,7 +43,12 @@ function setModulesMenu() {
     $('#menu').append('<li class="nav-header">Navigation</li>');
     $('#menu').append(createMenu(modules, 1));
     $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
-    Menu.init();
+
+    //TODO make better call for handle menu
+    handleSidebarMenu();
+    handleMobileSidebarToggle();
+    handleSidebarMinify();
+    handleMobileSidebar();
 }
 
 
@@ -68,7 +73,8 @@ function changeRole(id) {
 
 
 function setModule(id) {
-    var module = AJAXRequest('/getModule', globalSysRequestMethod, '');
+    var module = AJAXRequest(baseURL + '/getModule', globalSysRequestMethod, {id: id});
+    console.log(module);
 }
 
 
