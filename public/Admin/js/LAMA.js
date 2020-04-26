@@ -9,7 +9,7 @@ function AJAXRequest(url, method, data) {
             //TODO
             response = data;
         },
-        error: function (error) {
+        error: function () {
             //TODO
         }
     });
@@ -18,23 +18,57 @@ function AJAXRequest(url, method, data) {
 }
 
 function setOrganSelect() {
-    $('#ul-organ_list').html('');
-    var organsList = AJAXRequest(baseURL + '/getMyOrgans', globalSysRequestMethod, '')['data'];
-    var currentOrgan = {};
-    currentOrgan['id'] = 0;
-    currentOrgan = AJAXRequest(baseURL + '/getMyCurrentOrgan', globalSysRequestMethod, '')['data'];
-    for (var i = 0; i < organsList.length; i++)
-        $('#ul-organ_list').append('<li ' + (organsList[i]['id'] == currentOrgan['id'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeOrgan(' + organsList[i]['id'] + ')">' + organsList[i]['title'] + '</a></li>');
+    /*
+     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-database fa-fw"></i> organs <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" id="ul-organ_list">
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-database fa-fw"></i> roles <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" id="ul-role_list">
+
+                        </ul>
+                    </li>
+     */
+    //$('#top-navbar').html('');
+    var organsList = AJAXRequest(baseURL + '/getMyOrgans', globalSysRequestMethod, '');
+    var x = '';
+    if (organsList['data'].length < 2) {
+        //TODO make better UI
+        x += '<a href="javascript:;">' + organsList['data'][0]['title'] + '</a>';
+    } else {
+        x += '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-database fa-fw"></i> organs <b class="caret"></b></a><ul class="dropdown-menu" role="menu" id="ul-organ_list">';
+        var currentOrgan = {};
+        currentOrgan['id'] = 0;
+        currentOrgan = AJAXRequest(baseURL + '/getMyCurrentOrgan', globalSysRequestMethod, '')['data'];
+        for (var i = 0; i < organsList['data'].length; i++)
+            x += '<li ' + (organsList['data'][i]['id'] == currentOrgan['id'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeOrgan(' + organsList['data'][i]['id'] + ')">' + organsList['data'][i]['title'] + '</a></li>';
+        x += '</ul>';
+    }
+    $('#select-organ-li').html(x);
 }
 
 function setRoleSelect() {
-    $('#ul-role_list').html('');
     var rolesList = AJAXRequest(baseURL + '/getMyRolesOfCurrentOrgan', globalSysRequestMethod, '')['data'];
-    var currentRole = {};
-    currentRole['role'] = '';
-    currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
-    for (var i = 0; i < rolesList.length; i++)
-        $('#ul-role_list').append('<li ' + (currentRole['role'] == rolesList[i]['title'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeRole(' + rolesList[i]['id'] + ')">' + rolesList[i]['title'] + '</a></li>');
+    var x = '';
+    if (rolesList.length < 2) {
+        //TODO maybe show admin's role
+    } else {
+        x += '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-database fa-fw"></i> roles <b class="caret"></b></a><ul class="dropdown-menu" role="menu" id="ul-role_list">';
+        var currentRole = {};
+        currentRole['role'] = '';
+        currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
+        for (var i = 0; i < rolesList.length; i++)
+            x += '<li ' + (currentRole['role'] == rolesList[i]['title'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeRole(' + rolesList[i]['id'] + ')">' + rolesList[i]['title'] + '</a></li>';
+        x += '</ul>';
+    }
+    $('#select-role-li').html(x);
 }
 
 function setModulesMenu() {

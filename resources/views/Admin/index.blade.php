@@ -23,7 +23,9 @@
 
 
                 <!-- begin header navigation right -->
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" id="top-navbar">
+                    <li id="select-organ-li" class="dropdown"></li>
+                    <li id="select-role-li" class="dropdown"></li>
                     <li class="dropdown">
                         <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
                             <i class="fa fa-bell-o"></i>
@@ -64,22 +66,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-database fa-fw"></i> organs <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" id="ul-organ_list">
 
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-database fa-fw"></i> roles <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" id="ul-role_list">
-
-                        </ul>
-                    </li>
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('/Admin/templates/_1/assets/img/user-13.jpg') }}" alt="" />

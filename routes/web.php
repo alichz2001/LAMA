@@ -32,9 +32,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //===========================================================================
 
-Route::get('/admin', 'Admin\DashboardController@dashboard');
+Route::get('/admin', 'Admin\DashboardController@dashboard')->middleware('auth');
 
-
+//TODO all routs should be post after debugging
 Route::get('/admin/sys/getMyOrgans', 'Admin\AdminDetailsController@getMyOrgans')->middleware(['isLogin']);
 Route::get('/admin/sys/getMyCurrentOrgan', 'Admin\AdminDetailsController@getMyCurrentOrgan')->middleware(['isLogin']);
 Route::get('/admin/sys/getMyRoles', 'Admin\AdminDetailsController@getMyRoles')->middleware(['isLogin']);
