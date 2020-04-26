@@ -65,7 +65,8 @@ class SysController extends Controller
     public function getModule() {
         $module = Module::where(['id' => $this->req['id'], 'status' => 1])->get()->makevisible(['sys_title'])->toArray();
 
-        return 1;
+        $adminDetails = new AdminDetails(Auth::id());
+        return dump($module);
         if (!isset($module[0]))
             return Response::Handle(false, '', 3, 50000);
         elseif ($module[0]['has_child'] != 0)

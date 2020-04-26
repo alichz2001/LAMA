@@ -99,7 +99,7 @@ class AdminDetails
         $roles = [];
         foreach ($userRoleOrgan as $item)
             if ($item['organ'] != null && $item['role'] != null)
-                $roles[] = ['role' => $item['role']['title'], 'organ' => $item['organ']['title']];
+                $roles[] = ['role' => ['title' => $item['role']['title'], 'id' => $item['role']['id']], 'organ' => ['title' => $item['organ']['title'], 'id' => $item['organ']['id']]];
         $this->accessibleRoles = $roles;
     }
 
@@ -141,7 +141,6 @@ class AdminDetails
         }
         $this->rolesOfCurrentOrgan = $roles;
     }
-
 
 
 

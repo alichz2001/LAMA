@@ -18,25 +18,6 @@ function AJAXRequest(url, method, data) {
 }
 
 function setOrganSelect() {
-    /*
-     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-database fa-fw"></i> organs <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" id="ul-organ_list">
-
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-database fa-fw"></i> roles <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" id="ul-role_list">
-
-                        </ul>
-                    </li>
-     */
-    //$('#top-navbar').html('');
     var organsList = AJAXRequest(baseURL + '/getMyOrgans', globalSysRequestMethod, '');
     var x = '';
     if (organsList['data'].length < 2) {
@@ -71,22 +52,6 @@ function setRoleSelect() {
     $('#select-role-li').html(x);
 }
 
-function setModulesMenu() {
-    $('#menu').html('');
-    var modules = AJAXRequest(baseURL + '/getMyModules', globalSysRequestMethod, '')['data'];
-    $('#menu').append('<li class="nav-header">Navigation</li>');
-    $('#menu').append(createMenu(modules, 1));
-    $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
-
-    //TODO make better call for handle menu
-    handleSidebarMenu();
-    handleMobileSidebarToggle();
-    handleSidebarMinify();
-    handleMobileSidebar();
-}
-
-
-
 function changeOrgan(id) {
     var res = AJAXRequest(baseURL + '/changeOrgan', globalSysRequestMethod, {'id' : id});
     if (res['status'] == true) {
@@ -104,15 +69,19 @@ function changeRole(id) {
     }
 }
 
+function setModulesMenu() {
+    $('#menu').html('');
+    var modules = AJAXRequest(baseURL + '/getMyModules', globalSysRequestMethod, '')['data'];
+    $('#menu').append('<li class="nav-header">Navigation</li>');
+    $('#menu').append(createMenu(modules, 1));
+    $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
 
-
-function setModule(id) {
-    var module = AJAXRequest(baseURL + '/getModule', globalSysRequestMethod, {id: id});
-    console.log(module);
+    //TODO make better call for handle menu
+    handleSidebarMenu();
+    handleMobileSidebarToggle();
+    handleSidebarMinify();
+    handleMobileSidebar();
 }
-
-
-
 
 function createMenu(modules, step) {
     var x = '';
@@ -123,7 +92,7 @@ function createMenu(modules, step) {
 
             x += has_child ? '<li class="has-sub">' : '<li>';
 
-            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" onclick="setModule(' + modules[key]['id'] + ')">';
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(' + modules[key]['id'] + ')">';
 
             x += has_child ? '<b class="caret pull-right"></b>' : '';
             x += '<span>' + modules[key]['title'] + '</span>';
@@ -140,7 +109,7 @@ function createMenu(modules, step) {
         for (var key in modules) {
             has_child = modules[key]['has_child'];
             x += has_child ? '<li class="has-sub">' : '<li>' ;
-            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" onclick="setModule(' + modules[key]['id'] + ')">';
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(' + modules[key]['id'] + ')">';
             x += has_child ? '<b class="caret pull-right"></b>' : '';
             x += modules[key]['title'];
             x += '</a>';
@@ -156,3 +125,10 @@ function createMenu(modules, step) {
 
     return x;
 }
+
+function setModule(id) {
+    //TODO makt title of page
+    var module = AJAXRequest(baseURL + '/getModule', globalSysRequestMethod, {id: id});
+    console.log(module);
+}
+
