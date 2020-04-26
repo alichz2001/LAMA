@@ -19,7 +19,7 @@ class isLogin
     {
 
         if (Auth::check() == false)
-            return Response::Handle(false, '', 2, '40000');
+            return Response::Handle(false, '', 2, 40000);
         return $next($request);
     }
 }

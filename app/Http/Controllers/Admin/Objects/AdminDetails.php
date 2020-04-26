@@ -127,7 +127,7 @@ class AdminDetails
      */
     private function setCurrentRoleDetails() {
         $role = Role::where(['id' => $this->currentRoleId, 'status' => 1])->get()->toArray();
-        if (isset($role[0]) && in_array(['role' => $role[0]['title'], 'organ' => $this->currentOrganDetails['title']], $this->accessibleRoles))
+        if (isset($role[0]) && in_array(['role' => ['title' => $role[0]['title'], 'id' => $role[0]['id']], 'organ' => ['title' => $this->currentOrganDetails['title'], 'id' => $this->currentOrganDetails['id']]], $this->accessibleRoles))
             $this->currentRoleWithOrgan = ['role' => $role[0]['title'], 'organ' => $this->currentOrganDetails['title']];
         else
             $this->errors[] = 40020;
