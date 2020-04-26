@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Organ extends Model
 {
-    protected $table = 'companies';
+    protected $table = 'organs';
 
     protected $hidden = ['sys_title', 'status', 'pivot', 'created_at', 'updated_at'];
 }

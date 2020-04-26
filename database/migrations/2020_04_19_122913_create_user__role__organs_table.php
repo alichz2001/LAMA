@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserRoleCompaniesTable extends Migration
+class CreateUserRoleOrgansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateUserRoleCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user__role__company', function (Blueprint $table) {
+        Schema::create('user__role__organ', function (Blueprint $table) {
             $table->unsignedbigInteger('id')->autoIncrement()->index();
             $table->unsignedbigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedbigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->unsignedbigInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedbigInteger('organ_id');
+            $table->foreign('organ_id')->references('id')->on('organs')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('is_default')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
         });

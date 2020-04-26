@@ -72,7 +72,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        setCompanySelect();
+        setOrganSelect();
         setRoleSelect();
         setModulesMenu();
         App.init();

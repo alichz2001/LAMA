@@ -13,19 +13,19 @@ class AdminDetailsController extends Controller
     public function __construct()
     {
 
-        //session()->put(['currentCompanyId' => 1, 'currentRoleId' => 2]);
+        //session()->put(['currentOrganId' => 1, 'currentRoleId' => 2]);
     }
 
-    public function getMyCompanies() {
+    public function getMyOrgans() {
         $adminDetails = new AdminDetails(Auth::id());
-        return Response::Handle(true, $adminDetails->accessibleCompanies, 1,20000);
+        return Response::Handle(true, $adminDetails->accessibleOrgans, 1,20000);
     }
 
-    public function getMyCurrentCompany() {
-        //session(['currentCompanyId' => 1]);
+    public function getMyCurrentOrgan() {
+        //session(['currentOrganId' => 1]);
         $adminDetails = new AdminDetails(Auth::id());
-        //return dump($adminDetails->getCurrentCompanyDetails());
-        return Response::Handle(true, $adminDetails->currentCompanyDetails, 1,20001);
+        //return dump($adminDetails->getCurrentOrganDetails());
+        return Response::Handle(true, $adminDetails->currentOrganDetails, 1,20001);
 
     }
 
@@ -37,7 +37,7 @@ class AdminDetailsController extends Controller
     public function getMyCurrentRole() {
         $adminDetails = new AdminDetails(Auth::id());
         if ($adminDetails->errors == [])
-            return Response::Handle(true, $adminDetails->currentRoleWithCompany, 1,20003);
+            return Response::Handle(true, $adminDetails->currentRoleWithOrgan, 1,20003);
         return Response::Handle(false, '', 2, $adminDetails->errors);
     }
 
@@ -46,8 +46,8 @@ class AdminDetailsController extends Controller
         return Response::Handle(true, $adminDetails->modules, 1, 20004);
     }
 
-    public function getMyRolesOfCurrentCompany() {
+    public function getMyRolesOfCurrentOrgan() {
         $adminDetails = new AdminDetails(Auth::id());
-        return Response::Handle(true, $adminDetails->rolesOfCurrentCompany, 1, 20005);
+        return Response::Handle(true, $adminDetails->rolesOfCurrentOrgan, 1, 20005);
     }
 }

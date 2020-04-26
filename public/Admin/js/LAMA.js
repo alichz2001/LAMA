@@ -17,19 +17,19 @@ function AJAXRequest(url, method, data) {
     return { data: response['data'], status: response['status']};
 }
 
-function setCompanySelect() {
-    $('#ul-company_list').html('');
-    var companiesList = AJAXRequest(baseURL + '/getMyCompanies', globalSysRequestMethod, '')['data'];
-    var currentCompany = {};
-    currentCompany['id'] = 0;
-    currentCompany = AJAXRequest(baseURL + '/getMyCurrentCompany', globalSysRequestMethod, '')['data'];
-    for (var i = 0; i < companiesList.length; i++)
-        $('#ul-company_list').append('<li ' + (companiesList[i]['id'] == currentCompany['id'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeCompany(' + companiesList[i]['id'] + ')">' + companiesList[i]['title'] + '</a></li>');
+function setOrganSelect() {
+    $('#ul-organ_list').html('');
+    var organsList = AJAXRequest(baseURL + '/getMyOrgans', globalSysRequestMethod, '')['data'];
+    var currentOrgan = {};
+    currentOrgan['id'] = 0;
+    currentOrgan = AJAXRequest(baseURL + '/getMyCurrentOrgan', globalSysRequestMethod, '')['data'];
+    for (var i = 0; i < organsList.length; i++)
+        $('#ul-organ_list').append('<li ' + (organsList[i]['id'] == currentOrgan['id'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeOrgan(' + organsList[i]['id'] + ')">' + organsList[i]['title'] + '</a></li>');
 }
 
 function setRoleSelect() {
     $('#ul-role_list').html('');
-    var rolesList = AJAXRequest(baseURL + '/getMyRolesOfCurrentCompany', globalSysRequestMethod, '')['data'];
+    var rolesList = AJAXRequest(baseURL + '/getMyRolesOfCurrentOrgan', globalSysRequestMethod, '')['data'];
     var currentRole = {};
     currentRole['role'] = '';
     currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
@@ -53,10 +53,10 @@ function setModulesMenu() {
 
 
 
-function changeCompany(id) {
-    var res = AJAXRequest(baseURL + '/changeCompany', globalSysRequestMethod, {'id' : id});
+function changeOrgan(id) {
+    var res = AJAXRequest(baseURL + '/changeOrgan', globalSysRequestMethod, {'id' : id});
     if (res['status'] == true) {
-        setCompanySelect();
+        setOrganSelect();
         setRoleSelect();
         setModulesMenu();
     }

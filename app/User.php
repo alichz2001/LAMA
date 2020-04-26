@@ -37,11 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function companies() {
-        return $this->belongsToMany(Company::class,'user__role__company','user_id', 'company_id')->where(['status' => 1]);
+    public function organs() {
+        return $this->belongsToMany(Organ::class,User_Role_Organ::class,'user_id', 'organ_id')->where(['status' => 1]);
     }
 
     public function roles() {
-        return $this->belongsToMany(Role::class,'user__role__company','user_id', 'role_id')->where(['status' => 1]);
+        return $this->belongsToMany(Role::class,User_Role_Organ::class,'user_id', 'role_id')->where(['status' => 1]);
     }
 }

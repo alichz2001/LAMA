@@ -48,15 +48,15 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1
         ]);
 
-        \Illuminate\Support\Facades\DB::table('companies')->insert([
-            'title' => 'first company',
-            'sys_title' => 'first_company'
+        \Illuminate\Support\Facades\DB::table('organs')->insert([
+            'title' => 'first organ',
+            'sys_title' => 'first_organ'
         ]);
 
-        \Illuminate\Support\Facades\DB::table('user__role__company')->insert([
+        \Illuminate\Support\Facades\DB::table('user__role__organ')->insert([
             'user_id' => 1,
             'role_id' => 1,
-            'company_id' => 1
+            'organ_id' => 1
         ]);
     }
 }

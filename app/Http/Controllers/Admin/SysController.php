@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Company;
+use App\Organ;
 use App\Http\Controllers\Admin\Handler\Response;
 use App\Http\Controllers\Admin\Objects\AdminDetails;
 use App\Http\Controllers\Controller;
 use App\Module;
 use App\User;
-use App\User_Role_Company;
+use App\User_Role_Organ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,17 +21,17 @@ class SysController extends Controller
         $this->req = $req->toArray();
     }
 
-    public function changeCompany() {
+    public function changeOrgan() {
         $adminDetails = new AdminDetails(Auth::id());
-        $accessibleCompanies = $adminDetails->accessibleCompanies;
+        $accessibleOrgans = $adminDetails->accessibleOrgans;
         $access = 0;
-        foreach ($accessibleCompanies as $company)
+        foreach ($accessibleOrgans as $company)
             if ($company['id'] == $this->req['id']) {
                 $access = 1;
                 break;
             }
         if ($access == 1) {
-            session()->put(['currentCompanyId' => $this->req['id']]);
+            session()->put(['currentOrganId' => $this->req['id']]);
             session()->put(['currentRoleId' => 0]);
             return Response::Handle(true, '', 1, 20020);
         } else {
@@ -41,7 +41,7 @@ class SysController extends Controller
 
     public function changeRole() {
         $adminDetails = new AdminDetails(Auth::id());
-        $accessibleRoles = $adminDetails->rolesOfCurrentCompany;
+        $accessibleRoles = $adminDetails->rolesOfCurrentOrgan;
         //return dump(session()->all());
         $access = 0;
         foreach ($accessibleRoles as $role)

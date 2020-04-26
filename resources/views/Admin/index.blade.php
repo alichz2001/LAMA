@@ -66,9 +66,9 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-database fa-fw"></i> companies <b class="caret"></b>
+                            <i class="fa fa-database fa-fw"></i> organs <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu" role="menu" id="ul-company_list">
+                        <ul class="dropdown-menu" role="menu" id="ul-organ_list">
 
                         </ul>
                     </li>

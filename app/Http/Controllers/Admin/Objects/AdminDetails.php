@@ -4,11 +4,11 @@
 namespace App\Http\Controllers\Admin\Objects;
 
 
-use App\Company;
+use App\Organ;
 use App\Module;
 use App\Role;
 use App\Role_Module;
-use App\User_Role_Company;
+use App\User_Role_Organ;
 use Illuminate\Support\Facades\Auth;
 
 class AdminDetails
@@ -21,19 +21,19 @@ class AdminDetails
     private $id;
 
     /**
-     * @var array ['company_title' , ...]
+     * @var array ['organ_title' , ...]
      */
-    public $accessibleCompanies = [];
+    public $accessibleOrgans = [];
 
     /**
-     * @var array [[role => 'role_title', company => 'company_title'], ...]
+     * @var array [[role => 'role_title', organ => 'organ_title'], ...]
      */
     public $accessibleRoles = [];
 
     /**
-     * @var int|mixed company_id
+     * @var int|mixed organ_id
      */
-    private $currentCompanyId = 0;
+    private $currentOrganId = 0;
 
     /**
      * @var int|mixed role_id
@@ -41,19 +41,19 @@ class AdminDetails
     private $currentRoleId = 0;
 
     /**
-     * @var array [id => 'company_id', title => 'company_title', created_at => 'timestamp, updated_at => 'timestamp]
+     * @var array [id => 'organ_id', title => 'organ_title', created_at => 'timestamp, updated_at => 'timestamp]
      */
-    public $currentCompanyDetails = [];
+    public $currentOrganDetails = [];
 
     /**
-     * @var array [role => 'role_title', company => 'company_title']
+     * @var array [role => 'role_title', organ => 'organ_title']
      */
-    public $currentRoleWithCompany = [];
+    public $currentRoleWithOrgan = [];
 
     /**
      * @var array
      */
-    public $rolesOfCurrentCompany = [];
+    public $rolesOfCurrentOrgan = [];
 
     /**
      * @var array
@@ -68,52 +68,52 @@ class AdminDetails
     public function __construct($id)
     {
         $this->id = $id;
-        $this->setAllAccessibleCompanies();
-        $this->setAllAccessibleRolesInAccessibleCompanies();
+        $this->setAllAccessibleOrgans();
+        $this->setAllAccessibleRolesInAccessibleOrgans();
         $this->currentRoleId = !session()->has('currentRoleId') ? 0 : session()->get('currentRoleId');
-        $this->currentCompanyId = !session()->has('currentCompanyId') ? 0 : session()->get('currentCompanyId');
-        $this->setCurrentCompanyDetails();
-        $this->setRolesOfCurrentCompany();
+        $this->currentOrganId = !session()->has('currentOrganId') ? 0 : session()->get('currentOrganId');
+        $this->setCurrentOrganDetails();
+        $this->setRolesOfCurrentOrgan();
         $this->setCurrentRoleDetails();
         $this->setModules();
     }
 
     /**
-     * set all companies with true status that has access with true status in $this->accessibleCompanies
+     * set all organs with true status that has access with true status in $this->accessibleOrgans
      */
-    private function setAllAccessibleCompanies() {
-        $userRoleCompany = User_Role_Company::where(['user_id' => $this->id, 'status' => 1])->with(['company'])->get()->toArray();
-        $companies = [];
-        foreach ($userRoleCompany as $item)
-            if ($item['company'] != null && !in_array(['title' => $item['company']['title'], 'id' => $item['company']['id']], $companies))
-                $companies[] = ['title' => $item['company']['title'], 'id' => $item['company']['id']];
+    private function setAllAccessibleOrgans() {
+        $userRoleOrgan = User_Role_Organ::where(['user_id' => $this->id, 'status' => 1])->with(['organ'])->get()->toArray();
+        $organs = [];
+        foreach ($userRoleOrgan as $item)
+            if ($item['organ'] != null && !in_array(['title' => $item['organ']['title'], 'id' => $item['organ']['id']], $organs))
+                $organs[] = ['title' => $item['organ']['title'], 'id' => $item['organ']['id']];
 
-        $this->accessibleCompanies = $companies;
+        $this->accessibleOrgans = $organs;
     }
 
     /**
-     * set all roles with true status and company true status and access with true status to $this->accessibleRoles
+     * set all roles with true status and organ true status and access with true status to $this->accessibleRoles
      */
-    private function setAllAccessibleRolesInAccessibleCompanies() {
-        $userRoleCompany = User_Role_Company::where(['user_id' => $this->id])->where(['status' => 1])->with('company', 'role')->get()->toArray();
+    private function setAllAccessibleRolesInAccessibleOrgans() {
+        $userRoleOrgan = User_Role_Organ::where(['user_id' => $this->id])->where(['status' => 1])->with('organ', 'role')->get()->toArray();
         $roles = [];
-        foreach ($userRoleCompany as $item)
-            if ($item['company'] != null && $item['role'] != null)
-                $roles[] = ['role' => $item['role']['title'], 'company' => $item['company']['title']];
+        foreach ($userRoleOrgan as $item)
+            if ($item['organ'] != null && $item['role'] != null)
+                $roles[] = ['role' => $item['role']['title'], 'organ' => $item['organ']['title']];
         $this->accessibleRoles = $roles;
     }
 
     /**
-     * set details of current company
-     * if set currentCompanyId in session and that is accessible
-     * put to $this->currentCompany
+     * set details of current organ
+     * if set currentOrganId in session and that is accessible
+     * put to $this->currentOrgan
      * else
      * put 40010 error
      */
-    private function setCurrentCompanyDetails() {
-        $company = Company::where(['id' => $this->currentCompanyId, 'status' => 1])->get()->makeVisible(['created_at', 'updated_at', 'id'])->toArray();
-        if (isset($company[0]) && in_array(['title' => $company[0]['title'], 'id' => $company[0]['id']], $this->accessibleCompanies))
-            $this->currentCompanyDetails = $company[0];
+    private function setCurrentOrganDetails() {
+        $organ = Organ::where(['id' => $this->currentOrganId, 'status' => 1])->get()->makeVisible(['created_at', 'updated_at', 'id'])->toArray();
+        if (isset($organ[0]) && in_array(['title' => $organ[0]['title'], 'id' => $organ[0]['id']], $this->accessibleOrgans))
+            $this->currentOrganDetails = $organ[0];
         else
             $this->errors[] = 40010;
     }
@@ -121,25 +121,25 @@ class AdminDetails
     /**
      * set details of current role
      * if set currentRoleId in session and that is accessible
-     * put to $this->currentRoleWithCompany
+     * put to $this->currentRoleWithOrgan
      * else
      * put error 40020
      */
     private function setCurrentRoleDetails() {
         $role = Role::where(['id' => $this->currentRoleId, 'status' => 1])->get()->toArray();
-        if (isset($role[0]) && in_array(['role' => $role[0]['title'], 'company' => $this->currentCompanyDetails['title']], $this->accessibleRoles))
-            $this->currentRoleWithCompany = ['role' => $role[0]['title'], 'company' => $this->currentCompanyDetails['title']];
+        if (isset($role[0]) && in_array(['role' => $role[0]['title'], 'organ' => $this->currentOrganDetails['title']], $this->accessibleRoles))
+            $this->currentRoleWithOrgan = ['role' => $role[0]['title'], 'organ' => $this->currentOrganDetails['title']];
         else
             $this->errors[] = 40020;
     }
 
-    private function setRolesOfCurrentCompany() {
-        $userRoleCompany = User_Role_Company::where(['company_id' => $this->currentCompanyId, 'user_id' => Auth::id(), 'status' => 1])->with(['role'])->get()->makeVisible(['id', 'status'])->toArray();
+    private function setRolesOfCurrentOrgan() {
+        $userRoleOrgan = User_Role_Organ::where(['organ_id' => $this->currentOrganId, 'user_id' => Auth::id(), 'status' => 1])->with(['role'])->get()->makeVisible(['id', 'status'])->toArray();
         $roles = [];
-        foreach ($userRoleCompany as $item) {
+        foreach ($userRoleOrgan as $item) {
             $roles[] = $item['role'];
         }
-        $this->rolesOfCurrentCompany = $roles;
+        $this->rolesOfCurrentOrgan = $roles;
     }
 
 
