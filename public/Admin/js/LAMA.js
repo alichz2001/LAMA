@@ -128,7 +128,18 @@ function createMenu(modules, step) {
 
 function setModule(id) {
     //TODO make title of page
-    var module = AJAXRequest(baseURL + '/getModule', globalSysRequestMethod, {id: id});
-    console.log(module);
+    $.ajax({
+        url: baseURL + '/getModule',
+        method: globalSysRequestMethod,
+        data: {id: id},
+        async: false,
+        success: function (data) {
+            //TODO
+            $('#module-section').html(data);
+        },
+        error: function () {
+            //TODO
+        }
+    });
 }
 

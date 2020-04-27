@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Modules\Dashboard;
 use App\Organ;
 use App\Http\Controllers\Admin\Handler\Response;
 use App\Http\Controllers\Admin\Objects\AdminDetails;
@@ -62,21 +63,5 @@ class SysController extends Controller
 
     }
 
-    public function getModule() {
-        $module = Module::where(['id' => $this->req['id'], 'status' => 1])->get()->makevisible(['sys_title'])->toArray();
 
-        $adminDetails = new AdminDetails(Auth::id());
-        //return dump($module);
-        if (!isset($module[0]))
-            return Response::Handle(false, '', 3, 50000);
-        elseif ($module[0]['has_child'] != 0)
-            return Response::Handle(false, '', 3, 50001);
-        elseif (!view()->exists('Admin.Modules.' . $module[0]['sys_title']))
-            return Response::Handle(false, '', 2, 40050);
-        else
-            return view('Admin.Modules.dashboard');
-        //TODO not send view like this
-        // Response::Handle(true, view('Admin.Modules.dashboard'), 1, 20050);
-
-    }
 }

@@ -144,7 +144,8 @@
 
 
 
-            //modules section
+            <div id="module-section">
+            </div>
 
 
 
