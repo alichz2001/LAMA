@@ -19,7 +19,9 @@ class DashboardController extends Controller
                 return redirect('404');
 
             $defaultRole = $adminDetails->getDefaultRole();
-            session()->put(['currentRoleId' => $defaultRole['role']['id'], 'currentOrganId' => $defaultRole['organ']['id']]);
+            //return dump($defaultRole['role']['id']);
+            session()->put(['currentRoleId' => $defaultRole['role']['id']]);
+            session()->put(['currentOrganId' => $defaultRole['organ']['id']]);
             return redirect()->refresh();
         } else {
             return view('Admin.index');
