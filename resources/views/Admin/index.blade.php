@@ -7,39 +7,39 @@
     <!-- begin #page-container -->
     <div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-with-right-sidebar">
         <!-- begin #header -->
-        <div id="header" class="header navbar navbar-default navbar-fixed-top">
-            <!-- begin container-fluid -->
-            <div class="container-fluid">
-                <!-- begin mobile sidebar expand / collapse button -->
-                <div class="navbar-header">
-                    <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> Color Admin</a>
-                    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <!-- end mobile sidebar expand / collapse button -->
-
-
-                <!-- begin header navigation right -->
-                <ul class="nav navbar-nav navbar-right" id="top-navbar">
-                    <li id="select-organ-li" class="dropdown"></li>
-                    <li id="select-role-li" class="dropdown"></li>
-
-                    <li class="dropdown navbar-user">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('/Admin/templates/_1/assets/img/user-13.jpg') }}" alt="" />
-                            <span class="hidden-xs">Adam Schwartz</span> <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInLeft">
-                            <li><a href="/admin/logout">Log Out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- end header navigation right -->
+        <div id="header" class="header navbar-default">
+            <!-- begin navbar-header -->
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>Color</b> Admin</a>
+                <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-            <!-- end container-fluid -->
+            <!-- end navbar-header -->
+
+            <!-- begin header-nav -->
+            <ul class="navbar-nav navbar-right">
+                <li id="select-organ-li" class="dropdown"></li>
+                <li id="select-role-li" class="dropdown"></li>
+
+                <li class="dropdown navbar-user">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="{{ asset('/Admin/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
+                        <span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="javascript:;" class="dropdown-item">Edit Profile</a>
+                        <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
+                        <a href="javascript:;" class="dropdown-item">Calendar</a>
+                        <a href="javascript:;" class="dropdown-item">Setting</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="javascript:;" class="dropdown-item">Log Out</a>
+                    </div>
+                </li>
+            </ul>
+            <!-- end header navigation right -->
         </div>
         <!-- end #header -->
 
@@ -50,25 +50,28 @@
                 <!-- begin sidebar user -->
                 <ul class="nav">
                     <li class="nav-profile">
-                        <div class="image">
-                            <a href="javascript:;"><img src="{{ asset('/Admin/templates/_1/assets/img/user-13.jpg') }}" alt="" /></a>
-                        </div>
-                        <div class="info">
-                            Sean Ngu
-                            <small>Front end developer</small>
-                        </div>
+                        <a href="javascript:;" data-toggle="nav-profile">
+                            <div class="image">
+                                <img src="{{ asset('/Admin/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
+                            </div>
+                            <div class="info">
+                                <b class="caret pull-left"></b>
+                                Sean Ngu
+                                <small>Front end developer</small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <ul class="nav nav-profile">
+                            <li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
+                            <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
+                            <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <!-- end sidebar user -->
                 <!-- begin sidebar nav -->
                 <ul class="nav" id="menu">
-
-
-
-
-
-
-
 
                     <!-- begin sidebar minify button -->
                     <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
@@ -83,16 +86,22 @@
 
         <!-- begin #content -->
         <div id="content" class="content">
-            <!-- begin breadcrumb -->
-            <ol class="breadcrumb pull-left">
-                <li><a href="javascript:;">Home</a></li>
-                <li><a href="javascript:;">Page Options</a></li>
-                <li class="active">Page with Right Sidebar</li>
-            </ol>
-            <!-- end breadcrumb -->
-            <!-- begin page-header -->
-            <h1 class="page-header" style="text-align: right; direction: rtl">Page with Right Sidebar <small dir="rtl">header small text goes here...</small></h1>
-            <!-- end page-header -->
+
+            <div class="panel panel-inverse" data-sortable-id="ui-typography-4">
+
+                <div class="panel-body">
+                    <ol class="breadcrumb pull-left">
+                        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:;">Page Options</a></li>
+                        <li class="breadcrumb-item active">Blank Page</li>
+                    </ol>
+                    <!-- begin page-header -->
+                    <h1 class="page-header" style="text-align: right; direction: rtl">Page with Right Sidebar <small dir="rtl">header small text goes here...</small></h1>
+                    <!-- end page-header -->
+                </div>
+
+            </div>
+
 
 
 
@@ -106,8 +115,11 @@
 
 
 
+
+
         </div>
         <!-- end #content -->
+
 
 
         <!-- begin scroll to top btn -->

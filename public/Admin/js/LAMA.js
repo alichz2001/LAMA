@@ -82,10 +82,7 @@ function setModulesMenu() {
     $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
 
     //TODO make better call for handle menu
-    handleSidebarMenu();
-    handleMobileSidebarToggle();
-    handleSidebarMinify();
-    handleMobileSidebar();
+    App.initSidebar();
 }
 
 function createMenu(modules, step) {
@@ -99,7 +96,7 @@ function createMenu(modules, step) {
 
             x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(' + modules[key]['id'] + ')">';
 
-            x += has_child ? '<b class="caret pull-right"></b>' : '';
+            x += has_child ? '<b class="caret"></b>' : '';
             x += '<span>' + modules[key]['title'] + '</span>';
             x += '<i class="fa ' + modules[key]['icon'] + '"></i>';
 
@@ -115,7 +112,7 @@ function createMenu(modules, step) {
             has_child = modules[key]['has_child'];
             x += has_child ? '<li class="has-sub">' : '<li>' ;
             x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(' + modules[key]['id'] + ')">';
-            x += has_child ? '<b class="caret pull-right"></b>' : '';
+            x += has_child ? '<b class="caret"></b>' : '';
             x += modules[key]['title'];
             x += '</a>';
 
