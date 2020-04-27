@@ -21,8 +21,8 @@ class CreateRoleModulesTable extends Migration
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->integer('read_access')->default(1);
             $table->integer('save_access')->default(1);
-            $table->integer('update_access')->default(1);
-            $table->integer('delete_access')->default(1);
+            $table->integer('edit_access')->default(1);
+            $table->integer('remove_access')->default(1);
             $table->integer('status')->default(1);
             $table->timestamps();
         });

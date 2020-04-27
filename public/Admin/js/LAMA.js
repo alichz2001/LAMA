@@ -127,7 +127,7 @@ function createMenu(modules, step) {
 }
 
 function setModule(id) {
-    //TODO makt title of page
+    //TODO make title of page
     var module = AJAXRequest(baseURL + '/getModule', globalSysRequestMethod, {id: id});
     console.log(module);
 }

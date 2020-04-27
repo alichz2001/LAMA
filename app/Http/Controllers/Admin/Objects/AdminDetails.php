@@ -148,6 +148,13 @@ class AdminDetails
 
 
 
+    public function getDefaultRole() {
+        $userRoleOrgan = User_Role_Organ::where(['status' => 1, 'user_id' => $this->id, 'is_default' => 1])->with(['role', 'organ'])->get()->toArray();
+        $out = [];
+        if (isset($userRoleOrgan[0]))
+            $out = ['role' => $userRoleOrgan[0]['role'], 'organ' => $userRoleOrgan[0]['organ']];
+        return $out;
+    }
 
 
 
