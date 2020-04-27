@@ -4,9 +4,9 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Entities\Module;
 use App\Http\Controllers\Admin\Handler\Response;
 use App\Http\Controllers\Controller;
-use App\Module;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller

@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\Modules\Dashboard;
-use App\Organ;
 use App\Http\Controllers\Admin\Handler\Response;
 use App\Http\Controllers\Admin\Objects\AdminDetails;
 use App\Http\Controllers\Controller;
-use App\Module;
-use App\User;
-use App\User_Role_Organ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

@@ -4,11 +4,10 @@
 namespace App\Http\Controllers\Admin\Objects;
 
 
-use App\Organ;
-use App\Module;
-use App\Role;
-use App\Role_Module;
-use App\User_Role_Organ;
+use App\Entities\Organ;
+use App\Entities\Role;
+use App\Entities\Role_Module;
+use App\Entities\User_Role_Organ;
 use Illuminate\Support\Facades\Auth;
 
 class AdminDetails
