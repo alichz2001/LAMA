@@ -18,7 +18,7 @@ class ModuleController extends Controller
         $this->req = $request;
     }
 
-    public function main() {
+    public function view() {
         //TODO check exist id in data
         $module = Module::where(['id' => $this->req['id'], 'status' => 1])->get()->makevisible(['sys_title'])->toArray();
         if (!isset($module[0]))
@@ -36,8 +36,8 @@ class ModuleController extends Controller
                     return view('Admin.Modules.' . ucfirst($module[0]['sys_title']));
                 else
                     return 404;
+                    //TODO return true error when dont exist module view
             }
-            return 2;
         }
 
 

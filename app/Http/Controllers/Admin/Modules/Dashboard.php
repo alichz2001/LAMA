@@ -8,6 +8,7 @@ class Dashboard
 {
 
     public function view() {
+
         return view('Admin.Modules.Dashboard');
     }
 
