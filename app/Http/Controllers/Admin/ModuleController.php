@@ -35,7 +35,7 @@ class ModuleController extends Controller
                 if (view()->exists('Admin.Modules.' . ucfirst($module[0]['sys_title'])))
                     return view('Admin.Modules.' . ucfirst($module[0]['sys_title']));
                 else
-                    return 404;
+                    return view('Admin.Modules.404');
                     //TODO return true error when dont exist module view
             }
         }

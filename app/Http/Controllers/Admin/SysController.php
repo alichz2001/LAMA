@@ -58,5 +58,11 @@ class SysController extends Controller
 
     }
 
+    public function logout() {
+        session()->put(['currentRoleId' => 0, 'currentOrganId' => 0]);
+        Auth::logout();
+        return redirect('/admin');
+    }
+
 
 }

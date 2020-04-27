@@ -1,5 +1,7 @@
+
 function AJAXRequest(url, method, data) {
-    var response = 0;
+    //TODO page loader
+    var response = {};
     $.ajax({
         url: url,
         method: method,
@@ -7,13 +9,16 @@ function AJAXRequest(url, method, data) {
         async: false,
         success: function (data) {
             //TODO
+
             response = data;
         },
         error: function () {
             //TODO
         }
+
     });
-    //TODO
+
+    //TODO handle errors
     return { data: response['data'], status: response['status']};
 }
 
@@ -128,8 +133,9 @@ function createMenu(modules, step) {
 
 function setModule(id) {
     //TODO make title of page
+
     $.ajax({
-        url: baseURL + '/getModule',
+        url: baseURL + '/Module/view',
         method: globalSysRequestMethod,
         data: {id: id},
         async: false,
