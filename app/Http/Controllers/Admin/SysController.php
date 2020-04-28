@@ -21,15 +21,22 @@ class SysController extends Controller
         $adminDetails = new AdminDetails(Auth::id());
         $accessibleOrgans = $adminDetails->accessibleOrgans;
         $access = 0;
-        foreach ($accessibleOrgans as $company)
-            if ($company['id'] == $this->req['id']) {
+        //return dump($accessibleOrgans);
+        foreach ($accessibleOrgans as $organ)
+            if ($organ['id'] == $this->req['id']) {
                 $access = 1;
                 break;
             }
         if ($access == 1) {
             session()->put(['currentOrganId' => $this->req['id']]);
-            session()->put(['currentRoleId' => 0]);
-            return Response::Handle(true, '', 1, 20020);
+            $adminDetails = new AdminDetails(Auth::id());
+            //check has role in this organ or not
+            if (isset($adminDetails->rolesOfCurrentOrgan[0])) {
+                session()->put(['currentRoleId' => $adminDetails->rolesOfCurrentOrgan[0]['id']]);
+                return Response::Handle(true, '', 1, 20020);
+            } else {
+                return Response::Handle(false, '', 2, 40043);
+            }
         } else {
             return Response::Handle(false, '', 2, 40040);
         }
