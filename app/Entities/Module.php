@@ -11,4 +11,7 @@ class Module extends Model
     public function subModules() {
         return $this->hasMany(Module::class, 'parent_id', 'id')->where(['status' => 1])->with('subModules');
     }
+    public function methods() {
+        return $this->belongsToMany(Method::class, Module_Method::class, 'module_id', 'method_id')->where(['status' => 1]);
+    }
 }

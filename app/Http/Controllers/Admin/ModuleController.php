@@ -17,30 +17,25 @@ class ModuleController extends Controller
 
     private $req;
     private $adminDetails;
-    private $module;
 
     public function __construct(Request $request)
     {
-        $this->req = $request;
+        $this->req = $request->toArray();
         $this->adminDetails = new AdminDetails(Auth::id());
     }
 
-
-    public function index($moduleId, $type)
+    public function index($moduleId, $method)
     {
 
-        //check if $type is false trow back error
-        if (!in_array($type, ['read', 'save', 'edit', 'remove']))
-            return Response::Handle(false, '', 2, 40001);
-
+        //return dump($this->req);
         //check if $moduleId is false trow back error
         if (!is_numeric($moduleId))
             return Response::Handle(false, '', 2, 40002);
 
-        $this->module = Module::where(['id' => $moduleId, 'status' => 1])->get()->makevisible(['sys_title'])->toArray();
+        $module = Module::where(['id' => $moduleId, 'status' => 1])->with('methods')->get()->makevisible(['sys_title'])->toArray();
 
         //check module exist or not OR is enable or not
-        if (!isset($this->module[0]) || $this->module[0]['has_child'] != 0)
+        if (!isset($module[0]) || $module[0]['has_child'] != 0)
             return Response::Handle(false, '', 2, 40003);
 
         $roleModule = Role_Module::where(['status' => 1, 'role_id' => session()->get('currentRoleId'), 'module_id' => $moduleId])->get()->toArray();
@@ -49,28 +44,37 @@ class ModuleController extends Controller
         if (!isset($roleModule[0]))
             return Response::Handle(false, '', 2, 40004);
 
-        //check has type access to module
-        if ($roleModule[0][$type . '_access'] != 1)
-            return Response::Handle(false, '', 2, 40005);
 
-        return $this->$type($moduleId);
-    }
+        $moduleClassName = 'App\Http\Controllers\Admin\Modules\\' . ucfirst($module[0]['sys_title']);
+        if (class_exists($moduleClassName)) {
+            $moduleObject = new $moduleClassName();
 
+            foreach ($module[0]['methods'] as $item) {
+                if ($item['public_name'] == $method) {
+                    if ($roleModule[0][$item['type'] . '_access'] == 1) {
+                        $m = $item['sys_name'];
+                        if (method_exists($moduleObject, $m))
+                            return $moduleObject->$m();
+                        else
+                            return Response::Handle(false, '', 2, 40007);
 
-    private function read($moduleId)
-    {
-        if (class_exists('App\Http\Controllers\Admin\Modules\\' . ucfirst($this->module[0]['sys_title']))) {
-            $moduleClass = 'App\Http\Controllers\Admin\Modules\\' . ucfirst($this->module[0]['sys_title']);
-            $moduleObject = new $moduleClass();
-            return $moduleObject->read();
+                    } else {
+                        return Response::Handle(false, '', 2, 40006);
+                    }
+                }
+            }
+            return Response::Handle(false, '', 2, 40008);
         } else {
-            if (view()->exists('Admin.Modules.' . ucfirst($this->module[0]['sys_title'])))
-                return view('Admin.Modules.' . ucfirst($this->module[0]['sys_title']));
+            $viewNameEx = explode('_', $module[0]['sys_title']);
+            $viewName = '';
+            foreach ($viewNameEx as $item)
+                $viewName .= ucfirst($item);
+
+            //check if view dos not exist
+            if (view()->exists('Admin.Modules.' . $viewName))
+                return view('Admin.Modules.' . $viewName);
             else
-                return view('Admin.Modules.404');
-            //TODO return true error when dont exist module view
+                return Response::Handle(false, '', 2,40005);
         }
-
-
     }
 }

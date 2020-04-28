@@ -7,6 +7,8 @@ function AJAXRequest(url, method, data) {
         method: method,
         data: data,
         async: false,
+        //processData: false,
+        //contentType: false,
         success: function (data) {
             //TODO
 
@@ -132,7 +134,7 @@ function setModule(id) {
     //TODO make title of page
 
     $.ajax({
-        url: baseURL + '/Module/' + id + '/read',
+        url: baseURL + '/module/' + id + '/view',
         method: globalSysRequestMethod,
         data: {},
         async: false,
