@@ -132,9 +132,9 @@ function setModule(id) {
     //TODO make title of page
 
     $.ajax({
-        url: baseURL + '/Module/view',
+        url: baseURL + '/Module/' + id + '/read',
         method: globalSysRequestMethod,
-        data: {id: id},
+        data: {},
         async: false,
         success: function (data) {
             //TODO

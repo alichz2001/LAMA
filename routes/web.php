@@ -47,7 +47,7 @@ Route::get('/admin/sys/getMyModules', 'Admin\AdminDetailsController@getMyModules
 Route::get('/admin/sys/changeOrgan', 'Admin\SysController@changeOrgan')->middleware(['isLogin']);
 Route::get('/admin/sys/changeRole', 'Admin\SysController@changeRole')->middleware(['isLogin', 'isSetOrgan']);
 
-Route::get('/admin/sys/Module/view', 'Admin\ModuleController@view')->middleware(['isLogin', 'isSetOrgan', 'isSetRole']);
+Route::get('/admin/sys/Module/{moduleId}/{type}', 'Admin\ModuleController@index')->middleware(['isLogin', 'isSetOrgan', 'isSetRole']);
 
 
 Route::get('/admin/logout', 'Admin\SysController@logout');
