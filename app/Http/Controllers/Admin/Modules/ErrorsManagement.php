@@ -6,14 +6,12 @@ namespace App\Http\Controllers\Admin\Modules;
 
 use App\Http\Controllers\Admin\Handler\Response;
 
-class Errors_management
+class ErrorsManagement
 {
-
 
     public function view() {
         return view('Admin.Modules.ErrorsManagement');
     }
-
 
     public function getErrorsList() {
         $errorsManagement = \App\Entities\Errors_management::all()->toArray();

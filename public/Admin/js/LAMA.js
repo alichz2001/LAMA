@@ -96,7 +96,7 @@ function createMenu(modules, step) {
 
             x += has_child ? '<li class="has-sub">' : '<li>';
 
-            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(' + modules[key]['id'] + ')">';
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(\'' + modules[key]['sys_title'] + '\')">';
 
             x += has_child ? '<b class="caret"></b>' : '';
             x += '<span>' + modules[key]['title'] + '</span>';
@@ -113,7 +113,7 @@ function createMenu(modules, step) {
         for (var key in modules) {
             has_child = modules[key]['has_child'];
             x += has_child ? '<li class="has-sub">' : '<li>' ;
-            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(' + modules[key]['id'] + ')">';
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(\'' + modules[key]['sys_title'] + '"\'">';
             x += has_child ? '<b class="caret"></b>' : '';
             x += modules[key]['title'];
             x += '</a>';
@@ -130,11 +130,11 @@ function createMenu(modules, step) {
     return x;
 }
 
-function setModule(id) {
+function setModule(sys_title) {
     //TODO make title of page
 
     $.ajax({
-        url: baseURL + '/module/' + id + '/view',
+        url: baseURL + '/module/' + sys_title + '/view',
         method: globalSysRequestMethod,
         data: {},
         async: false,

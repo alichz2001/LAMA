@@ -9,7 +9,7 @@
                 <p></p>
             </div>
             <div class="stats-link">
-                <a href="#addError"><i class="fa fa-arrow-alt-circle-right"></i></a>
+                <a href="#section-addError"><i class="fa fa-arrow-alt-circle-right"></i></a>
             </div>
         </div>
     </div>
@@ -21,16 +21,15 @@
 <div class="row">
 
     <!-- begin col-12 -->
-    <div class="col-lg-12">
+    <div class="col-lg-12" id="section-errorsList">
         <!-- begin panel -->
         <div class="panel panel-inverse">
             <!-- begin panel-heading -->
             <div class="panel-heading">
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload" onclick="listErrors()"><i class="fa fa-redo"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success btn-reload" data-click="panel-reload" onclick="listErrors()"><i class="fa fa-redo"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">لیست ارور ها</h4>
             </div>
@@ -64,7 +63,7 @@
         <!-- end panel -->
     </div>
     <!-- end col-12 -->
-    <div class="col-lg-12">
+    <div class="col-lg-12" id="section-addError">
         <div class="panel panel-inverse">
             <!-- begin panel-heading -->
             <div class="panel-heading ui-sortable-handle">
@@ -72,7 +71,6 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">
                     اضافه کردن ارور
@@ -142,7 +140,7 @@
         var formData = new FormData(form);
         //var x = AJAXRequest('/admin/sys/module/6/addError', 'get', formData);
         $.ajax({
-            url: '/admin/sys/module/6/addError',
+            url: '/admin/sys/module/errors_management/addError',
             method: 'post',
             data: formData,
             async: false,
@@ -152,6 +150,7 @@
             processData:false,
             success: function (data) {
                 //TODO
+                $('#section-errorsList > .btn-reload').click();
 
                 console.log(data);
             },
@@ -168,7 +167,7 @@
 
 <script>
     function listErrors() {
-        var x = AJAXRequest('/admin/sys/module/6/getErrorsList', 'get', '');
+        var x = AJAXRequest('/admin/sys/module/errors_management/getErrorsList', 'get', '');
         var t = $('#data-table-errorsList').DataTable();
         t.clear();
         for (var i = 0; i < x['data'].length; i++) {

@@ -24,28 +24,24 @@ class ModuleController extends Controller
         $this->adminDetails = new AdminDetails(Auth::id());
     }
 
-    public function index($moduleId, $method)
+    public function index($moduleSysName, $method)
     {
 
-        //return dump($this->req);
-        //check if $moduleId is false trow back error
-        if (!is_numeric($moduleId))
-            return Response::Handle(false, '', 2, 40002);
-
-        $module = Module::where(['id' => $moduleId, 'status' => 1])->with('methods')->get()->makevisible(['sys_title'])->toArray();
+        $module = Module::where(['sys_title' => $moduleSysName, 'status' => 1])->with('methods')->get()->makevisible(['file_name'])->toArray();
 
         //check module exist or not OR is enable or not
         if (!isset($module[0]) || $module[0]['has_child'] != 0)
             return Response::Handle(false, '', 2, 40003);
 
-        $roleModule = Role_Module::where(['status' => 1, 'role_id' => session()->get('currentRoleId'), 'module_id' => $moduleId])->get()->toArray();
+        //return dump($module);
+        $roleModule = Role_Module::where(['status' => 1, 'role_id' => session()->get('currentRoleId'), 'module_id' => $module[0]['id']])->get()->toArray();
 
         //check this role has access to this module and its status is true
         if (!isset($roleModule[0]))
             return Response::Handle(false, '', 2, 40004);
 
 
-        $moduleClassName = 'App\Http\Controllers\Admin\Modules\\' . ucfirst($module[0]['sys_title']);
+        $moduleClassName = 'App\Http\Controllers\Admin\Modules\\' . ucfirst($module[0]['file_name']);
         if (class_exists($moduleClassName)) {
             $moduleObject = new $moduleClassName();
 
@@ -65,14 +61,8 @@ class ModuleController extends Controller
             }
             return Response::Handle(false, '', 2, 40008);
         } else {
-            $viewNameEx = explode('_', $module[0]['sys_title']);
-            $viewName = '';
-            foreach ($viewNameEx as $item)
-                $viewName .= ucfirst($item);
-
-            //check if view dos not exist
-            if (view()->exists('Admin.Modules.' . $viewName))
-                return view('Admin.Modules.' . $viewName);
+            if (view()->exists('Admin.Modules.' . $module[0]['file_name']))
+                return view('Admin.Modules.' . $module[0]['file_name']);
             else
                 return Response::Handle(false, '', 2,40005);
         }
