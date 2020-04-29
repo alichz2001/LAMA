@@ -19,6 +19,7 @@ class ErrorsManagement
     }
 
     public function addError() {
+
         //TODO validation
         $err = new \App\Entities\Errors_management();
         $err->code = request('name');

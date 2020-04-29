@@ -1,128 +1,4 @@
-<div class="row">
 
-    <!-- begin col-3 -->
-    <div class="col-lg-3 col-md-6">
-        <div class="widget widget-stats bg-green">
-            <div class="stats-icon"><i class="fa fa-link"></i></div>
-            <div class="stats-info">
-                <h4>اضافه کردن ارور جدید</h4>
-                <p></p>
-            </div>
-            <div class="stats-link">
-                <a href="#section-addError"><i class="fa fa-arrow-alt-circle-right"></i></a>
-            </div>
-        </div>
-    </div>
-    <!-- end col-3 -->
-
-</div>
-
-<!-- begin row -->
-<div class="row">
-
-    <!-- begin col-12 -->
-    <div class="col-lg-12" id="section-errorsList">
-        <!-- begin panel -->
-        <div class="panel panel-inverse">
-            <!-- begin panel-heading -->
-            <div class="panel-heading">
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success btn-reload" data-click="panel-reload" onclick="listErrors()"><i class="fa fa-redo"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                </div>
-                <h4 class="panel-title">لیست ارور ها</h4>
-            </div>
-            <!-- end panel-heading -->
-
-            <!-- begin panel-body -->
-            <div class="panel-body">
-                <table id="data-table-errorsList" class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th width="1%"></th>
-                        <th class="text-nowrap">code</th>
-                        <th class="text-nowrap">description</th>
-                        <th class="text-nowrap">type</th>
-                        <th class="text-nowrap">cause</th>
-                        <th class="text-nowrap">file</th>
-                        <th class="text-nowrap">method</th>
-                        <th class="text-nowrap">actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-
-
-
-                    </tbody>
-                </table>
-            </div>
-            <!-- end panel-body -->
-        </div>
-        <!-- end panel -->
-    </div>
-    <!-- end col-12 -->
-    <div class="col-lg-12" id="section-addError">
-        <div class="panel panel-inverse">
-            <!-- begin panel-heading -->
-            <div class="panel-heading ui-sortable-handle">
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                </div>
-                <h4 class="panel-title">
-                    اضافه کردن ارور
-                </h4>
-            </div>
-            <!-- end panel-heading -->
-            <!-- begin panel-body -->
-            <div class="panel-body">
-                <form id="add-error" method="post">
-                    <div class="form-group row m-b-15">
-                        <label class="col-sm-3 col-form-label">description</label>
-                        <div class="col-sm-9">
-                            <textarea name="description" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 92px;"></textarea>                        </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                        <label class="col-sm-3 col-form-label">error code</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="code" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                        <label class="col-sm-3 col-form-label">error type</label>
-                        <div class="col-sm-9">
-                            <select name="type" class="form-control">
-                                <option value="2">error</option>
-                                <option value="3">warning</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                        <label class="col-sm-3 col-form-label">file</label>
-                        <div class="col-sm-9">
-                            <input name="file" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                        <label class="col-sm-3 col-form-label">method</label>
-                        <div class="col-sm-9">
-                            <input name="method" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-7 offset-md-3">
-                        <button type="button" onclick="addError()" class="btn btn-sm btn-primary m-r-5">Login</button>
-                    </div>
-                </form>
-            </div>
-            <!-- end panel-body -->
-        </div>
-
-    </div>
-</div>
-<!-- end row -->
 
 
 
@@ -133,6 +9,8 @@
 <script src="{{ asset('/Admin/templates/_1/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/Admin/templates/_1/assets/js/demo/table-manage-keytable.demo.min.js') }}"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
+
+
 <script>
 
     function addError() {
@@ -150,7 +28,6 @@
             processData:false,
             success: function (data) {
                 //TODO
-                $('#section-errorsList > .btn-reload').click();
 
                 console.log(data);
             },
@@ -166,7 +43,28 @@
 
 
 <script>
-    function listErrors() {
+
+
+    async function section_errorsList() {
+        $('#section-body_errorsList').html(x);
+        var x = '<table id="data-table-errorsList" class="table table-striped table-bordered">\n' +
+            '                    <thead>\n' +
+            '                    <tr>\n' +
+            '                        <th width="1%"></th>\n' +
+            '                        <th class="text-nowrap">code</th>\n' +
+            '                        <th class="text-nowrap">description</th>\n' +
+            '                        <th class="text-nowrap">type</th>\n' +
+            '                        <th class="text-nowrap">cause</th>\n' +
+            '                        <th class="text-nowrap">file</th>\n' +
+            '                        <th class="text-nowrap">method</th>\n' +
+            '                        <th class="text-nowrap">actions</th>\n' +
+            '                    </tr>\n' +
+            '                    </thead>\n' +
+            '                    <tbody>\n' +
+            '                    </tbody>\n' +
+            '                </table>';
+        $('#section-body_errorsList').html(x);
+
         var x = AJAXRequest('/admin/sys/module/errors_management/getErrorsList', 'get', '');
         var t = $('#data-table-errorsList').DataTable();
         t.clear();
@@ -182,14 +80,62 @@
                     x['data'][i]['method'],
                     '<a href="javascript:;" onclick=""><i class="fa fa-edit"></i></a>'
                 ]
-             ).draw( false );
+            ).draw( false );
         }
     }
+    async function section_addError() {
+        var x = '<form id="add-error" method="post">\n' +
+            '                    <div class="form-group row m-b-15">\n' +
+            '                        <label class="col-sm-3 col-form-label">description</label>\n' +
+            '                        <div class="col-sm-9">\n' +
+            '                            <textarea name="description" class="form-control" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 92px;"></textarea>                        </div>\n' +
+            '                    </div>\n' +
+            '                    <div class="form-group row m-b-15">\n' +
+            '                        <label class="col-sm-3 col-form-label">error code</label>\n' +
+            '                        <div class="col-sm-9">\n' +
+            '                            <input type="text" name="code" class="form-control">\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <div class="form-group row m-b-15">\n' +
+            '                        <label class="col-sm-3 col-form-label">error type</label>\n' +
+            '                        <div class="col-sm-9">\n' +
+            '                            <select name="type" class="form-control">\n' +
+            '                                <option value="2">error</option>\n' +
+            '                                <option value="3">warning</option>\n' +
+            '                            </select>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <div class="form-group row m-b-15">\n' +
+            '                        <label class="col-sm-3 col-form-label">file</label>\n' +
+            '                        <div class="col-sm-9">\n' +
+            '                            <input name="file" type="text" class="form-control">\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <div class="form-group row m-b-15">\n' +
+            '                        <label class="col-sm-3 col-form-label">method</label>\n' +
+            '                        <div class="col-sm-9">\n' +
+            '                            <input name="method" type="text" class="form-control">\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <div class="col-md-7 offset-md-3">\n' +
+            '                        <button type="button" onclick="addError()" class="btn btn-sm btn-primary m-r-5">Login</button>\n' +
+            '                    </div>\n' +
+            '                </form>';
+        $('#section-body_addError').html(x);
 
-</script>
-<script>
+    }
+
+
+
+
+    createSections([
+        {'type': 1, 'title': 'لیست ارور ها', 'id': 'errorsList'},
+        {'type': 1, 'title': 'اضافه کردن ارور جدید', 'id': 'addError'}
+    ]);
+
     $(document).ready(function() {
-        listErrors();
+        section_errorsList();
+        section_addError();
         TableManageKeyTable.init();
     });
 </script>

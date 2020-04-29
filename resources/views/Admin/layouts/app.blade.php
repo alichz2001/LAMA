@@ -64,6 +64,7 @@
 
 <script src="{{ asset('/Admin/js/LAMA.js') }}"></script>
 <script src="{{ asset('/Admin/js/app.js') }}"></script>
+<script src="{{ asset('/Admin/js/moduleMaker.js') }}"></script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {

@@ -107,7 +107,7 @@
 
 
 
-            <div id="module-section">
+            <div class="row" id="module-section">
             </div>
 
 
