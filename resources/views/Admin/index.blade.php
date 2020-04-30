@@ -30,12 +30,7 @@
                         <span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="javascript:;" class="dropdown-item">Edit Profile</a>
-                        <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
-                        <a href="javascript:;" class="dropdown-item">Calendar</a>
-                        <a href="javascript:;" class="dropdown-item">Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="javascript:;" class="dropdown-item">Log Out</a>
+                        <a href="/admin/logout" class="dropdown-item">Log Out</a>
                     </div>
                 </li>
             </ul>
@@ -91,8 +86,6 @@
 
                 <div class="panel-body">
                     <ol class="breadcrumb pull-left" id="module-path">
-                        <li class="breadcrumb-item">Blank Page</li>
-                        <li class="breadcrumb-item">Blank Page</li>
                     </ol>
                     <!-- begin page-header -->
                     <h1 class="page-header" id="module-title" style="text-align: right; direction: rtl"></h1>
