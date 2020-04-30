@@ -11,20 +11,20 @@
     z-index: 1010;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    
+
     & .nav {
 		display: block;
-		
+
 		& > li {
 			position: relative;
-			
+
 			& > a {
 				padding: 7px 20px;
 				line-height: 20px;
 				color: #aaa;
 				display: block;
 				text-decoration: none;
-				
+
 				& i {
 					float: left;
 					margin: -3px 10px -3px 0;
@@ -76,7 +76,7 @@
 			&.active > a {
 				position: relative;
 				z-index: 10;
-				
+
 				& i {
 					color: #fff;
 					background: none !important;
@@ -86,8 +86,8 @@
 					background: rgba(0,0,0,0.25);
 				}
 			}
-			&.active > a, 
-			&.active > a:hover, 
+			&.active > a,
+			&.active > a:hover,
 			&.active > a:focus {
 				color: #fff;
 				background: @blue;
@@ -99,12 +99,12 @@
 				font-size: 11px;
 				color: #889097;
 				font-weight: 600;
-				
+
 				& a {
 					padding: 0;
 					margin: 0;
 					display: inline;
-					
+
 					&:hover,
 					&:focus {
 						background: none;
@@ -121,7 +121,7 @@
 				color: #fff;
 				background: #1a2229;
 				overflow: hidden;
-				
+
 				& a {
 					padding: 0;
 				}
@@ -138,7 +138,7 @@
 					overflow: hidden;
 					border-radius: 50%;
 					position: relative;
-					
+
 					& img {
 						max-width: 100%;
 						max-height: 100%;
@@ -147,7 +147,7 @@
 				& .info {
 					font-size: 14px;
 					position: relative;
-					
+
 					& .caret {
 						margin-top: 2px;
 					}
@@ -167,7 +167,7 @@
 					background: url('images/cover-sidebar-user.jpg');
 					background-repeat: no-repeat;
 					background-size: cover;
-					
+
 					&.with-shadow:before {
 						content: '';
 						position: absolute;
@@ -186,19 +186,19 @@
 			}
 			&.nav-widget {
 				padding: 10px 20px;
-				
+
 				& i {
 					margin-right: auto;
 				}
 			}
 		}
-		
+
 		&.nav-profile {
 			padding: 0;
 			border-bottom: 1px solid @black_lighter;
 			padding-bottom: 5px;
 			display: none;
-			
+
 			&.active {
 				display: block;
 			}
@@ -287,10 +287,10 @@
     margin: 0;
     position: relative;
     display: none;
-    
+
     & > li {
 		position: relative;
-		
+
 		& > a {
 			padding: 3px 20px 3px 15px;
 			display:block;
@@ -370,7 +370,7 @@
 	& .sidebar .caret:before,
 	& .sidebar li.active .caret:before,
 	& .sidebar li.expanding .caret:before,
-	& .sidebar li.expand .caret:before { 
+	& .sidebar li.expand .caret:before {
 		transform: rotate(0deg);
 	}
 	& .sidebar .nav > li > a > i,
@@ -442,7 +442,7 @@
 		margin-right: 6px!important;
 		margin-left: 6px!important;
 		float: none!important;
-		
+
 		& i {
 			margin: 0 !important;
 			float: none !important;
@@ -457,7 +457,7 @@
     background: rgba(0,0,0,.5);
     color: #fff;
     border-radius: 20px;
-	
+
 	& i {
 		margin: 0 10px 0 0 !important;
 		background: none !important;
@@ -493,7 +493,7 @@
 	}
 	& .sidebar .nav > li .sub-menu,
 	&.page-sidebar-minified .sidebar .nav li.has-sub > .sub-menu,
-	&.page-sidebar-minified .sidebar .nav > li.has-sub:focus > a, 
+	&.page-sidebar-minified .sidebar .nav > li.has-sub:focus > a,
 	&.page-sidebar-minified .sidebar .nav > li.has-sub:hover > a {
 		background: none;
 		color: @black;
@@ -521,10 +521,10 @@
 			font-weight: normal;
 			color: #777;
 		}
-		& > li > a:focus, 
+		& > li > a:focus,
 		& > li > a:hover,
-		& > li.active > a, 
-		& > li.active > a:focus, 
+		& > li.active > a,
+		& > li.active > a:focus,
 		& > li.active > a:hover,
 		.flat-black & > li.active > a {
 			color: @black_lighter;
@@ -532,8 +532,8 @@
 		& > li.active > a {
 			font-weight: 600;
 		}
-		& > li:before, 
-		& > li > a:after, 
+		& > li:before,
+		& > li > a:after,
 		& > li.has-sub > a:before {
 			background: #e7e9ea;
 		}
@@ -543,7 +543,7 @@
 	}
 	& .sidebar-minify-btn {
 		color: #fff;
-		
+
 		&:hover,
 		&:focus {
 			background: rgba(0,0,0,.65) !important;
@@ -596,7 +596,7 @@
 
 .sidebar.sidebar-transparent {
     background: none;
-    
+
 	& .nav > li.nav-profile,
 	& .nav > li.nav-profile.active {
 		background: rgba(0, 0, 0, 0.25);
@@ -625,13 +625,13 @@
 	& .has-sub.active > .sub-menu {
 		overflow: hidden;
 	}
-	& .nav > li.active > a, 
-	& .nav > li.active > a:hover, 
+	& .nav > li.active > a,
+	& .nav > li.active > a:hover,
 	& .nav > li.active > a:focus {
 		background: rgba(0, 0, 0, 0.3);
 	}
-	& .sub-menu > li:before, 
-	& .sub-menu > li > a:after, 
+	& .sub-menu > li:before,
+	& .sub-menu > li > a:after,
 	& .sub-menu > li.has-sub > a:before {
 		background: rgba(0, 0, 0, 0.3);
 	}
@@ -644,10 +644,10 @@
     background: url(images/cover-sidebar.jpg);
     background-size: cover;
 }
-.page-sidebar-minified .sidebar.sidebar-transparent .nav > li.has-sub:hover > a, 
+.page-sidebar-minified .sidebar.sidebar-transparent .nav > li.has-sub:hover > a,
 .page-sidebar-minified .sidebar.sidebar-transparent .nav > li.has-sub:focus > a,
-.sidebar.sidebar-transparent .nav > li.expand > a, 
-.sidebar.sidebar-transparent .nav > li > a:focus, 
+.sidebar.sidebar-transparent .nav > li.expand > a,
+.sidebar.sidebar-transparent .nav > li > a:focus,
 .sidebar.sidebar-transparent .nav > li > a:hover {
 	background: none;
 	color: #fff;
@@ -659,7 +659,7 @@
 .page-with-right-sidebar {
 	& .sidebar {
 		text-align: right;
-		
+
 		& .nav > li > a .icon-img,
 		& .nav > li > a i {
 			float: right;
@@ -669,7 +669,7 @@
 		& .sub-menu {
 			padding-left: 0;
 			padding-right: 39px;
-			
+
 			& > li:before {
 				left: auto;
 				right: -13px;
@@ -714,11 +714,11 @@
 		left: auto;
 		right: 0;
 	}
-	& .sidebar li.active > a .caret:before, 
-	& .sidebar li.expanding > a .caret:before, 
-	& .sidebar li.expand > a .caret:before, 
-	& .float-sub-menu li.active > a .caret:before, 
-	& .float-sub-menu li.expanding > a .caret:before, 
+	& .sidebar li.active > a .caret:before,
+	& .sidebar li.expanding > a .caret:before,
+	& .sidebar li.expand > a .caret:before,
+	& .float-sub-menu li.active > a .caret:before,
+	& .float-sub-menu li.expanding > a .caret:before,
 	& .float-sub-menu li.expand > a .caret:before {
 		transform: rotate(-90deg);
 	}
@@ -726,7 +726,7 @@
 		padding-left: 0;
 		padding-right: 39px;
 		text-align: right;
-		
+
 		& li > a {
 			padding-left: 15px;
 			padding-right: 20px;
@@ -786,7 +786,7 @@
 	padding: 9px 0 9px 39px;
 	margin: 0;
 	list-style-type: none;
-	
+
 	& .sub-menu {
 		display: none;
 		list-style-type: none;
@@ -796,7 +796,7 @@
 	}
 	& li {
 		position: relative;
-		
+
 		&:first-child:before {
 			top: -14px;
 		}

@@ -21,9 +21,9 @@
 
             <!-- begin header-nav -->
             <ul class="navbar-nav navbar-right">
-                <li id="select-role-li" class="dropdown"></li>
+                <li id="select-role-li" class="dropdown-toggle"></li>
 
-                <li id="select-organ-li" class="dropdown"></li>
+                <li id="select-organ-li" class="dropdown-toggle"></li>
 
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
@@ -50,8 +50,14 @@
                                 <img src="{{ asset('/Admin/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
                             </div>
                             <div class="info ">
-                                <p class="name-filed"></p>
-                                <small id="role-name"></small>
+                                <strong class="name-filed"></strong>
+                                <br>
+                                <span class="label label-light">
+                                    <strong class="role-title"></strong>
+                                    <<
+                                    <strong class="organ-title"></strong>
+                                </span>
+
                             </div>
                     </li>
 

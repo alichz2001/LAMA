@@ -35,6 +35,7 @@ function setOrganSelect() {
         var currentOrgan = {};
         currentOrgan['id'] = 0;
         currentOrgan = AJAXRequest(baseURL + '/getMyCurrentOrgan', globalSysRequestMethod, '')['data'];
+        $('.organ-title').html(currentOrgan['title']);
         for (var i = 0; i < organsList['data'].length; i++)
             x += '<li ' + (organsList['data'][i]['id'] == currentOrgan['id'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeOrgan(' + organsList['data'][i]['id'] + ')">' + organsList['data'][i]['title'] + '</a></li>';
         x += '</ul>';
@@ -52,7 +53,7 @@ function setRoleSelect() {
         var currentRole = {};
         currentRole['role'] = '';
         currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
-        $('#role-name').html(currentRole['role']);
+        $('.role-title').html(currentRole['role']);
 
         for (var i = 0; i < rolesList.length; i++)
             x += '<li ' + (currentRole['role'] == rolesList[i]['title'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeRole(' + rolesList[i]['id'] + ')">' + rolesList[i]['title'] + '</a></li>';
@@ -83,9 +84,7 @@ function setModulesMenu() {
     var modules = AJAXRequest(baseURL + '/getMyModules', globalSysRequestMethod, '')['data'];
     $('#menu').append('<li class="nav-header">Navigation</li>');
     $('#menu').append(createMenu(modules, 1));
-    $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
     $('[module-sys_title=' + getUrlParameter('module') + ']').click();
-
     App.initSidebar();
 }
 
