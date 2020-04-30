@@ -1,4 +1,3 @@
-
 function AJAXRequest(url, method, data) {
     //TODO page loader
     var response = {};
@@ -163,12 +162,11 @@ function setModule(sys_title) {
         data: {},
         async: false,
         success: function (data) {
-            //TODO
-
-            if (data['messageCode'] != undefined)
-                console.log(3);
-            else
+            if (data['messageCode'] != undefined) {
+                //TODO handle errors
+            } else {
                 $('#module-section').html(data);
+            }
         },
         error: function () {
             //TODO
