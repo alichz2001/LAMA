@@ -27,7 +27,7 @@
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('/Admin/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
-                        <span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
+                        <span class="d-none d-md-inline username-filed"></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="/admin/logout" class="dropdown-item">Log Out</a>
@@ -45,24 +45,15 @@
                 <!-- begin sidebar user -->
                 <ul class="nav">
                     <li class="nav-profile">
-                        <a href="javascript:;" data-toggle="nav-profile">
                             <div class="image">
                                 <img src="{{ asset('/Admin/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
                             </div>
-                            <div class="info">
-                                <b class="caret pull-left"></b>
-                                Sean Ngu
-                                <small>Front end developer</small>
+                            <div class="info ">
+                                <p class="name-filed"></p>
+                                <small id="role-name"></small>
                             </div>
-                        </a>
                     </li>
-                    <li>
-                        <ul class="nav nav-profile">
-                            <li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
-                            <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
-                            <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
-                        </ul>
-                    </li>
+
                 </ul>
                 <!-- end sidebar user -->
                 <!-- begin sidebar nav -->

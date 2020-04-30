@@ -52,6 +52,8 @@ function setRoleSelect() {
         var currentRole = {};
         currentRole['role'] = '';
         currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
+        $('#role-name').html(currentRole['role']);
+
         for (var i = 0; i < rolesList.length; i++)
             x += '<li ' + (currentRole['role'] == rolesList[i]['title'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeRole(' + rolesList[i]['id'] + ')">' + rolesList[i]['title'] + '</a></li>';
         x += '</ul>';
@@ -82,9 +84,15 @@ function setModulesMenu() {
     $('#menu').append('<li class="nav-header">Navigation</li>');
     $('#menu').append(createMenu(modules, 1));
     $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
+    $('[module-sys_title=dashboard]').click();
 
-    //TODO make better call for handle menu
     App.initSidebar();
+}
+
+function setAdminDetails() {
+    var adminDetails = AJAXRequest(baseURL + '/getUserDetails', globalSysRequestMethod, '')['data'];
+    $('.username-filed').html(adminDetails['username'])
+    $('.name-filed').html(adminDetails['first_name'] + ' ' + adminDetails['last_name'])
 }
 
 function createMenu(modules, step) {

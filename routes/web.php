@@ -42,6 +42,8 @@ Route::get('/admin/sys/getMyRolesOfCurrentOrgan', 'Admin\AdminDetailsController@
 Route::get('/admin/sys/getMyCurrentRole', 'Admin\AdminDetailsController@getMyCurrentRole')->middleware(['isLogin']);
 Route::get('/admin/sys/getMyModules', 'Admin\AdminDetailsController@getMyModules')->middleware(['isLogin', 'isSetOrgan']);
 
+Route::get('/admin/sys/getUserDetails', 'Admin\AdminDetailsController@getUserDetails')->middleware(['isLogin']);
+
 
 
 Route::get('/admin/sys/changeOrgan', 'Admin\SysController@changeOrgan')->middleware(['isLogin']);

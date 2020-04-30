@@ -50,4 +50,14 @@ class AdminDetailsController extends Controller
         $adminDetails = new AdminDetails(Auth::id());
         return Response::Handle(true, $adminDetails->rolesOfCurrentOrgan, 1, 20005);
     }
+
+    public function getUserDetails() {
+        //TODO more details of user should returns
+        $data = [
+            'username' => Auth::user()->username,
+            'first_name' => Auth::user()->first_name,
+            'last_name' => Auth::user()->last_name
+        ];
+        return Response::Handle(true, $data, 1, 20006);
+    }
 }
