@@ -37,7 +37,7 @@ function setOrganSelect() {
         currentOrgan = AJAXRequest(baseURL + '/getMyCurrentOrgan', globalSysRequestMethod, '')['data'];
         $('.organ-title').html(currentOrgan['title']);
         for (var i = 0; i < organsList['data'].length; i++)
-            x += '<li ' + (organsList['data'][i]['id'] == currentOrgan['id'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeOrgan(' + organsList['data'][i]['id'] + ')">' + organsList['data'][i]['title'] + '</a></li>';
+            x += '<li ' + (organsList['data'][i]['id'] == currentOrgan['id'] ? 'class="active"' : '') + '><a href="javascript:;" ' + (organsList['data'][i]['id'] != currentOrgan['id'] ? 'onclick="changeOrgan(' + organsList['data'][i]['id'] + ')"' : '') + '>' + organsList['data'][i]['title'] + '</a></li>';
         x += '</ul>';
     }
     $('#select-organ-li').html(x);
@@ -46,17 +46,17 @@ function setOrganSelect() {
 function setRoleSelect() {
     var rolesList = AJAXRequest(baseURL + '/getMyRolesOfCurrentOrgan', globalSysRequestMethod, '')['data'];
     var x = '';
+    var currentRole = {};
+    currentRole['role'] = '';
+    currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
+    $('.role-title').html(currentRole['role']);
+
     if (rolesList.length < 2) {
         //TODO maybe show admin's role
     } else {
         x += '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user fa-fw"></i> roles <b class="caret"></b></a><ul class="dropdown-menu" role="menu" id="ul-role_list">';
-        var currentRole = {};
-        currentRole['role'] = '';
-        currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
-        $('.role-title').html(currentRole['role']);
-
         for (var i = 0; i < rolesList.length; i++)
-            x += '<li ' + (currentRole['role'] == rolesList[i]['title'] ? 'class="active"' : '') + '><a href="javascript:;" onclick="changeRole(' + rolesList[i]['id'] + ')">' + rolesList[i]['title'] + '</a></li>';
+            x += '<li ' + (currentRole['role'] == rolesList[i]['title'] ? 'class="active"' : '') + '><a href="javascript:;" ' + (currentRole['role'] != rolesList[i]['title'] ? 'onclick="changeRole(' + rolesList[i]['id'] + ')"' : '') + '>' + rolesList[i]['title'] + '</a></li>';
         x += '</ul>';
     }
     $('#select-role-li').html(x);

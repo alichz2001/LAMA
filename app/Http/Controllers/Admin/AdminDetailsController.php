@@ -12,7 +12,6 @@ class AdminDetailsController extends Controller
 {
     public function __construct()
     {
-
         //session()->put(['currentOrganId' => 1, 'currentRoleId' => 2]);
     }
 
