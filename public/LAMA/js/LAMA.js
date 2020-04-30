@@ -159,7 +159,9 @@ function setModule(sys_title) {
     $.ajax({
         url: baseURL + '/module/' + sys_title + '/view',
         method: globalSysRequestMethod,
-        data: {},
+        data: {
+            '_SC': SC,
+        },
         async: false,
         success: function (data) {
             if (data['messageCode'] != undefined) {

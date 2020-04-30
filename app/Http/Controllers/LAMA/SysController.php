@@ -7,6 +7,7 @@ use App\Http\Controllers\LAMA\Objects\AdminDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SysController extends Controller
 {
@@ -32,6 +33,7 @@ class SysController extends Controller
             //check has role in this organ or not
             if (isset($adminDetails->rolesOfCurrentOrgan[0])) {
                 session()->put(['currentRoleId' => $adminDetails->rolesOfCurrentOrgan[0]['id']]);
+                session()->put(['_SC' => Hash::make(Auth::id() . session()->get('currentOrganId') . session()->get('currentRoleId'))]);
                 return Response::Handle(true, '', 1, 20020);
             } else {
                 return Response::Handle(false, '', 2, 40043);
@@ -53,6 +55,7 @@ class SysController extends Controller
             }
         if ($access == 1) {
             session()->put(['currentRoleId' => $this->req['id']]);
+            session()->put(['_SC' => Hash::make(Auth::id() . session()->get('currentOrganId') . session()->get('currentRoleId'))]);
             return Response::Handle(true, '', 1, 20021);
         } else {
             return Response::Handle(false, '', 2, 40041);
