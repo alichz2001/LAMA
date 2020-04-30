@@ -3,7 +3,7 @@ function createSections(sectionsArray) {
     for (var i = 0; i < sectionsArray.length; i++) {
         switch (sectionsArray[i]['type']) {
             case 1:
-                out += sectionCreatorPanel(sectionsArray[i]);
+                out += sectionCreator_1(sectionsArray[i]);
                 break;
 
         }
@@ -11,7 +11,7 @@ function createSections(sectionsArray) {
     $('#module-section').append(out);
 }
 
-function sectionCreatorPanel(sectionDetails) {
+function sectionCreator_1(sectionDetails) {//_1 : panel
     var out = '';
     out += '<!-- begin col-12 -->\n' +
         '    <div class="col-lg-12" id="section_' + sectionDetails['id'] + '">\n' +

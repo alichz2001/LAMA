@@ -1,4 +1,4 @@
-function AJAXRequest(url, method, data) {
+function AJAXRequest(url, method, data, type = 1) {
     //TODO page loader
     var response = {};
     $.ajax({
@@ -9,18 +9,18 @@ function AJAXRequest(url, method, data) {
         //processData: false,
         //contentType: false,
         success: function (data) {
-            //TODO
-
             response = data;
         },
         error: function () {
-            //TODO
         }
-
     });
 
-    //TODO handle errors
-    return { data: response['data'], status: response['status']};
+    if (type == 1) {//type 1 : handle errors and pass standard data
+        //TODO handle errors
+        return {data: response['data'], status: response['status']};
+    } else if (type == 2) {//type 2 : pass all data without handle errors
+        return response;
+    }
 }
 
 function setOrganSelect() {
@@ -155,24 +155,12 @@ function setModule(sys_title) {
     $('#menu li').removeClass('active');
     $('[module-sys_title=' + sys_title +']').parents('li').addClass('active');
 
+    var data = AJAXRequest(baseURL + '/module/' + sys_title + '/view', globalSysRequestMethod, {'_SC': SC}, 2);
+    if (data['messageCode'] != undefined) {
+        //TODO handle errors
+    } else {
+        $('#module-section').html(data);
+    }
 
-    $.ajax({
-        url: baseURL + '/module/' + sys_title + '/view',
-        method: globalSysRequestMethod,
-        data: {
-            '_SC': SC,
-        },
-        async: false,
-        success: function (data) {
-            if (data['messageCode'] != undefined) {
-                //TODO handle errors
-            } else {
-                $('#module-section').html(data);
-            }
-        },
-        error: function () {
-            //TODO
-        }
-    });
 }
 
