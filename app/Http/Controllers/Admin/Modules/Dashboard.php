@@ -7,8 +7,7 @@ namespace App\Http\Controllers\Admin\Modules;
 class Dashboard
 {
 
-    public function read() {
-
+    public function view() {
         return view('Admin.Modules.Dashboard');
     }
 

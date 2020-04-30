@@ -96,7 +96,7 @@ function createMenu(modules, step) {
 
             x += has_child ? '<li class="has-sub">' : '<li>';
 
-            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(\'' + modules[key]['sys_title'] + '\')">';
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-sys_title="' + modules[key]['sys_title'] + '" module-id="' + modules[key]['id'] + '" onclick="setModule(\'' + modules[key]['sys_title'] + '\')">';
 
             x += has_child ? '<b class="caret"></b>' : '';
             x += '<span>' + modules[key]['title'] + '</span>';
@@ -113,9 +113,9 @@ function createMenu(modules, step) {
         for (var key in modules) {
             has_child = modules[key]['has_child'];
             x += has_child ? '<li class="has-sub">' : '<li>' ;
-            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-id="' + modules[key]['id'] + '" onclick="setModule(\'' + modules[key]['sys_title'] + '"\'">';
+            x += has_child ? '<a href="javascript:;">' : '<a href="javascript:;" module-sys_title="' + modules[key]['sys_title'] + '" module-id="' + modules[key]['id'] + '" onclick="setModule(\'' + modules[key]['sys_title'] + '\')">';
             x += has_child ? '<b class="caret"></b>' : '';
-            x += modules[key]['title'];
+            x += '<span>' + modules[key]['title'] + '</span>';
             x += '</a>';
 
             x += has_child ? createMenu(modules[key]['sub_module'], 2) : '';
@@ -133,6 +133,18 @@ function createMenu(modules, step) {
 function setModule(sys_title) {
     //TODO make title of page
 
+    $('#module-section').html('');
+    var moduleName = $('[module-sys_title=' + sys_title +']').children('span').html();
+    $('#module-title').html(moduleName);
+    var modulePath = '';
+    var x = $('[module-sys_title=' + sys_title +']').parents('li').children('a').children('span').each(function () {
+        modulePath += '<li class="breadcrumb-item">' + $(this).html() + '</li>';
+    });
+    $('#module-path').html(modulePath);
+    $('#menu li').removeClass('active');
+    $('[module-sys_title=' + sys_title +']').parents('li').addClass('active');
+
+
     $.ajax({
         url: baseURL + '/module/' + sys_title + '/view',
         method: globalSysRequestMethod,
@@ -140,7 +152,11 @@ function setModule(sys_title) {
         async: false,
         success: function (data) {
             //TODO
-            $('#module-section').html(data);
+
+            if (data['messageCode'] != undefined)
+                console.log(3);
+            else
+                $('#module-section').html(data);
         },
         error: function () {
             //TODO

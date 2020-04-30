@@ -79,6 +79,7 @@
         setOrganSelect();
         setRoleSelect();
         setModulesMenu();
+        $('[module-sys_title=dashboard]').click();
     });
 </script>
 </body>

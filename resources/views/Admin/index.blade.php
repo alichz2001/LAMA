@@ -90,13 +90,12 @@
             <div class="panel panel-inverse" data-sortable-id="ui-typography-4">
 
                 <div class="panel-body">
-                    <ol class="breadcrumb pull-left">
-                        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:;">Page Options</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                    <ol class="breadcrumb pull-left" id="module-path">
+                        <li class="breadcrumb-item">Blank Page</li>
+                        <li class="breadcrumb-item">Blank Page</li>
                     </ol>
                     <!-- begin page-header -->
-                    <h1 class="page-header" style="text-align: right; direction: rtl">Page with Right Sidebar <small dir="rtl">header small text goes here...</small></h1>
+                    <h1 class="page-header" id="module-title" style="text-align: right; direction: rtl"></h1>
                     <!-- end page-header -->
                 </div>
 
