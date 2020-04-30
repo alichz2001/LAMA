@@ -21,8 +21,9 @@
 
             <!-- begin header-nav -->
             <ul class="navbar-nav navbar-right">
-                <li id="select-organ-li" class="dropdown"></li>
                 <li id="select-role-li" class="dropdown"></li>
+
+                <li id="select-organ-li" class="dropdown"></li>
 
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">

@@ -48,7 +48,7 @@ function setRoleSelect() {
     if (rolesList.length < 2) {
         //TODO maybe show admin's role
     } else {
-        x += '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-database fa-fw"></i> roles <b class="caret"></b></a><ul class="dropdown-menu" role="menu" id="ul-role_list">';
+        x += '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user fa-fw"></i> roles <b class="caret"></b></a><ul class="dropdown-menu" role="menu" id="ul-role_list">';
         var currentRole = {};
         currentRole['role'] = '';
         currentRole = AJAXRequest(baseURL + '/getMyCurrentRole', globalSysRequestMethod, '')['data'];
@@ -84,7 +84,7 @@ function setModulesMenu() {
     $('#menu').append('<li class="nav-header">Navigation</li>');
     $('#menu').append(createMenu(modules, 1));
     $('#menu').append('<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>');
-    $('[module-sys_title=dashboard]').click();
+    $('[module-sys_title=' + getUrlParameter('module') + ']').click();
 
     App.initSidebar();
 }
@@ -140,6 +140,7 @@ function createMenu(modules, step) {
 
 function setModule(sys_title) {
     //TODO make title of page
+    window.history.replaceState(null, null, "/admin/?module=" + sys_title);
 
     $('#module-section').html('');
     var moduleName = $('[module-sys_title=' + sys_title +']').children('span').html();
