@@ -68,6 +68,8 @@ function changeOrgan(id) {
         setOrganSelect();
         setRoleSelect();
         setModulesMenu();
+        $('[module-sys_title=dashboard]').click();
+
     }
 }
 
@@ -76,6 +78,8 @@ function changeRole(id) {
     if (res['status'] == true) {
         setRoleSelect();
         setModulesMenu();
+        $('[module-sys_title=dashboard]').click();
+
     }
 }
 
