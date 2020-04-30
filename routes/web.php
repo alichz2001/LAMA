@@ -32,28 +32,28 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //===========================================================================
 
-Route::get('/admin', 'Admin\DashboardController@index')->middleware('auth');
+Route::get('/admin', 'LAMA\IndexController@index')->middleware('auth');
 
 //TODO all routs should be post after debugging
-Route::get('/admin/sys/getMyOrgans', 'Admin\AdminDetailsController@getMyOrgans')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyCurrentOrgan', 'Admin\AdminDetailsController@getMyCurrentOrgan')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyRoles', 'Admin\AdminDetailsController@getMyRoles')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyRolesOfCurrentOrgan', 'Admin\AdminDetailsController@getMyRolesOfCurrentOrgan')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyCurrentRole', 'Admin\AdminDetailsController@getMyCurrentRole')->middleware(['isLogin']);
-Route::get('/admin/sys/getMyModules', 'Admin\AdminDetailsController@getMyModules')->middleware(['isLogin', 'isSetOrgan']);
+Route::get('/admin/sys/getMyOrgans', 'LAMA\AdminDetailsController@getMyOrgans')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyCurrentOrgan', 'LAMA\AdminDetailsController@getMyCurrentOrgan')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyRoles', 'LAMA\AdminDetailsController@getMyRoles')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyRolesOfCurrentOrgan', 'LAMA\AdminDetailsController@getMyRolesOfCurrentOrgan')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyCurrentRole', 'LAMA\AdminDetailsController@getMyCurrentRole')->middleware(['isLogin']);
+Route::get('/admin/sys/getMyModules', 'LAMA\AdminDetailsController@getMyModules')->middleware(['isLogin', 'isSetOrgan']);
 
-Route::get('/admin/sys/getUserDetails', 'Admin\AdminDetailsController@getUserDetails')->middleware(['isLogin']);
-
-
-
-Route::get('/admin/sys/changeOrgan', 'Admin\SysController@changeOrgan')->middleware(['isLogin']);
-Route::get('/admin/sys/changeRole', 'Admin\SysController@changeRole')->middleware(['isLogin', 'isSetOrgan']);
-
-Route::get('/admin/sys/module/{moduleSysName}/{method}', 'Admin\ModuleController@index')->middleware(['isLogin', 'isSetOrgan', 'isSetRole']);
-Route::post('/admin/sys/module/{moduleSysName}/{method}', 'Admin\ModuleController@index')->middleware(['isLogin', 'isSetOrgan', 'isSetRole']);
+Route::get('/admin/sys/getUserDetails', 'LAMA\AdminDetailsController@getUserDetails')->middleware(['isLogin']);
 
 
-Route::get('/admin/logout', 'Admin\SysController@logout');
+
+Route::get('/admin/sys/changeOrgan', 'LAMA\SysController@changeOrgan')->middleware(['isLogin']);
+Route::get('/admin/sys/changeRole', 'LAMA\SysController@changeRole')->middleware(['isLogin', 'isSetOrgan']);
+
+Route::get('/admin/sys/module/{moduleSysName}/{method}', 'LAMA\ModuleController@index')->middleware(['isLogin', 'isSetOrgan', 'isSetRole']);
+Route::post('/admin/sys/module/{moduleSysName}/{method}', 'LAMA\ModuleController@index')->middleware(['isLogin', 'isSetOrgan', 'isSetRole']);
+
+
+Route::get('/admin/logout', 'LAMA\SysController@logout');
 Route::get('/admin/test', function () {
     return dump(session()->all());
 });

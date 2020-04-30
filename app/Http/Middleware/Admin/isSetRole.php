@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware\Admin;
 
-use App\Http\Controllers\Admin\Handler\Response;
+use App\Http\Controllers\LAMA\Handler\Response;
 use Closure;
 
 class isSetRole

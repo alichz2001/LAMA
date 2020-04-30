@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware\Admin;
 
-use App\Http\Controllers\Admin\Handler\Response;
-use App\Http\Controllers\Admin\Objects\AdminDetails;
+use App\Http\Controllers\LAMA\Handler\Response;
+use App\Http\Controllers\LAMA\Objects\AdminDetails;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
