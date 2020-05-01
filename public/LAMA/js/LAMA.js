@@ -1,10 +1,12 @@
-function AJAXRequest(url, method, data, type = 1) {
+function AJAXRequest(url, method, data, type = 3) {
     /**
      * type = 1 : little notification modal
      * type = 2 : big notification modal
      * type = 3 : no action
-     * type = 4 : if status is false little notification error message
-     * type = 5 : if status is false big notification error message
+     * type = 4 : little notification error message
+     * type = 5 : big notification error message
+     * type = 6 : if status is false little notification error message
+     * type = 7 : if status is false big notification error message
      * @type {{}}
      */
     //TODO page loader
@@ -34,8 +36,13 @@ function AJAXRequest(url, method, data, type = 1) {
     } else if (type == 3) {//type 2 : pass all data without handle errors
         return response;
     } else if (type == 4) {
+        errorsManagement(response['messageCode'], response['type'], 1);
+        return {data: response['data'], status: response['status']};
+    }else if (type == 5) {
         //TODO
-    } else if (type == 5) {
+    }else if (type == 6) {
+        //TODO
+    } else if (type == 7) {
         if (response['type'] == 2)
             errorsManagement(response['messageCode'], response['type'], 2);
         return {data: response['data'], status: response['status']};
@@ -81,7 +88,7 @@ function setRoleSelect() {
 }
 
 function changeOrgan(id) {
-    var res = AJAXRequest(baseURL + '/changeOrgan', globalSysRequestMethod, {'id' : id});
+    var res = AJAXRequest(baseURL + '/changeOrgan', globalSysRequestMethod, {'id' : id}, 4);
     if (res['status'] == true) {
         setOrganSelect();
         setRoleSelect();
@@ -92,7 +99,7 @@ function changeOrgan(id) {
 }
 
 function changeRole(id) {
-    var res = AJAXRequest(baseURL + '/changeRole', globalSysRequestMethod, {'id' : id});
+    var res = AJAXRequest(baseURL + '/changeRole', globalSysRequestMethod, {'id' : id}, 4);
     if (res['status'] == true) {
         setRoleSelect();
         setModulesMenu();
@@ -174,7 +181,7 @@ function setModule(sys_title) {
     $('#menu li').removeClass('active');
     $('[module-sys_title=' + sys_title +']').parents('li').addClass('active');
 
-    var data = AJAXRequest(baseURL + '/module/' + sys_title + '/view', globalSysRequestMethod, {'_SC': SC}, 5);
+    var data = AJAXRequest(baseURL + '/module/' + sys_title + '/view', globalSysRequestMethod, {'_SC': SC}, 7);
     if (data['messageCode'] != undefined) {
         //TODO handle errors
     } else {
@@ -183,30 +190,3 @@ function setModule(sys_title) {
 
 }
 
-function errorsManagement(errorCode, messageType, modalType) {
-    var message = translateMessage(errorCode, 'fa');
-    //message type word
-    var MTW = {
-        1: 'success',
-        2: 'error',
-        3: 'warning'
-    };
-    if (modalType == 1) {
-        //TODO
-    } else if (modalType == 2) {
-        swal({
-            title: '',
-            text: message,
-            icon: MTW[messageType],
-            buttons: {
-                confirm: {
-                    text: 'ok',
-                    value: true,
-                    visible: true,
-                    className: 'btn btn-primary',
-                    closeModal: true
-                }
-            }
-        });
-    }
-}

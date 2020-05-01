@@ -26,9 +26,9 @@ class ModuleController extends Controller
 
     public function index($moduleSysName, $method)
     {
-        //security code check
-        if (!isset($this->req['_SC']) || $this->req['_SC'] != session()->get('_SC'))
-            return Response::Handle(false, '', 2,44000);
+        //security code check TODO
+        //if (!isset($this->req['_SC']) || $this->req['_SC'] != session()->get('_SC'))
+        //    return Response::Handle(false, '', 2,44000);
 
         $module = Module::where(['sys_title' => $moduleSysName, 'status' => 1])->with('methods')->get()->makevisible(['file_name'])->toArray();
 

@@ -22,6 +22,12 @@
     <link href="{{ asset('/LAMA/templates/_1/assets/css/transparent/theme/default.css') }}" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
 
+
+    <!-- ================== BEGIN MODAL NOTIFICATION STYLE ================== -->
+    <link href="{{ asset('/LAMA/templates/_2/css/iziToast.min.css') }}" rel="stylesheet" id="theme" />
+    <!-- ================== END MODAL NOTIFICATION STYLE ================== -->
+
+
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="{{ asset('/LAMA/templates/_1/assets/plugins/pace/pace.min.js') }}"></script>
     <!-- ================== END BASE JS ================== -->
@@ -65,6 +71,7 @@
 
 <!-- ================== BEGIN MODAL NOTIFICATION JS ================== -->
 <script src="{{ asset('/LAMA/templates/_1/assets/plugins/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('/LAMA/templates/_2/js/iziToast.min.js') }}"></script>
 <!-- ================== END MODAL NOTIFICATION JS ================== -->
 
 
@@ -82,11 +89,11 @@
 <script>
     $(document).ready(function() {
         App.init();
-
         setOrganSelect();
         setRoleSelect();
-        setModulesMenu();
         setAdminDetails();
+        setModulesMenu();
+
     });
 </script>
 </body>
