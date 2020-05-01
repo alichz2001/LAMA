@@ -7,10 +7,10 @@
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <script>
-    async function section_modulesList() {
-        var modulesRequest = AJAXRequest('/admin/sys/module/Module_management/getModulesList', 'get', {'_SC': SC}, 6);
-        if (modulesRequest['status'] == 1) {
-            var x = '<table id="data-table_modulesList" class="table table-striped table-bordered">\n' +
+    async function section_rolesList() {
+        var rolesRequest = AJAXRequest('/admin/sys/module/role_management/getRolesList', 'get', {'_SC': SC}, 6);
+        if (rolesRequest['status'] == 1) {
+            var x = '<table id="data-table_rolesList" class="table table-striped table-bordered">\n' +
                 '                    <thead>\n' +
                 '                    <tr>\n' +
                 '                        <th width="1%"></th>\n' +
@@ -21,15 +21,15 @@
                 '                    <tbody>\n' +
                 '                    </tbody>\n' +
                 '                </table>';
-            $('#section-body_modulesList').html(x);
-            var t = $('#data-table_modulesList').DataTable();
+            $('#section-body_rolesList').html(x);
+            var t = $('#data-table_rolesList').DataTable();
             t.clear()
-            var modules = modulesRequest['data']['modules'];
-            for (var i = 0; i < modules.length; i++) {
+            var roles = rolesRequest['data']['roles'];
+            for (var i = 0; i < roles.length; i++) {
                 t.row.add(
                     [
                         i + 1,
-                        modules[i]['title'],
+                        roles[i]['title'],
                         '<a href="javascript:;" onclick=""><i class="fa fa-edit"></i></a>'
                     ]
                 ).draw(true);
@@ -42,9 +42,9 @@
 <script>
     $(document).ready(function () {
         createSections([
-            {'type': 1, 'title': 'لیست ماژول ها', 'id': 'modulesList'}
+            {'type': 1, 'title': 'لیست نقش ها', 'id': 'rolesList'}
         ]);
-        section_modulesList();
+        section_rolesList();
 
     });
 
