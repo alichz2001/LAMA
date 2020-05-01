@@ -51,7 +51,7 @@
 <script>
     const baseURL = '{{ url('/') }}' + '/admin/sys';
     const globalSysRequestMethod = 'get';
-    const SC = "{{ $_SC }}";
+    var SC = "{{ $_SC }}";
 </script>
 <!-- ================== BEGIN BASE JS ================== -->
 <script src="{{ asset('/LAMA/templates/_1/assets/plugins/jquery/jquery-3.2.1.min.js') }}"></script>

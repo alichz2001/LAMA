@@ -7,6 +7,7 @@ function AJAXRequest(url, method, data, type = 3) {
      * type = 5 : big notification error message
      * type = 6 : if status is false little notification error message
      * type = 7 : if status is false big notification error message
+     * type = 8 : for modules
      * @type {{}}
      */
     //TODO page loader
@@ -46,6 +47,10 @@ function AJAXRequest(url, method, data, type = 3) {
         if (response['type'] == 2)
             errorsManagement(response['messageCode'], response['type'], 2);
         return {data: response['data'], status: response['status']};
+    } else if (type == 8) {
+        if (response['type'] == 2)
+            errorsManagement(response['messageCode'], response['type'], 2);
+        return response;
     }
 }
 
@@ -90,6 +95,7 @@ function setRoleSelect() {
 function changeOrgan(id) {
     var res = AJAXRequest(baseURL + '/changeOrgan', globalSysRequestMethod, {'id' : id}, 4);
     if (res['status'] == true) {
+        SC = res['data']['SC'];
         setOrganSelect();
         setRoleSelect();
         setModulesMenu();
@@ -101,6 +107,7 @@ function changeOrgan(id) {
 function changeRole(id) {
     var res = AJAXRequest(baseURL + '/changeRole', globalSysRequestMethod, {'id' : id}, 4);
     if (res['status'] == true) {
+        SC = res['data']['SC'];
         setRoleSelect();
         setModulesMenu();
         $('[module-sys_title=dashboard]').click();
@@ -181,7 +188,7 @@ function setModule(sys_title) {
     $('#menu li').removeClass('active');
     $('[module-sys_title=' + sys_title +']').parents('li').addClass('active');
 
-    var data = AJAXRequest(baseURL + '/module/' + sys_title + '/view', globalSysRequestMethod, {'_SC': SC}, 7);
+    var data = AJAXRequest(baseURL + '/module/' + sys_title + '/view', globalSysRequestMethod, {'_SC': SC}, 8);
     if (data['messageCode'] != undefined) {
         //TODO handle errors
     } else {
