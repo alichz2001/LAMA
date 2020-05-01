@@ -10,7 +10,7 @@
         <div id="header" class="header navbar-default">
             <!-- begin navbar-header -->
             <div class="navbar-header">
-                <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>Color</b> LAMA</a>
+                <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b></b> LAMA</a>
                 <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -27,7 +27,7 @@
 
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('/LAMA/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
+                        <img class="user_avatar-field" src="{{ asset('/LAMA/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
                         <span class="d-none d-md-inline username-filed"></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -47,7 +47,7 @@
                 <ul class="nav">
                     <li class="nav-profile">
                             <div class="image">
-                                <img src="{{ asset('/LAMA/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
+                                <img class="user_avatar-field" src="{{ asset('/LAMA/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
                             </div>
                             <div class="info ">
                                 <strong class="name-filed"></strong>

@@ -128,8 +128,9 @@ function setModulesMenu() {
 
 function setAdminDetails() {
     var adminDetails = AJAXRequest(baseURL + '/getUserDetails', globalSysRequestMethod, '')['data'];
-    $('.username-filed').html(adminDetails['username'])
-    $('.name-filed').html(adminDetails['first_name'] + ' ' + adminDetails['last_name'])
+    $('.username-filed').html(adminDetails['username']);
+    $('.name-filed').html(adminDetails['first_name'] + ' ' + adminDetails['last_name']);
+    $('.user_avatar-field').attr('src', adminDetails['avatar']);
 }
 
 function createMenu(modules, step) {

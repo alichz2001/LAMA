@@ -1,5 +1,5 @@
 /*
-Template Name: Color LAMA - Responsive LAMA Dashboard Template build with Twitter Bootstrap 3 & 4
+Template Name: Color Admin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3 & 4
 Version: 4.0.0
 Author: Sean Ngu
 Website: http://www.seantheme.com/color-admin-v4.0/admin/
@@ -25,7 +25,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 	2.4  Page Option - Right Sidebar
 	2.5  Page Option - Transparent Sidebar
 	2.6  Page Option - Boxed Layout
-
+	
 ::  3.0 Components
 -------------------------------------------
 	3.1  Component - Theme Panel
@@ -44,7 +44,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 -------------------------------------------
 	4.1  Widget - Widget Chart (Added in V1.3)
 	4.2  Widget - Superbox Setting (Added in V1.3)
-
+	
 ::  5.0 Plugins
 -------------------------------------------
 	5.3  Plugin - jQuery Wizard
@@ -71,7 +71,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 	6.12 Page - Inbox V2 (Added in V1.4)
 	6.13 Page - Login / Register V3 (Added in V1.7)
 	6.14 Page - Profile (Added in V1.7)
-
+	
 ::  7.0 Predefined CSS
 -------------------------------
 	7.1 CSS - Vertical Box
@@ -90,7 +90,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 	.header .navbar-toggle {
 		display: none;
 	}
-	.header.navbar > .container .navbar-brand,
+	.header.navbar > .container .navbar-brand, 
 	.header.navbar > .container-fluid .navbar-brand {
 		margin-left: -15px;
 	}
@@ -154,7 +154,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
     .header .navbar-form {
         margin: 0 !important;
         padding: 9px 10px;
-        border: none;
+        border: none;    
         box-shadow: none;
     }
     .header .navbar.navbar-inverse .navbar-form {
@@ -203,7 +203,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
     .navbar-nav .open .dropdown-menu > li > a {
         padding: 5px 15px;
     }
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, 
     .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
         background: #edf0f5;
     }
@@ -298,7 +298,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 /* 1.2 Page Sidebar */
 
 @media (max-width: 767px) {
-
+    
     .sidebar {
         position: absolute;
         left: -250px;
@@ -435,7 +435,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
     }
     .page-with-wide-sidebar.page-with-right-sidebar .sidebar,
     .page-with-wide-sidebar.page-with-right-sidebar .sidebar-bg,
-    .page-with-wide-sidebar.page-with-two-sidebar .sidebar.sidebar-right,
+    .page-with-wide-sidebar.page-with-two-sidebar .sidebar.sidebar-right, 
     .page-with-wide-sidebar.page-with-two-sidebar .sidebar-bg.sidebar-right {
         left: auto;
         right: -250px;
@@ -555,7 +555,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
         margin-right: 0 !important;
     }
     .page-with-two-sidebar .sidebar.sidebar-right,
-    .page-with-two-sidebar .sidebar-bg.sidebar-right {
+    .page-with-two-sidebar .sidebar-bg.sidebar-right { 
         right: -250px;
         left: auto !important;
         position: fixed;
@@ -658,7 +658,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 /* 2.5 Page Option - Transparent Sidebar */
 
 @media (max-width: 767px) {
-    .page-sidebar-toggled.page-sidebar-minified .sidebar.sidebar-transparent + .sidebar-bg,
+    .page-sidebar-toggled.page-sidebar-minified .sidebar.sidebar-transparent + .sidebar-bg, 
     .sidebar.sidebar-transparent + .sidebar-bg {
     	background-size: 100% 100%;
     }
@@ -763,7 +763,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
     .form-horizontal.form-bordered .form-group > div {
         padding: 0px 15px 15px !important;
     }
-    .form-bordered .form-group > .col-form-label,
+    .form-bordered .form-group > .col-form-label, 
     .form-horizontal.form-bordered .form-group > .control-label {
     	padding-top: 15px;
     	padding-bottom: 5px;
@@ -774,11 +774,11 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 /* 3.4 Component - Table */
 
 @media (max-width: 767px) {
-    .table-responsive .table > thead > tr > th,
-    .table-responsive .table > tbody > tr > th,
-    .table-responsive .table > tfoot > tr > th,
-    .table-responsive .table > thead > tr > td,
-    .table-responsive .table > tbody > tr > td,
+    .table-responsive .table > thead > tr > th, 
+    .table-responsive .table > tbody > tr > th, 
+    .table-responsive .table > tfoot > tr > th, 
+    .table-responsive .table > thead > tr > td, 
+    .table-responsive .table > tbody > tr > td, 
     .table-responsive .table > tfoot > tr > td {
         white-space: nowrap;
     }
@@ -1098,7 +1098,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 
 @media (max-width: 420px) {
 	#gritter-notice-wrapper {
-		width: 320px !important;
+		width: 320px !important;	
 	}
 	.gritter-close, .gritter-light .gritter-close {
 		width: 60px !important;
@@ -1120,7 +1120,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 }
 @media (max-width: 360px) {
 	#gritter-notice-wrapper {
-		width: 280px !important;
+		width: 280px !important;	
 	}
 	.gritter-with-image {
 		width: 210px !important;
@@ -1589,17 +1589,17 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
     	bottom: 0;
     	top: 0;
     }
-    .login.login-with-news-feed .right-content,
+    .login.login-with-news-feed .right-content, 
     .register.register-with-news-feed .right-content {
     	width: 360px;
     }
-    .login.login-with-news-feed .news-feed,
+    .login.login-with-news-feed .news-feed, 
     .register.register-with-news-feed .news-feed {
     	right: 360px;
     }
-    .login.login-with-news-feed .login-header,
+    .login.login-with-news-feed .login-header, 
     .register.register-with-news-feed .register-header,
-    .login.login-with-news-feed .login-content,
+    .login.login-with-news-feed .login-content, 
     .register.register-with-news-feed .register-content {
     	padding-left: 45px;
     	padding-right: 45px;
@@ -1718,7 +1718,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
     .vertical-box .vertical-column {
         display: block !important;
     }
-
+    
     .vertical-box,
     .vertical-box-row,
     .vertical-box-column,
@@ -1761,7 +1761,7 @@ Website: http://www.seantheme.com/color-admin-v4.0/admin/
 	.p-r-xs-0 { padding-right: 0 !important; }
 	.p-b-xs-0 { padding-bottom: 0 !important; }
 	.p-xs-0 { padding: 0 !important; }
-
+	
 	.m-l-xs-0 { margin-left: 0 !important; }
 	.m-t-xs-0 { margin-top: 0 !important; }
 	.m-r-xs-0 { margin-right: 0 !important; }
