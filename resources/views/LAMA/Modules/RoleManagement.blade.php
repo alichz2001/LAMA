@@ -42,7 +42,7 @@
 <script>
     $(document).ready(function () {
         createSections([
-            {'type': 1, 'title': 'لیست نقش ها', 'id': 'rolesList'}
+            {'type': 1, 'title': 'لیست نقش ها', 'id': 'rolesList'},
         ]);
         section_rolesList();
 
