@@ -1,4 +1,12 @@
 function AJAXRequest(url, method, data, type = 1) {
+    /**
+     * type = 1 : little notification modal
+     * type = 2 : big notification modal
+     * type = 3 : no action
+     * type = 4 : if status is false little notification error message
+     * type = 5 : if status is false big notification error message
+     * @type {{}}
+     */
     //TODO page loader
     var response = {};
     $.ajax({
@@ -12,14 +20,25 @@ function AJAXRequest(url, method, data, type = 1) {
             response = data;
         },
         error: function () {
+            //TODO
         }
     });
 
     if (type == 1) {//type 1 : handle errors and pass standard data
         //TODO handle errors
+        errorsManagement(response['messageCode'], response['type'], 1);
         return {data: response['data'], status: response['status']};
-    } else if (type == 2) {//type 2 : pass all data without handle errors
+    } else if (type == 2) {
+        errorsManagement(response['messageCode'], response['type'], 2);
+        return {data: response['data'], status: response['status']};
+    } else if (type == 3) {//type 2 : pass all data without handle errors
         return response;
+    } else if (type == 4) {
+        //TODO
+    } else if (type == 5) {
+        if (response['type'] == 2)
+            errorsManagement(response['messageCode'], response['type'], 2);
+        return {data: response['data'], status: response['status']};
     }
 }
 
@@ -155,7 +174,7 @@ function setModule(sys_title) {
     $('#menu li').removeClass('active');
     $('[module-sys_title=' + sys_title +']').parents('li').addClass('active');
 
-    var data = AJAXRequest(baseURL + '/module/' + sys_title + '/view', globalSysRequestMethod, {'_SC': SC}, 2);
+    var data = AJAXRequest(baseURL + '/module/' + sys_title + '/view', globalSysRequestMethod, {'_SC': SC}, 5);
     if (data['messageCode'] != undefined) {
         //TODO handle errors
     } else {
@@ -164,3 +183,30 @@ function setModule(sys_title) {
 
 }
 
+function errorsManagement(errorCode, messageType, modalType) {
+    var message = translateMessage(errorCode, 'fa');
+    //message type word
+    var MTW = {
+        1: 'success',
+        2: 'error',
+        3: 'warning'
+    };
+    if (modalType == 1) {
+        //TODO
+    } else if (modalType == 2) {
+        swal({
+            title: '',
+            text: message,
+            icon: MTW[messageType],
+            buttons: {
+                confirm: {
+                    text: 'ok',
+                    value: true,
+                    visible: true,
+                    className: 'btn btn-primary',
+                    closeModal: true
+                }
+            }
+        });
+    }
+}

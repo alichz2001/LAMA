@@ -63,9 +63,15 @@
 <!-- ================== END BASE JS ================== -->
 
 
+<!-- ================== BEGIN MODAL NOTIFICATION JS ================== -->
+<script src="{{ asset('/LAMA/templates/_1/assets/plugins/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
+<!-- ================== END MODAL NOTIFICATION JS ================== -->
+
+
 <script src="{{ asset('/LAMA/js/LAMA.js') }}"></script>
 <script src="{{ asset('/LAMA/js/app.js') }}"></script>
 <script src="{{ asset('/LAMA/js/moduleMaker.js') }}"></script>
+<script src="{{ asset('/LAMA/js/translateMessage.js') }}"></script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
