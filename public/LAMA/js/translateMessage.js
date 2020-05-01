@@ -1,6 +1,5 @@
 function errorsManagement(errorCode, messageType, modalType) {
     var message = translateMessage(errorCode, 'fa');
-    console.log(message);
     //message type word
     var MTW = {
         1: 'success',

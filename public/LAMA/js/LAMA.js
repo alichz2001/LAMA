@@ -42,7 +42,9 @@ function AJAXRequest(url, method, data, type = 3) {
     }else if (type == 5) {
         //TODO
     }else if (type == 6) {
-        //TODO
+        if (response['type'] == 2)
+            errorsManagement(response['messageCode'], response['type'], 1);
+        return {data: response['data'], status: response['status']};
     } else if (type == 7) {
         if (response['type'] == 2)
             errorsManagement(response['messageCode'], response['type'], 2);

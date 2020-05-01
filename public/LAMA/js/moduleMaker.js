@@ -1,4 +1,4 @@
-function createSections(sectionsArray) {
+async function createSections(sectionsArray) {
     var out = '';
     for (var i = 0; i < sectionsArray.length; i++) {
         switch (sectionsArray[i]['type']) {
