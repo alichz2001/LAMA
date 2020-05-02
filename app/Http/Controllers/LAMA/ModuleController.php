@@ -52,9 +52,18 @@ class ModuleController extends Controller
                 if ($item['public_name'] == $method) {
                     if ($roleModule[0][$item['type'] . '_access'] == 1) {
                         $m = $item['sys_name'];
-                        if (method_exists($moduleObject, $m))
+                        if (method_exists($moduleObject, $m)) {
+                            if (isset($this->req['data'])) {
+                                //convert null values to empty string
+                                foreach ($this->req['data'] as $key => $value) {
+                                    if (is_null($value)) {
+                                        $this->req['data'][$key] = "";
+                                    }
+                                }
+                                return $moduleObject->$m($this->req['data']);
+                            }
                             return $moduleObject->$m();
-                        else
+                        } else
                             return Response::Handle(false, '', 2, 40007);
 
                     } else {

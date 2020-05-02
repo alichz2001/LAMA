@@ -4,11 +4,14 @@
 <script src="{{ asset('/LAMA/templates/_1/assets/plugins/DataTables/extensions/KeyTable/js/dataTables.keyTable.min.js') }}"></script>
 <script src="{{ asset('/LAMA/templates/_1/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/LAMA/templates/_1/assets/js/demo/table-manage-keytable.demo.min.js') }}"></script>
+
+
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <script>
     async function section_rolesList() {
         var rolesRequest = AJAXRequest('/admin/sys/module/role_management/getRolesList', 'get', {'_SC': SC}, 6);
+        console.log(rolesRequest);
         if (rolesRequest['status'] == 1) {
             var x = '<table id="data-table_rolesList" class="table table-striped table-bordered">\n' +
                 '                    <thead>\n' +
@@ -45,6 +48,7 @@
             {'type': 1, 'title': 'لیست نقش ها', 'id': 'rolesList'},
         ]);
         section_rolesList();
+
 
     });
 

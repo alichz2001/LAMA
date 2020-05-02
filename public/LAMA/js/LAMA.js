@@ -3,22 +3,21 @@ function AJAXRequest(url, method, data, type = 3) {
      * type = 1 : little notification modal
      * type = 2 : big notification modal
      * type = 3 : no action
-     * type = 4 : little notification error message
-     * type = 5 : big notification error message
+     * type = 4 : little notification message
+     * type = 5 : big notification message
      * type = 6 : if status is false little notification error message
      * type = 7 : if status is false big notification error message
      * type = 8 : for modules
      * @type {{}}
      */
     //TODO page loader
+        //console.log(data);
     var response = {};
     $.ajax({
         url: url,
         method: method,
         data: data,
         async: false,
-        //processData: false,
-        //contentType: false,
         success: function (data) {
             response = data;
         },
@@ -198,5 +197,22 @@ function setModule(sys_title) {
         $('#module-section').html(data);
     }
 
+}
+
+
+function setFormErrors(formId, errors) {
+    $('#' + formId + ' .error-field').html('');
+    for (var key in errors) {
+        $('#' + formId + ' [name=' + key + ']').removeClass('is-invalid');
+        $('#' + formId + ' [name=' + key + ']').addClass('is-valid');
+        if (errors[key].length > 0) {
+            console.log('test');
+            $('#' + formId + ' [name=' + key + ']').addClass('is-invalid');
+            $('#' + formId + ' [name=' + key + ']').removeClass('is-valid');
+            $('#' + formId + ' [name=' + key + ']').parent().children('.error-field').html(errors[key]);
+        }
+    }
+    $('#' + formId + ' [name=title]').addClass('is-invalid');
+    //console.log(formId, errors);
 }
 

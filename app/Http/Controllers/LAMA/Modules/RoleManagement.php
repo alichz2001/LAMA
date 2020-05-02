@@ -14,7 +14,7 @@ class RoleManagement
     }
 
     public function getRolesList() {
-        $roles = Role::all()->toArray();
+        $roles = Role::all()->makeVisible(['status', 'sys_title'])->toArray();
         return Response::Handle(true, ['roles' => $roles], 1, 20000);
     }
 }

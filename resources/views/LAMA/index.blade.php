@@ -27,7 +27,7 @@
 
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="user_avatar-field" src="{{ asset('/LAMA/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
+                        <img class="user_avatar-field" src="{{ asset('/LAMA/templates/_1/assets/img/user/undefined-user.png') }}" onerror="this.src='default-image.jpg';" alt="" />
                         <span class="d-none d-md-inline username-filed"></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -47,7 +47,7 @@
                 <ul class="nav">
                     <li class="nav-profile">
                             <div class="image">
-                                <img class="user_avatar-field" src="{{ asset('/LAMA/templates/_1/assets/img/user/user-13.jpg') }}" alt="" />
+                                <img class="user_avatar-field" src="{{ asset('/LAMA/templates/_1/assets/img/user/undefined-user.png') }}" alt="" />
                             </div>
                             <div class="info ">
                                 <strong class="name-filed"></strong>
