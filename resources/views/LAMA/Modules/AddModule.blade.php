@@ -6,7 +6,7 @@
 <!-- begin col-12 -->
 <div class="col-lg-12" id="section_addModule">
     <!-- begin panel -->
-    <div class="panel panel-inverse" data-sortable-id="index-2">
+    <div class="panel panel-inverse">
         <div class="panel-heading">
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
@@ -66,23 +66,6 @@
 
     </div>
     <!-- end panel -->
-`
-    <!-- begin panel -->
-    <div class="panel panel-inverse" data-sortable-id="index-2">
-        <div class="panel-heading">
-            <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-            </div>
-            <h4 class="panel-title">اضافه کردن ماژول جدید</h4>
-        </div>
-        <div class="panel-body">
-        </div>
-
-    </div>
-    <!-- end panel -->
 </div>
 <!-- end col-12 -->
 
@@ -101,35 +84,35 @@
     var F_addModule = $('#form-addModule').parsley();
     $(function(){
 
-            $('#form-addModule').submit(function (e) {
-                e.preventDefault();
-                if (F_addModule.isValid()) {
-                    var formData = {
-                        'title': $('#form-addModule input[name=title]').val(),
-                        'sys_title': $('#form-addModule input[name=sys_title]').val(),
-                        'file_name': $('#form-addModule input[name=file_name]').val(),
-                        'status': $('#form-addModule input[name=status]').val(),
-                        'parent_id': $('#form-addModule select[name=parent_id]').val(),
-                        'icon': ''
-                    };
-                    var res = AJAXRequest('/admin/sys/module/module_management/addModule', 'post', {
-                        'data': formData,
-                        '_SC': SC
-                    }, 1);
-                    if (res['status'] == true) {
-                        section_addModule();
-                        section_modulesList();
-                        //TODO reset form and parsley classes
-                    }
+        $('#form-addModule').submit(function (e) {
+            e.preventDefault();
+            if (F_addModule.isValid()) {
+                var formData = {
+                    'title': $('#form-addModule input[name=title]').val(),
+                    'sys_title': $('#form-addModule input[name=sys_title]').val(),
+                    'file_name': $('#form-addModule input[name=file_name]').val(),
+                    'status': $('#form-addModule input[name=status]').val(),
+                    'parent_id': $('#form-addModule select[name=parent_id]').val(),
+                    'icon': ''
+                };
+                var res = AJAXRequest('/admin/sys/module/module_management/addModule', 'post', {
+                    'data': formData,
+                    '_SC': SC
+                }, 1);
+                if (res['status'] == true) {
+                    section_addModule();
+                    section_modulesList();
+                    //TODO reset form and parsley classes
                 }
-            });
+            }
+        });
 
     });
 </script>
 
 <script>
     async function section_modulesList() {
-        var modulesRequest = AJAXRequest('/admin/sys/module/Module_management/getModulesList', 'get', {'_SC': SC}, 6);
+        var modulesRequest = AJAXRequest('/admin/sys/module/add_module/getModulesList', 'get', {'_SC': SC}, 6);
         if (modulesRequest['status'] == 1) {
             var x = '<table id="data-table_modulesList" class="table table-striped table-bordered">\n' +
                 '                    <thead>\n' +
@@ -159,7 +142,7 @@
     }
 
     async function section_addModule() {
-        var modulesRequest = AJAXRequest('/admin/sys/module/Module_management/getModulesList', 'get', {'_SC': SC}, 6);
+        var modulesRequest = AJAXRequest('/admin/sys/module/add_module/getModulesList', 'get', {'_SC': SC}, 6);
         var modules = modulesRequest['data']['modules'];
         $('#select_module').html('');
         $('#select_module').append('<option style="color: black;" value="">select module</option>');
@@ -172,11 +155,6 @@
 </script>
 <script>
     $(document).ready(function () {
-        createSections([
-            {'title': 'modules list', 'id': 'modulesList', 'type': 1}
-        ]);
-
-        section_modulesList();
         section_addModule();
         app.init();
     });
