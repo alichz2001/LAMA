@@ -73,10 +73,7 @@ class ModuleController extends Controller
             }
             return Response::Handle(false, '', 2, 40008);
         } else {
-            if (view()->exists('LAMA.Modules.' . $module[0]['file_name']))
-                return view('LAMA.Modules.' . $module[0]['file_name']);
-            else
-                return Response::Handle(false, '', 2,40005);
+            return Response::Handle(false, '', 2,40005);
         }
     }
 }

@@ -95,7 +95,7 @@
                     'parent_id': $('#form-addModule select[name=parent_id]').val(),
                     'icon': ''
                 };
-                var res = AJAXRequest('/admin/sys/module/module_management/addModule', 'post', {
+                var res = AJAXRequest('/admin/sys/module/add_module/addModule', 'post', {
                     'data': formData,
                     '_SC': SC
                 }, 1);
@@ -111,35 +111,6 @@
 </script>
 
 <script>
-    async function section_modulesList() {
-        var modulesRequest = AJAXRequest('/admin/sys/module/add_module/getModulesList', 'get', {'_SC': SC}, 6);
-        if (modulesRequest['status'] == 1) {
-            var x = '<table id="data-table_modulesList" class="table table-striped table-bordered">\n' +
-                '                    <thead>\n' +
-                '                    <tr>\n' +
-                '                        <th width="1%"></th>\n' +
-                '                        <th class="text-nowrap">عنوان</th>\n' +
-                '                        <th class="text-nowrap">actions</th>\n' +
-                '                    </tr>\n' +
-                '                    </thead>\n' +
-                '                    <tbody>\n' +
-                '                    </tbody>\n' +
-                '                </table>';
-            $('#section-body_modulesList').html(x);
-            var t = $('#data-table_modulesList').DataTable();
-            t.clear()
-            var modules = modulesRequest['data']['modules'];
-            for (var i = 0; i < modules.length; i++) {
-                t.row.add(
-                    [
-                        i + 1,
-                        modules[i]['title'],
-                        '<a href="javascript:;" onclick=""><i class="fa fa-edit"></i></a>'
-                    ]
-                ).draw(true);
-            }
-        }
-    }
 
     async function section_addModule() {
         var modulesRequest = AJAXRequest('/admin/sys/module/add_module/getModulesList', 'get', {'_SC': SC}, 6);

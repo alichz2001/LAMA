@@ -68,13 +68,35 @@ var translateMessage = function (errorCode, lang) {
 
 
 
-
+                case 40005:
+                    return {
+                        'title': 'مشکل سرور',
+                        'text' : 'ماژول مورد نظر یافت نشد'
+                    };
+                    break;
+                case 40006:
+                    return {
+                        'title': 'مشکل سرور',
+                        'text' : 'ماژول مورد نظر یافت نشد'
+                    };
+                    break;
                 case 40007:
                     return {
                         'title': 'مشکل سرور',
                         'text' : 'ماژول مورد نظر یافت نشد'
                     };
                     break;
+                case 40008:
+                    return {
+                        'title': 'مشکل سرور',
+                        'text' : 'ماژول مورد نظر یافت نشد'
+                    };
+                    break;
+
+
+
+
+
                 case 40040:
                     return {
                         'title': 'مشکل دسترسی',
