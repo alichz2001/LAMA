@@ -6,7 +6,7 @@
 <!-- begin col-12 -->
 <div class="col-lg-12" id="section_addModule">
     <!-- begin panel -->
-    <div class="panel panel-inverse">
+    <div class="panel panel-inverse" data-sortable-id="index-2">
         <div class="panel-heading">
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
@@ -17,25 +17,25 @@
             <h4 class="panel-title">اضافه کردن ماژول جدید</h4>
         </div>
         <div class="panel-body">
-            <form class="form-hoizontal" id="form-addModule">
+            <form class="form-hoizontal" id="form-addModule" data-parsley-validate="true">
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-sm-4 col-form-label">title * :</label>
                     <div class="col-md-8 col-sm-8">
-                        <input class="form-control" name="title" type="text" placeholder="title"/>
+                        <input class="form-control" name="title" data-parsley-minlength="3" data-parsley-required="true" type="text" placeholder="title"/>
                         <p class="error-field"></p>
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-sm-4 col-form-label">sys title * :</label>
                     <div class="col-md-8 col-sm-8">
-                        <input class="form-control" name="sys_title" type="text" placeholder="sys title"/>
+                        <input class="form-control" name="sys_title" data-parsley-minlength="3" data-parsley-required="true" type="text" placeholder="sys title"/>
                         <p class="error-field"></p>
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-sm-4 col-form-label">file name * :</label>
                     <div class="col-md-8 col-sm-8">
-                        <input class="form-control" name="file_name" type="text" placeholder="file name"/>
+                        <input class="form-control" name="file_name" data-parsley-minlength="3" data-parsley-required="true" type="text" placeholder="file name"/>
                         <p class="error-field"></p>
                     </div>
                 </div>
@@ -66,6 +66,23 @@
 
     </div>
     <!-- end panel -->
+`
+    <!-- begin panel -->
+    <div class="panel panel-inverse" data-sortable-id="index-2">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">اضافه کردن ماژول جدید</h4>
+        </div>
+        <div class="panel-body">
+        </div>
+
+    </div>
+    <!-- end panel -->
 </div>
 <!-- end col-12 -->
 
@@ -81,20 +98,32 @@
 
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
+    var F_addModule = $('#form-addModule').parsley();
     $(function(){
-        $('#form-addModule').submit(function(e){
-            e.preventDefault();
-            var formData = {
-                'title': $('#form-addModule input[name=title]').val(),
-                'sys_title': $('#form-addModule input[name=sys_title]').val(),
-                'file_name': $('#form-addModule input[name=file_name]').val(),
-                'status': $('#form-addModule input[name=status]').val(),
-                'parent_id': $('#form-addModule select[name=parent_id]').val(),
-                'icon': ''
-            };
-            var res = AJAXRequest('/admin/sys/module/module_management/addModule', 'post', {'data': formData, '_SC': SC});
-            setFormErrors('form-addModule', res['data']['formErrors']);
-        });
+
+            $('#form-addModule').submit(function (e) {
+                e.preventDefault();
+                if (F_addModule.isValid()) {
+                    var formData = {
+                        'title': $('#form-addModule input[name=title]').val(),
+                        'sys_title': $('#form-addModule input[name=sys_title]').val(),
+                        'file_name': $('#form-addModule input[name=file_name]').val(),
+                        'status': $('#form-addModule input[name=status]').val(),
+                        'parent_id': $('#form-addModule select[name=parent_id]').val(),
+                        'icon': ''
+                    };
+                    var res = AJAXRequest('/admin/sys/module/module_management/addModule', 'post', {
+                        'data': formData,
+                        '_SC': SC
+                    }, 1);
+                    if (res['status'] == true) {
+                        section_addModule();
+                        section_modulesList();
+                        //TODO reset form and parsley classes
+                    }
+                }
+            });
+
     });
 </script>
 
@@ -132,6 +161,7 @@
     async function section_addModule() {
         var modulesRequest = AJAXRequest('/admin/sys/module/Module_management/getModulesList', 'get', {'_SC': SC}, 6);
         var modules = modulesRequest['data']['modules'];
+        $('#select_module').html('');
         $('#select_module').append('<option style="color: black;" value="">select module</option>');
         for (var i = 0; i < modules.length; i++) {
             $('#select_module').append('<option style="color: black;" value="' + modules[i]['id'] + '">' + modules[i]['title'] + '</option>');
@@ -145,9 +175,10 @@
         createSections([
             {'title': 'modules list', 'id': 'modulesList', 'type': 1}
         ]);
+
         section_modulesList();
         section_addModule();
-
+        app.init();
     });
 
 </script>

@@ -93,6 +93,25 @@ var translateMessage = function (errorCode, lang) {
                         'text' : 'شما در این ارگان هیچ نقشی ندارید'
                     };
                     break;
+
+
+
+
+
+
+                case 60000:
+                    return {
+                        'title': '',
+                        'text': 'ماژول با موفقیت ثبت شد'
+                    };
+                    break;
+
+                case 70000:
+                    return {
+                        'title': '',
+                        'text': 'ماژول ثبت نشد'
+                    };
+                    break;
                 default:
                     return {
                         'title': '',

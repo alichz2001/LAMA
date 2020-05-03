@@ -27,7 +27,6 @@ function AJAXRequest(url, method, data, type = 3) {
     });
 
     if (type == 1) {//type 1 : handle errors and pass standard data
-        //TODO handle errors
         errorsManagement(response['messageCode'], response['type'], 1);
         return {data: response['data'], status: response['status']};
     } else if (type == 2) {
@@ -197,22 +196,5 @@ function setModule(sys_title) {
         $('#module-section').html(data);
     }
 
-}
-
-
-function setFormErrors(formId, errors) {
-    $('#' + formId + ' .error-field').html('');
-    for (var key in errors) {
-        $('#' + formId + ' [name=' + key + ']').removeClass('is-invalid');
-        $('#' + formId + ' [name=' + key + ']').addClass('is-valid');
-        if (errors[key].length > 0) {
-            console.log('test');
-            $('#' + formId + ' [name=' + key + ']').addClass('is-invalid');
-            $('#' + formId + ' [name=' + key + ']').removeClass('is-valid');
-            $('#' + formId + ' [name=' + key + ']').parent().children('.error-field').html(errors[key]);
-        }
-    }
-    $('#' + formId + ' [name=title]').addClass('is-invalid');
-    //console.log(formId, errors);
 }
 

@@ -74,6 +74,10 @@
 <script src="{{ asset('/LAMA/templates/_2/js/iziToast.min.js') }}"></script>
 <!-- ================== END MODAL NOTIFICATION JS ================== -->
 
+<!-- ================== BEGIN PARSLEY JS ================== -->
+<script src="{{ asset('/LAMA/templates/_1/assets/plugins/parsley/dist/parsley.min.js') }}"></script>
+<!-- ================== END PARSLEY JS ================== -->
+
 
 <script src="{{ asset('/LAMA/js/LAMA.js') }}"></script>
 <script src="{{ asset('/LAMA/js/app.js') }}"></script>
