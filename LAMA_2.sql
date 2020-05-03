@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 -- Database: `LAMA`
 --
 
+
+--
+-- Dumping data for table `modules`
+--
+
+INSERT INTO `modules` (`id`, `has_parent`, `parent_id`, `has_child`, `title`, `sys_title`, `file_name`, `icon`, `status`, `type`, `created_at`, `updated_at`) VALUES
+(1, 0, NULL, 0, 'داشبورد', 'dashboard', 'Dashboard', 'fa-columns', 1, 'user', NULL, NULL),
+(2, 0, NULL, 1, 'مدیریت ماژول ها', 'module_management', 'ModuleManagement', 'fa-paperclip', 1, 'dev', NULL, '2020-05-03 06:51:58'),
+(3, 0, NULL, 0, 'مدیریت نقش ها', 'role_management', 'RoleManagement', 'fa-paperclip', 1, 'user', NULL, '2020-05-03 04:55:14'),
+(4, 1, 2, 0, 'اضافه کردن ماژول', 'add_module', 'AddModule', 'fa-paperclip', 1, 'user', '2020-05-03 05:56:16', '2020-05-03 05:56:16'),
+(5, 1, 2, 0, 'لیست ماژول ها', 'modules_list', 'ModulesList', 'fa-paperclip', 1, 'user', '2020-05-03 06:09:51', '2020-05-03 06:09:51');
+
+
 --
 -- Dumping data for table `methods`
 --
@@ -33,31 +46,6 @@ INSERT INTO `methods` (`id`, `module_id`, `public_name`, `sys_name`, `type`, `st
 (6, 5, 'view', 'view', 'read', 1, NULL, NULL),
 (7, 5, 'getModulesList', 'getModulesList', 'read', 1, NULL, NULL),
 (8, 5, 'getModuleDetails', 'getModuleDetails', 'read', 1, NULL, NULL);
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2020_04_19_103413_create_modules_table', 1),
-(4, '2020_04_19_103428_create_roles_table', 1),
-(5, '2020_04_19_110521_create_organs_table', 1),
-(6, '2020_04_19_111652_create_role__modules_table', 1),
-(7, '2020_04_19_122913_create_user__role__organs_table', 1),
-(8, '2020_04_28_113857_create_methods_table', 1);
-
---
--- Dumping data for table `modules`
---
-
-INSERT INTO `modules` (`id`, `has_parent`, `parent_id`, `has_child`, `title`, `sys_title`, `file_name`, `icon`, `status`, `type`, `created_at`, `updated_at`) VALUES
-(1, 0, NULL, 0, 'داشبورد', 'dashboard', 'Dashboard', 'fa-columns', 1, 'user', NULL, NULL),
-(2, 0, NULL, 1, 'مدیریت ماژول ها', 'module_management', 'ModuleManagement', 'fa-paperclip', 1, 'dev', NULL, '2020-05-03 06:51:58'),
-(3, 0, NULL, 0, 'مدیریت نقش ها', 'role_management', 'RoleManagement', 'fa-paperclip', 1, 'user', NULL, '2020-05-03 04:55:14'),
-(4, 1, 2, 0, 'اضافه کردن ماژول', 'add_module', 'AddModule', 'fa-paperclip', 1, 'user', '2020-05-03 05:56:16', '2020-05-03 05:56:16'),
-(5, 1, 2, 0, 'لیست ماژول ها', 'modules_list', 'ModulesList', 'fa-paperclip', 1, 'user', '2020-05-03 06:09:51', '2020-05-03 06:09:51');
 
 --
 -- Dumping data for table `organs`

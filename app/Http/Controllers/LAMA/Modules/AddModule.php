@@ -27,9 +27,7 @@ class AddModule
             $newModule->has_parent = ((int)$req['parent_id'] == 0) ? 0 : 1;
             $newModule->save();
             foreach ($req['methods'] as $item)
-                $methods = $newModule->methods()->create($item);
-            //return dump($newModule->id);
-            //if newModule has parent set
+                $newModule->methods()->create($item);
             if ((int)$req['parent_id'] != 0) {
                 Module::where(['id' => $req['parent_id']])->update(['has_child' => 1]);
             }

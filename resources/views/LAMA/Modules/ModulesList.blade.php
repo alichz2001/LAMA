@@ -1,6 +1,5 @@
 
 
-
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script src="{{ asset('/LAMA/templates/_1/assets/plugins/DataTables/media/js/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('/LAMA/templates/_1/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js') }}"></script>
@@ -35,7 +34,8 @@
                     [
                         i + 1,
                         modules[i]['title'],
-                        '<a href="javascript:;" onclick="editModule(' + modules[i]['id'] + ')"><i class="fa fa-edit"></i></a>'
+                        '<a style="margin-left: 30px;" href="javascript:;" data-button-type="module-edit" data-module-id="' + modules[i]['id'] + '"><i class="fa fa-edit"></i>EDIT</a>' +
+                        '<a style="margin-left: 30px;" href="javascript:;"><i class="fa fa-trash"></i>REMOVE</a>'
                     ]
                 ).draw(true);
             }
@@ -43,8 +43,12 @@
     }
 
 
+
+
+
+
+
     async function editModule(id) {
-        var moduleDetails = AJAXRequest('/admin/sys/module/modules_list/getModuleDetails', 'post', {'data': {'id': id}, '_SC': SC}, 6);
         console.log(moduleDetails);
     }
 
@@ -53,9 +57,18 @@
 <script>
     $(document).ready(function () {
         createSections([
-            {'title': 'لیست ماژول ها', 'id': 'modulesList', 'type': 1}
+            {'title': 'لیست ماژول ها', 'id': 'modulesList', 'type': 1},
+            {'title': 'ادیت ماژول', 'id': 'editModule', 'type': 1}
         ]);
         section_modulesList();
+
+        $('#section_editModule').hide();
+        $('a[data-button-type=module-edit]').on('click', function () {
+            var moduleDetails = AJAXRequest('/admin/sys/module/modules_list/getModuleDetails', 'post', {'data': {'id': this.getAttribute('data-module-id')}, '_SC': SC}, 6);
+
+            console.log(moduleDetails);
+        })
     });
+
 
 </script>
