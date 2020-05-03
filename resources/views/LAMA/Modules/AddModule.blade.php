@@ -1,7 +1,3 @@
-<link href="{{ asset('LAMA/templates/_1/assets/plugins/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet" />
-
-<link href="{{ asset('LAMA/templates/_1/assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
-
 
 <!-- begin col-12 -->
 <div class="col-lg-12" id="section_addModule">
