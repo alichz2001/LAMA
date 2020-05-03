@@ -23,6 +23,7 @@ class CreateModulesTable extends Migration
               $table->integer('is_default')->default(1);
               $table->string('icon')->default('fa-paperclip')->nullable();
               $table->integer('status')->default(1);
+              $table->set('type', ['dev', 'user'])->default('user');
               $table->timestamps();
         });
 
