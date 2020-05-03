@@ -4,7 +4,7 @@
 
 
 <!-- begin col-12 -->
-<div class="col-lg-12" id="section_addModule">
+<div class="col-lg-12" id="section_addMethod">
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <div class="panel-heading">
@@ -17,7 +17,7 @@
             <h4 class="panel-title">اضافه کردن ماژول جدید</h4>
         </div>
         <div class="panel-body">
-            <form class="form-hoizontal" id="form-addModule" data-parsley-validate="true">
+            <form class="form-hoizontal" id="form-addMethod" data-parsley-validate="true">
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-sm-4 col-form-label">title * :</label>
                     <div class="col-md-8 col-sm-8">
@@ -40,15 +40,15 @@
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
-                    <label class="col-md-4 col-form-label">select parent module :<br><small>(if this is main module, dont select any module)</small></label>
+                    <label class="col-md-4 col-form-label">select parent Method :<br><small>(if this is main Method, dont select any Method)</small></label>
                     <div class="col-md-8">
-                        <select class="form-control" name="parent_id" id="select_module">
+                        <select class="form-control" name="parent_id" id="select_Method">
                         </select>
                         <p class="error-field"></p>
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
-                    <label class="col-md-4 col-form-label">is this module enable? :</label>
+                    <label class="col-md-4 col-form-label">is this Method enable? :</label>
                     <div class="col-md-8">
                         <input type="checkbox" name="status" value="1" checked>
                         <p class="error-field"></p>
@@ -72,27 +72,27 @@
 
 
 <script>
-    var F_addModule = $('#form-addModule').parsley();
+    var F_addMethod = $('#form-addMethod').parsley();
     $(function(){
 
-        $('#form-addModule').submit(function (e) {
+        $('#form-addMethod').submit(function (e) {
             e.preventDefault();
-            if (F_addModule.isValid()) {
+            if (F_addMethod.isValid()) {
                 var formData = {
-                    'title': $('#form-addModule input[name=title]').val(),
-                    'sys_title': $('#form-addModule input[name=sys_title]').val(),
-                    'file_name': $('#form-addModule input[name=file_name]').val(),
-                    'status': $('#form-addModule input[name=status]').val(),
-                    'parent_id': $('#form-addModule select[name=parent_id]').val(),
+                    'title': $('#form-addMethod input[name=title]').val(),
+                    'sys_title': $('#form-addMethod input[name=sys_title]').val(),
+                    'file_name': $('#form-addMethod input[name=file_name]').val(),
+                    'status': $('#form-addMethod input[name=status]').val(),
+                    'parent_id': $('#form-addMethod select[name=parent_id]').val(),
                     'icon': ''
                 };
-                var res = AJAXRequest('/admin/sys/module/add_module/addModule', 'post', {
+                var res = AJAXRequest('/admin/sys/Method/add_method/addMethod', 'post', {
                     'data': formData,
                     '_SC': SC
                 }, 1);
                 if (res['status'] == true) {
-                    section_addModule();
-                    section_modulesList();
+                    section_addMethod();
+                    section_MethodsList();
                     //TODO reset form and parsley classes
                 }
             }
@@ -103,13 +103,13 @@
 
 <script>
 
-    async function section_addModule() {
-        var modulesRequest = AJAXRequest('/admin/sys/module/add_module/getModulesList', 'get', {'_SC': SC}, 6);
-        var modules = modulesRequest['data']['modules'];
-        $('#select_module').html('');
-        $('#select_module').append('<option style="color: black;" value="">select module</option>');
-        for (var i = 0; i < modules.length; i++) {
-            $('#select_module').append('<option style="color: black;" value="' + modules[i]['id'] + '">' + modules[i]['title'] + '</option>');
+    async function section_addMethod() {
+        var MethodsRequest = AJAXRequest('/admin/sys/Method/add_method/getMethodsList', 'get', {'_SC': SC}, 6);
+        var Methods = MethodsRequest['data']['Methods'];
+        $('#select_Method').html('');
+        $('#select_Method').append('<option style="color: black;" value="">select Method</option>');
+        for (var i = 0; i < Methods.length; i++) {
+            $('#select_Method').append('<option style="color: black;" value="' + Methods[i]['id'] + '">' + Methods[i]['title'] + '</option>');
         }
     }
 
@@ -117,7 +117,7 @@
 </script>
 <script>
     $(document).ready(function () {
-        section_addModule();
+        section_addMethod();
         app.init();
     });
 

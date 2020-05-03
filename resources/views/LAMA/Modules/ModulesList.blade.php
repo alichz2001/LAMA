@@ -35,7 +35,7 @@
                     [
                         i + 1,
                         modules[i]['title'],
-                        '<a href="javascript:;" onclick=""><i class="fa fa-edit"></i></a>'
+                        '<a href="javascript:;" onclick="editModule(' + modules[i]['id'] + ')"><i class="fa fa-edit"></i></a>'
                     ]
                 ).draw(true);
             }
@@ -43,6 +43,10 @@
     }
 
 
+    async function editModule(id) {
+        var moduleDetails = AJAXRequest('/admin/sys/module/modules_list/getModuleDetails', 'post', {'data': {'id': id}, '_SC': SC}, 6);
+        console.log(moduleDetails);
+    }
 
 
 </script>
@@ -52,7 +56,6 @@
             {'title': 'لیست ماژول ها', 'id': 'modulesList', 'type': 1}
         ]);
         section_modulesList();
-        app.init();
     });
 
 </script>

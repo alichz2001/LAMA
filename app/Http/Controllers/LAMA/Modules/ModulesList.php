@@ -15,5 +15,15 @@ class ModulesList
         return Response::Handle(true, ['modules' => $modules], 1, 20000);
     }
 
+    public function getModuleDetails($req) {
+        $moduleDetails = Module::where(['id' => $req['id']])->with('subModules', 'methods')->get()->makeVisible(['file_name', 'status'])->toArray();
+        if (isset($moduleDetails[0])) {
+            return dump($moduleDetails[0]);
+        } else {
+            return Response::Handle(false, '', 2, 40050);
+        }
+
+    }
+
 
 }
