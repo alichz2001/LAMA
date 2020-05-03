@@ -16,6 +16,7 @@ class AddModule
     }
 
     public function addModule($req) {
+
         try {
             $newModule = new Module();
             $newModule->title = $req['title'];
@@ -25,6 +26,9 @@ class AddModule
             $newModule->parent_id = ((int)$req['parent_id'] == 0) ? null : (int)$req['parent_id'];
             $newModule->has_parent = ((int)$req['parent_id'] == 0) ? 0 : 1;
             $newModule->save();
+            foreach ($req['methods'] as $item)
+                $methods = $newModule->methods()->create($item);
+            //return dump($newModule->id);
             //if newModule has parent set
             if ((int)$req['parent_id'] != 0) {
                 Module::where(['id' => $req['parent_id']])->update(['has_child' => 1]);
@@ -35,8 +39,15 @@ class AddModule
 namespace App\Http\Controllers\LAMA\Modules;
 
 class ' . $req['file_name'] . '
-{
-    //
+{';
+
+            foreach ($req['methods'] as $item)
+                $txt .= '
+    public function ' . $item['sys_name'] . '() {
+        //
+    }
+                ';
+            $txt .= '
 }
             ';
             fwrite($file, $txt);
@@ -49,6 +60,7 @@ class ' . $req['file_name'] . '
 
             return Response::Handle(true, '', 1,60000);
         } catch (\Exception $e) {
+            return dump($e);
             return Response::Handle(false, ['errorCode' => $e->getMessage()], 2, 70000);
         }
     }

@@ -22,21 +22,21 @@
                     <label class="col-md-4 col-sm-4 col-form-label">title * :</label>
                     <div class="col-md-8 col-sm-8">
                         <input class="form-control" name="title" data-parsley-minlength="3" data-parsley-required="true" type="text" placeholder="title"/>
-                        <p class="error-field"></p>
+
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-sm-4 col-form-label">sys title * :</label>
                     <div class="col-md-8 col-sm-8">
                         <input class="form-control" name="sys_title" data-parsley-minlength="3" data-parsley-required="true" type="text" placeholder="sys title"/>
-                        <p class="error-field"></p>
+
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-sm-4 col-form-label">file name * :</label>
                     <div class="col-md-8 col-sm-8">
                         <input class="form-control" name="file_name" data-parsley-minlength="3" data-parsley-required="true" type="text" placeholder="file name"/>
-                        <p class="error-field"></p>
+
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
@@ -44,16 +44,30 @@
                     <div class="col-md-8">
                         <select class="form-control" name="parent_id" id="select_module">
                         </select>
-                        <p class="error-field"></p>
+
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-form-label">is this module enable? :</label>
                     <div class="col-md-8">
                         <input type="checkbox" name="status" value="1" checked>
-                        <p class="error-field"></p>
+
                     </div>
                 </div>
+
+                <hr>
+                <div class="form-group row m-b-15">
+                    <label class="col-md-4 col-form-label">methods :</label>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-default m-r-5 m-b-5" onclick="CreatAddMethodInput()">add new method</button>
+                    </div>
+                </div>
+                <div class="form-group row m-b-15 add-method-field">
+
+                </div>
+
+                <hr>
+
                 <div class="form-group row m-b-0">
                     <label class="col-md-4 col-sm-4 col-form-label">&nbsp;</label>
                     <div class="col-md-8 col-sm-8">
@@ -69,30 +83,78 @@
 </div>
 <!-- end col-12 -->
 
-
-
 <script>
+
+    var methodCount = 0;
+    function CreatAddMethodInput() {
+        var x = '<div class="col-md-3">\n' +
+            '                            <label class="col-md-12 col-sm-12 col-form-label">method public name :</label>\n' +
+            '                            <div class="col-md-12 col-sm-12">\n' +
+            '                                <input class="form-control" name="method-public_name' + methodCount + '" data-parsley-required="true" type="text" placeholder="method name"/>\n' +
+            '\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '         <div class="col-md-3">\n' +
+        '                            <label class="col-md-12 col-sm-12 col-form-label">method sys name :</label>\n' +
+        '                            <div class="col-md-12 col-sm-12">\n' +
+        '                                <input class="form-control" name="method-sys_name' + methodCount + '" data-parsley-required="true" type="text" placeholder="method name"/>\n' +
+        '                            </div>\n' +
+        '                        </div>\n' +
+            '                    <div class="col-md-3">\n' +
+            '                            <label class="col-md-12 col-sm-12 col-form-label">method type :</label>\n' +
+            '                            <div class="col-md-12 col-sm-12">\n' +
+            '                                <select class="form-control" name="method-type' + methodCount + '" data-parsley-required="true" type="text" placeholder="sys title">\n' +
+            '                                    <option value="read">read</option>\n' +
+            '                                    <option value="save">save</option>\n' +
+            '                                    <option value="edit">edit</option>\n' +
+            '                                    <option value="remove">remove</option>\n' +
+            '                                </select>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '<div class="col-md-3">\n' +
+            '<label class="col-md-12 col-form-label">is this method enable? :</label>\n' +
+            '                    <div class="col-md-12">\n' +
+            '                        <input type="checkbox" name="method-status' + methodCount + '" value="1" checked>\n' +
+            '\n' +
+            '                    </div>' +
+            '                    </div>';
+        $('.add-method-field').append(x);
+        methodCount++;
+    }
+
+
     var F_addModule = $('#form-addModule').parsley();
     $(function(){
 
         $('#form-addModule').submit(function (e) {
             e.preventDefault();
             if (F_addModule.isValid()) {
+                var methods = [];
+                for (var j = 0; j < methodCount; j++) {
+                    methods[j] = {
+                        'public_name': $('input[name=method-public_name' + j + ']').val(),
+                        'sys_name': $('input[name=method-sys_name' + j + ']').val(),
+                        'type': $('select[name=method-type' + j + ']').val(),
+                        'status': 1,//TODO
+                    };
+                }
                 var formData = {
                     'title': $('#form-addModule input[name=title]').val(),
                     'sys_title': $('#form-addModule input[name=sys_title]').val(),
                     'file_name': $('#form-addModule input[name=file_name]').val(),
                     'status': $('#form-addModule input[name=status]').val(),
                     'parent_id': $('#form-addModule select[name=parent_id]').val(),
+                    'methods': methods,
                     'icon': ''
                 };
                 var res = AJAXRequest('/admin/sys/module/add_module/addModule', 'post', {
                     'data': formData,
                     '_SC': SC
                 }, 1);
+
+
                 if (res['status'] == true) {
                     section_addModule();
-                    section_modulesList();
                     //TODO reset form and parsley classes
                 }
             }
@@ -118,7 +180,6 @@
 <script>
     $(document).ready(function () {
         section_addModule();
-        app.init();
     });
 
 </script>
