@@ -1,5 +1,6 @@
 <?php
 
+use App\Entities\Module;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,5 +56,6 @@ Route::post('/admin/sys/module/{moduleSysName}/{method}', 'LAMA\ModuleController
 
 Route::get('/admin/logout', 'LAMA\SysController@logout');
 Route::get('/admin/test', function () {
-    return dump(session()->all());
+    return dump(Module::where(['sys_title' => 'dashboard', 'status' => 1])->with('methods')->get()->makevisible(['file_name'])->toArray());
+
 });

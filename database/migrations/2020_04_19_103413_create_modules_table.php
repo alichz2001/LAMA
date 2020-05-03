@@ -20,7 +20,7 @@ class CreateModulesTable extends Migration
               $table->boolean('has_child')->default(0);
               $table->string('title')->unique();
               $table->string('sys_title')->unique();
-              $table->integer('is_default')->default(1);
+              $table->string('file_name')->unique();
               $table->string('icon')->default('fa-paperclip')->nullable();
               $table->integer('status')->default(1);
               $table->set('type', ['dev', 'user'])->default('user');

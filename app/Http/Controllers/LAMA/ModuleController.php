@@ -48,6 +48,7 @@ class ModuleController extends Controller
         if (class_exists($moduleClassName)) {
             $moduleObject = new $moduleClassName();
 
+            //return dump($module[0]['methods']);
             foreach ($module[0]['methods'] as $item) {
                 if ($item['public_name'] == $method) {
                     if ($roleModule[0][$item['type'] . '_access'] == 1) {

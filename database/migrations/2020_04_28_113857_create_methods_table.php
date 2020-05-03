@@ -15,6 +15,8 @@ class CreateMethodsTable extends Migration
     {
         Schema::create('methods', function (Blueprint $table) {
             $table->unsignedbigInteger('id')->autoIncrement()->index();
+            $table->unsignedbigInteger('module_id');
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->string('public_name');
             $table->string('sys_name');
             $table->string('type');
