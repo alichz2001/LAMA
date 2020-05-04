@@ -99,7 +99,6 @@ function changeOrgan(id) {
         setOrganSelect();
         setRoleSelect();
         setModulesMenu();
-        $('[module-sys_title=dashboard]').click();
 
     }
 }
@@ -110,7 +109,7 @@ function changeRole(id) {
         SC = res['data']['SC'];
         setRoleSelect();
         setModulesMenu();
-        $('[module-sys_title=dashboard]').click();
+
 
     }
 }
@@ -120,7 +119,7 @@ function setModulesMenu() {
     var modules = AJAXRequest(baseURL + '/getMyModules', globalSysRequestMethod, '')['data'];
     $('#menu').append('<li class="nav-header">Navigation</li>');
     $('#menu').append(createMenu(modules, 1));
-    $('[module-sys_title=' + getUrlParameter('module') + ']').click();
+    setModule('dashboard');
     App.initSidebar();
 }
 
