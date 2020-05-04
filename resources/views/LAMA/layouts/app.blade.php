@@ -17,9 +17,9 @@
     <link href="{{ asset('/LAMA/templates/_1/assets/plugins/bootstrap/4.0.0/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/plugins/animate/animate.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/LAMA/templates/_1/assets/css/transparent/style.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/LAMA/templates/_1/assets/css/transparent/style-responsive.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/LAMA/templates/_1/assets/css/transparent/theme/default.css') }}" rel="stylesheet" id="theme" />
+    <link href="{{ asset('/LAMA/templates/_1/assets/css/default/style.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/LAMA/templates/_1/assets/css/default/style-responsive.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/LAMA/templates/_1/assets/css/default/theme/default.css') }}" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
 
 
