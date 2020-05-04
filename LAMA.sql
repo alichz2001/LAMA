@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 03, 2020 at 01:32 PM
+-- Generation Time: May 04, 2020 at 11:54 AM
 -- Server version: 5.7.29-0ubuntu0.18.04.1
 -- PHP Version: 7.2.24-0ubuntu0.18.04.4
 
@@ -20,32 +20,16 @@ SET time_zone = "+00:00";
 -- Database: `LAMA`
 --
 
-
 --
 -- Dumping data for table `modules`
 --
 
 INSERT INTO `modules` (`id`, `has_parent`, `parent_id`, `has_child`, `title`, `sys_title`, `file_name`, `icon`, `status`, `type`, `created_at`, `updated_at`) VALUES
-(1, 0, NULL, 0, 'داشبورد', 'dashboard', 'Dashboard', 'fa-columns', 1, 'user', NULL, NULL),
-(2, 0, NULL, 1, 'مدیریت ماژول ها', 'module_management', 'ModuleManagement', 'fa-paperclip', 1, 'dev', NULL, '2020-05-03 06:51:58'),
-(3, 0, NULL, 0, 'مدیریت نقش ها', 'role_management', 'RoleManagement', 'fa-paperclip', 1, 'user', NULL, '2020-05-03 04:55:14'),
+(1, 0, NULL, 0, 'داشبورد', 'dashboard', 'Dashboard', 'fa-columns', 1, 'user', NULL, '2020-05-04 05:39:39'),
+(2, 0, NULL, 1, 'مدیریت ماژول ها', 'module_management', 'ModuleManagement', 'fa-paperclip', 1, 'dev', NULL, '2020-05-04 07:09:26'),
+(3, 0, NULL, 0, 'مدیریت نقش ها', 'role_management', 'RoleManagement', 'fa-paperclip', 1, 'user', NULL, '2020-05-04 07:09:44'),
 (4, 1, 2, 0, 'اضافه کردن ماژول', 'add_module', 'AddModule', 'fa-paperclip', 1, 'user', '2020-05-03 05:56:16', '2020-05-03 05:56:16'),
-(5, 1, 2, 0, 'لیست ماژول ها', 'modules_list', 'ModulesList', 'fa-paperclip', 1, 'user', '2020-05-03 06:09:51', '2020-05-03 06:09:51');
-
-
---
--- Dumping data for table `methods`
---
-
-INSERT INTO `methods` (`id`, `module_id`, `public_name`, `sys_name`, `type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 4, 'view', 'view', 'read', 1, NULL, NULL),
-(2, 1, 'view', 'view', 'read', 1, NULL, NULL),
-(3, 4, 'view', 'view', 'read', 1, NULL, NULL),
-(4, 4, 'getModulesList', 'getModulesList', 'read', 1, NULL, NULL),
-(5, 4, 'addModule', 'addModule', 'save', 1, NULL, NULL),
-(6, 5, 'view', 'view', 'read', 1, NULL, NULL),
-(7, 5, 'getModulesList', 'getModulesList', 'read', 1, NULL, NULL),
-(8, 5, 'getModuleDetails', 'getModuleDetails', 'read', 1, NULL, NULL);
+(5, 1, 2, 0, 'لیست ماژول ها', 'modules_list', 'ModulesList', 'fa-paperclip', 1, 'user', '2020-05-03 06:09:51', '2020-05-04 06:44:58');
 
 --
 -- Dumping data for table `organs`
@@ -93,6 +77,21 @@ INSERT INTO `user__role__organ` (`id`, `user_id`, `role_id`, `organ_id`, `is_def
 (1, 1, 1, 1, 1, 1, NULL, NULL),
 (2, 1, 2, 1, 0, 1, NULL, NULL),
 (3, 1, 1, 2, 0, 1, NULL, NULL);
+
+--
+-- Dumping data for table `methods`
+--
+
+INSERT INTO `methods` (`id`, `module_id`, `public_name`, `sys_name`, `type`, `status`, `created_at`, `updated_at`) VALUES
+(1, 4, 'view', 'view', 'read', 1, NULL, NULL),
+(2, 1, 'view', 'view', 'read', 1, NULL, NULL),
+(4, 4, 'getModulesList', 'getModulesList', 'read', 1, NULL, NULL),
+(5, 4, 'addModule', 'addModule', 'save', 1, NULL, NULL),
+(6, 5, 'view', 'view', 'read', 1, NULL, NULL),
+(7, 5, 'getModulesList', 'getModulesList', 'read', 1, NULL, NULL),
+(8, 5, 'getModuleDetails', 'getModuleDetails', 'read', 1, NULL, NULL),
+(9, 5, 'removeModule', 'removeModule', 'remove', 1, NULL, NULL),
+(10, 5, 'editModule', 'editModule', 'edit', 1, NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
