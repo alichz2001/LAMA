@@ -83,7 +83,8 @@
 
     var methodCount = 0;
     function CreatAddMethodInput() {
-        var x = '<div class="col-md-3">\n' +
+        var x = '<div class="row" id="addMethod_' + methodCount + '">' +
+            '<div class="col-md-3">\n' +
             '                            <label class="col-md-12 col-sm-12 col-form-label">method public name :</label>\n' +
             '                            <div class="col-md-12 col-sm-12">\n' +
             '                                <input class="form-control" name="method-public_name' + methodCount + '" data-parsley-required="true" type="text" placeholder="method name"/>\n' +
@@ -96,7 +97,7 @@
         '                                <input class="form-control" name="method-sys_name' + methodCount + '" data-parsley-required="true" type="text" placeholder="method name"/>\n' +
         '                            </div>\n' +
         '                        </div>\n' +
-            '                    <div class="col-md-3">\n' +
+            '                    <div class="col-md-2">\n' +
             '                            <label class="col-md-12 col-sm-12 col-form-label">method type :</label>\n' +
             '                            <div class="col-md-12 col-sm-12">\n' +
             '                                <select class="form-control" name="method-type' + methodCount + '" data-parsley-required="true" type="text" placeholder="sys title">\n' +
@@ -107,17 +108,29 @@
             '                                </select>\n' +
             '                            </div>\n' +
             '                        </div>\n' +
-            '<div class="col-md-3">\n' +
-            '<label class="col-md-12 col-form-label">is this method enable? :</label>\n' +
+            '<div class="col-md-2">\n' +
+            '<label class="col-md-12 col-form-label">status :</label>\n' +
             '                    <div class="col-md-12">\n' +
             '                        <input type="checkbox" name="method-status' + methodCount + '" value="1" checked>\n' +
             '\n' +
             '                    </div>' +
-            '                    </div>';
+            '                    </div>' +
+            '<div class="col-md-2">\n' +
+            '                    <div class="col-md-12">\n' +
+            '<a href="javascript:;" onclick="removeMethodRow(' + methodCount + ')" class="btn btn-danger btn-icon btn-circle btn-lg remove-method-row"><i class="fa fa-times"></i></a>' +
+            '\n' +
+            '                    </div>' +
+            '                    </div></div>'
+        ;
         $('.add-method-field').append(x);
         methodCount++;
     }
 
+
+    function removeMethodRow(methodN) {
+        $('#addMethod_' + methodN).remove();
+        console.log(methodN);
+    }
 
     var F_addModule = $('#form-addModule').parsley();
     $(function(){
@@ -127,12 +140,15 @@
             if (F_addModule.isValid()) {
                 var methods = [];
                 for (var j = 0; j < methodCount; j++) {
-                    methods[j] = {
-                        'public_name': $('input[name=method-public_name' + j + ']').val(),
-                        'sys_name': $('input[name=method-sys_name' + j + ']').val(),
-                        'type': $('select[name=method-type' + j + ']').val(),
-                        'status': 1,//TODO
-                    };
+                    if ($('input[name=method-public_name' + j + ']').val() != undefined) {
+                        console.log($('input[name=method-public_name' + j + ']').val());
+                        methods[j] = {
+                            'public_name': $('input[name=method-public_name' + j + ']').val(),
+                            'sys_name': $('input[name=method-sys_name' + j + ']').val(),
+                            'type': $('select[name=method-type' + j + ']').val(),
+                            'status': 1,//TODO
+                        };
+                    }
                 }
                 var formData = {
                     'title': $('#form-addModule input[name=title]').val(),
