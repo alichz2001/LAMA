@@ -260,13 +260,26 @@
 
         $('a[data-button-type=module-remove]').on('click', function () {
 
-            AJAXRequest(
-                '/admin/sys/module/modules_list/removeModule',
-                'post',
-                {'data': {'id': this.getAttribute('data-module-id')}, '_SC': SC},
-                1
-            );
-            setModule('modules_list');
+            Swal.fire({
+                title: 'ایا اطمینان دارید؟',
+                text: "می خواهید این ماژول را حذف نمایید",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'بازگشت',
+                confirmButtonColor: '#d92800',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'تایید'
+            }).then((result) => {
+                if (result.value) {
+                    AJAXRequest(
+                        '/admin/sys/module/modules_list/removeModule',
+                        'post',
+                        {'data': {'id': this.getAttribute('data-module-id')}, '_SC': SC},
+                        1
+                    );
+                    setModule('modules_list');
+                }
+            })
         });
 
 

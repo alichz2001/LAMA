@@ -15,6 +15,7 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/plugins/bootstrap/4.0.0/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/LAMA/templates/_1/assets/plugins/bootstrap-rtl/4.2.1/css/bootstrap-rtl.css') }}" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/plugins/animate/animate.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/css/default/style.min.css') }}" rel="stylesheet" />
@@ -71,6 +72,7 @@
 
 <!-- ================== BEGIN MODAL NOTIFICATION JS ================== -->
 <script src="{{ asset('/LAMA/templates/_1/assets/plugins/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('/LAMA/templates/_1/assets/plugins/bootstrap-sweetalert/sweetalert-2.js') }}"></script>
 <script src="{{ asset('/LAMA/templates/_2/js/iziToast.min.js') }}"></script>
 <!-- ================== END MODAL NOTIFICATION JS ================== -->
 
