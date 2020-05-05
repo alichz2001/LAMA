@@ -13,6 +13,7 @@ class RoleManagement
         return view('LAMA.Modules.RoleManagement');
     }
 
+    
     public function getRolesList() {
         $roles = Role::all()->makeVisible(['status', 'sys_title'])->toArray();
         return Response::Handle(true, ['roles' => $roles], 1, 20000);
