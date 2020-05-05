@@ -21,6 +21,8 @@
     <link href="{{ asset('/LAMA/templates/_1/assets/css/default/style.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/css/default/style-responsive.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/LAMA/templates/_1/assets/css/default/theme/default.css') }}" rel="stylesheet" id="theme" />
+
+    <link rel="stylesheet" href="{{ '/LAMA/css/style.css' }}">
     <!-- ================== END BASE CSS STYLE ================== -->
 
 

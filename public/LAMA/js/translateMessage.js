@@ -127,11 +127,23 @@ var translateMessage = function (errorCode, lang) {
                         'text': 'ماژول با موفقیت ثبت شد'
                     };
                     break;
+                case 60001:
+                    return {
+                        'title': '',
+                        'text': 'نقش با موفقیت ثبت شد'
+                    };
+                    break;
 
                 case 70000:
                     return {
                         'title': '',
                         'text': 'ماژول ثبت نشد'
+                    };
+                    break;
+                case 70001:
+                    return {
+                        'title': '',
+                        'text': 'نقش ثبت نشد'
                     };
                     break;
                 default:

@@ -129,7 +129,6 @@
 
     function removeMethodRow(methodN) {
         $('#addMethod_' + methodN).remove();
-        console.log(methodN);
     }
 
     var F_addModule = $('#form-addModule').parsley();

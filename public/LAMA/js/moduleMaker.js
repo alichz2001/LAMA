@@ -8,7 +8,7 @@ async function createSections(sectionsArray) {
 
         }
     }
-    $('#module-section').prepend(out);
+    $('#module-section').append(out);
 }
 
 function sectionCreator_1(sectionDetails) {//_1 : panel

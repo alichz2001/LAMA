@@ -1,0 +1,8 @@
+.rtl {
+    text-align: right !important;
+    float: right;
+    direction: rtl;
+}
+div.dataTables_wrapper {
+    direction: rtl;
+}
