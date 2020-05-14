@@ -7,6 +7,7 @@ namespace App\Http\Controllers\LAMA;
 use App\Entities\Module;
 use App\Entities\Role_Module;
 use App\Http\Controllers\LAMA\Handler\Response;
+use App\Http\Controllers\LAMA\Handler\Validator;
 use App\Http\Controllers\LAMA\Objects\AdminDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,6 +18,20 @@ class ModuleController extends Controller
 
     private $req;
     private $adminDetails;
+    private $validData = [
+        'RoleManagement' => [
+            'addRole' => [
+                'fa_title' => [
+                    'LengthBetween' => '3|255'
+                ],
+                'en_title' => [
+                    'LengthBetween' => '3|255'
+                ],
+                'description' => [],
+                'modules' => []
+            ],
+        ],
+        ];
 
     public function __construct(Request $request)
     {
@@ -26,7 +41,7 @@ class ModuleController extends Controller
 
     public function index($moduleSysName, $method)
     {
-        //security code check TODO
+        //security code check
         if (!isset($this->req['_SC']) || $this->req['_SC'] != session()->get('_SC'))
             return Response::Handle(false, '', 2,44000);
 
@@ -47,8 +62,6 @@ class ModuleController extends Controller
         $moduleClassName = 'App\Http\Controllers\LAMA\Modules\\' . ucfirst($module[0]['file_name']);
         if (class_exists($moduleClassName)) {
             $moduleObject = new $moduleClassName();
-
-            //return dump($module[0]['methods']);
             foreach ($module[0]['methods'] as $item) {
                 if ($item['public_name'] == $method) {
                     if ($roleModule[0][$item['type'] . '_access'] == 1) {
@@ -61,9 +74,20 @@ class ModuleController extends Controller
                                         $this->req['data'][$key] = "";
                                     }
                                 }
-                                return $moduleObject->$m($this->req['data']);
+
+                                //creat validation object and call validation method
+                                $validator = new Validator();
+                                $validator->validation($this->req['data'], $this->validData[ucfirst($module[0]['file_name'])][$m]);
+                                //get validation errors
+                                $validationErrors = $validator->getErrors();
+                                if ($validationErrors['global'] == 0 && count($validationErrors['items']) == 0) {
+                                    return $moduleObject->$m($this->req['data']);
+                                } else {
+                                    return Response::Handle(false, $validationErrors['items'], 2, $validationErrors['global']);
+                                }
+                            } else {
+                                return $moduleObject->$m();
                             }
-                            return $moduleObject->$m();
                         } else
                             return Response::Handle(false, '', 2, 40007);
 

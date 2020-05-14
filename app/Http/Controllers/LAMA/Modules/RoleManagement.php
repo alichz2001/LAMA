@@ -21,7 +21,13 @@ class RoleManagement
         return Response::Handle(true, ['roles' => $roles], 1, 20000);
     }
 
-    public function addRole($req) {
+    public function addRole($data) {
+
+        return dump($data);
+
+
+
+
         try {
 
             DB::transaction(function () use ($req) {

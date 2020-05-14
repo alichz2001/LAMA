@@ -1,8 +1,13 @@
+<link href="{{ asset('/LAMA/templates/_1/assets/plugins/jstree/dist/themes/default/style.min.css') }}" rel="stylesheet" />
+
+
+
+
 <div class="col-md-12 m-b-15">
     <button type="button" class="btn btn-lime" onclick="$('#section_addRole').show()">اضافه کردن نقش</button>
 </div>
 
-<div class="col-md-12" style="display: none" id="section_addRole">
+<div class="col-md-12" style="display: block" id="section_addRole">
     <div class="panel panel-inverse" data-sortable-id="ui-buttons-1" style="">
         <!-- begin panel-heading -->
         <div class="panel-heading ui-sortable-handle">
@@ -17,6 +22,9 @@
         <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body">
+
+
+
             <form class="form-horizontal" id="form-addRole" dir="rtl" data-parsley-validate="true" name="demo-form" novalidate="">
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-sm-4 col-form-label rtl">عنوان فارسی نقش * :</label>
@@ -39,8 +47,10 @@
 
                 <div class="form-group row m-b-15">
                     <label class="col-md-4 col-sm-4 col-form-label rtl">تخصیص ماژول * :</label>
-                    <div class="col-md-8 col-sm-8" id="modules-checkbox">
+                    <div class="col-md-8 col-sm-8" id="modules_selection">
+
                     </div>
+
                 </div>
 
 
@@ -67,6 +77,7 @@
 <script src="{{ asset('/LAMA/templates/_1/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/LAMA/templates/_1/assets/js/demo/table-manage-keytable.demo.min.js') }}"></script>
 
+<script src="{{ asset('/LAMA/templates/_1/assets/plugins/jstree/dist/jstree.min.js') }}"></script>
 
 <!-- ================== END PAGE LEVEL JS ================== -->
 
@@ -80,9 +91,12 @@
 
 
 <script>
-    async function section_rolesList() {
+    /**
+     * SECTIONS
+     */
+    function section_rolesList() {
         var rolesRequest = AJAXRequest('/admin/sys/module/role_management/getRolesList', 'get', {'_SC': SC}, 6);
-        console.log(rolesRequest);
+        //console.log(rolesRequest);
         if (rolesRequest['status'] == 1) {
             var x = '<table id="data-table_rolesList" class="table table-striped table-bordered">\n' +
                 '                    <thead>\n' +
@@ -112,6 +126,48 @@
         }
     }
 
+    function section_addRole() {
+        var modules = AJAXRequest('/admin/sys/getMyModules', globalSysRequestMethod, '', 6);
+        function creatModulesTree(modules, isOpen) {
+            var out = [];
+            for (var key in modules) {
+                var children = [];
+                if (modules[key]['has_child'] != 0) {
+                    children = creatModulesTree(modules[key]['sub_module'], 1);
+                } else {
+                    children = [
+                        {text: 'دیدن', icon: 'fa fa-file', id: modules[key]['id'] + '_read',},
+                        {text: 'ثبت', icon: 'fa fa-file', id: modules[key]['id'] + '_save',},
+                        {text: 'خذف', icon: 'fa fa-file', id: modules[key]['id'] + '_remove',},
+                        {text: 'تغییر', icon: 'fa fa-file', id: modules[key]['id'] + '_edit',},
+                    ]
+                }
+                out.push({
+                    id: modules[key]['id'],
+                    text: modules[key]['title'],
+                    state: {
+                        opened: (modules[key]['has_child'] != 0) ? true: false,
+                    },
+                    children: children
+                });
+            }
+            return out;
+        }
+
+        $("#modules_selection").jstree({
+            plugins: ["wholerow", "checkbox", "types"],
+            core: {
+                themes: {responsive: 1},
+                data: creatModulesTree(modules['data'])
+            },
+            types: {"default": {icon: "f"}, file: {icon: ""}}
+        });
+    }
+
+
+    /**
+     * BUTTONS
+     */
     function removeRole(id) {
         Swal.fire({
             title: 'ایا اطمینان دارید؟',
@@ -135,80 +191,49 @@
         })
     }
 
-    async function section_addRole() {
 
-        var modules = AJAXRequest('/admin/sys/getMyModules', globalSysRequestMethod, '', 6);
-
-        function creatModulesCheckbox(modules, step) {
-            var x = '';
-            if (step == 1) {
-                var has_child = 0;
-                for (var key in modules) {
-                    has_child = modules[key]['has_child'];
-                    x += '<li>';
-                    x += '<input type="checkbox" value="1" data-module-checkbox-id="' + modules[key]['id'] + '" name="module_checkbox_' + modules[key]['id'] + '"><label>' + modules[key]['title'] + '</label>';
-                    x += has_child ? creatModulesCheckbox(modules[key]['sub_module'], 2) : '';
-                    x += '</li>';
-                }
-            } else {
-                var has_child = 0;
-                x += '<ul>';
-                for (var key in modules) {
-                    has_child = modules[key]['has_child'];
-                    x += '<li>' ;
-                    x += '<input type="checkbox" value="1" data-module-checkbox-id="' + modules[key]['id'] + '" name="module_checkbox_' + modules[key]['id'] + '"><label>' + modules[key]['title'] + '</label>';
-                    x += has_child ? creatModulesCheckbox(modules[key]['sub_module'], 2) : '';
-                    x += '</li>';
-                }
-                x += '</ul>';
-            }
-            return x;
-        }
-
-        $('#modules-checkbox').html(creatModulesCheckbox(modules['data'], 1));
-    }
-
-
-
-
-
+    /**
+     * FORMS
+     */
     var F_addRole = $('#form-addRole').parsley();
     $(function(){
 
         $('#form-addRole').submit(function (e) {
             e.preventDefault();
+            var modules = ($("#modules_selection").jstree("get_selected",true));
+
             if (F_addRole.isValid()) {
 
                 var formData = {
                     'fa_title': $('#form-addRole input[name=en_title]').val(),
                     'en_title': $('#form-addRole input[name=fa_title]').val(),
                     'description': $('#form-addRole textarea[name=description]').html(),
+                    'modules': modules,
                 };
-                var x = $('#form-addRole').serializeArray();
-                var selectedModules = [];
-                $('#form-addRole input[name^=module_checkbox_]').each(function () {
-                    if ($(this).prop('checked'))
-                        selectedModules.push($(this).attr('data-module-checkbox-id'));
-                });
-                formData['modules'] = selectedModules;
+
+                console.log(formData);
+
+
+
                 var res = AJAXRequest('/admin/sys/module/role_management/addRole', 'post', {
                     'data': formData,
                     '_SC': SC
                 }, 1);
 
+                console.log(res);
+                /*
                 if (res['status'] == true) {
                     section_addRole();
                     section_rolesList();
                     $('#section_addRole').hide();
                     //TODO reset form and parsley classes
                 }
+
+                 */
             }
         });
 
     });
-
-
-
 
 
 
@@ -222,58 +247,13 @@
         createSections([
             {'type': 1, 'title': 'لیست نقش ها', 'id': 'rolesList'},
         ]);
+
+
         section_rolesList();
         section_addRole();
 
-//handle modules checkbox
-        $('input[type="checkbox"]').change(function(e) {
-            var checked = $(this).prop("checked"),
-                container = $(this).parent(),
-                siblings = container.siblings();
 
-            container.find('input[type="checkbox"]').prop({
-                indeterminate: false,
-                checked: checked
-            });
 
-            function checkSiblings(el) {
-
-                var parent = el.parent().parent(),
-                    all = true;
-
-                el.siblings().each(function() {
-                    let returnValue = all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
-                    return returnValue;
-                });
-
-                if (all && checked) {
-
-                    parent.children('input[type="checkbox"]').prop({
-                        indeterminate: false,
-                        checked: checked
-                    });
-
-                    checkSiblings(parent);
-
-                } else if (all && !checked) {
-
-                    parent.children('input[type="checkbox"]').prop("checked", checked);
-                    parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
-                    checkSiblings(parent);
-
-                } else {
-
-                    el.parents("li").children('input[type="checkbox"]').prop({
-                        indeterminate: true,
-                        checked: true
-                    });
-
-                }
-
-            }
-
-            checkSiblings(container);
-        });
     });
 
 </script>
