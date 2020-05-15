@@ -30,6 +30,7 @@ class ModuleController extends Controller
                 'description' => [],
                 'modules' => []
             ],
+
         ],
         ];
 
@@ -76,14 +77,19 @@ class ModuleController extends Controller
                                 }
 
                                 //creat validation object and call validation method
-                                $validator = new Validator();
-                                $validator->validation($this->req['data'], $this->validData[ucfirst($module[0]['file_name'])][$m]);
-                                //get validation errors
-                                $validationErrors = $validator->getErrors();
-                                if ($validationErrors['global'] == 0 && count($validationErrors['items']) == 0) {
-                                    return $moduleObject->$m($this->req['data']);
+                                //TODO check exist method in $validData
+                                if (isset($this->validData[ucfirst($module[0]['file_name'])][$m])) {
+                                    $validator = new Validator();
+                                    $validator->validation($this->req['data'], $this->validData[ucfirst($module[0]['file_name'])][$m]);
+                                    //get validation errors
+                                    $validationErrors = $validator->getErrors();
+                                    if ($validationErrors['global'] == 0 && count($validationErrors['items']) == 0) {
+                                        return $moduleObject->$m($this->req['data']);
+                                    } else {
+                                        return Response::Handle(false, $validationErrors['items'], 2, $validationErrors['global']);
+                                    }
                                 } else {
-                                    return Response::Handle(false, $validationErrors['items'], 2, $validationErrors['global']);
+                                    return $moduleObject->$m($this->req['data']);
                                 }
                             } else {
                                 return $moduleObject->$m();
